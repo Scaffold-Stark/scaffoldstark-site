@@ -9,9 +9,9 @@ const baseUrl = process.env.VERCEL_URL
   : `http://localhost:${process.env.PORT || 3000}`;
 const imageUrl = `${baseUrl}/thumbnail.jpg`;
 
-const title = "Scaffold-ETH 2 App";
-const titleTemplate = "%s | Scaffold-ETH 2";
-const description = "Built with 🏗 Scaffold-ETH 2";
+const title = "Scaffold-Starknet ";
+const titleTemplate = "%s | Scaffold-Starknet 2";
+const description = "Built with 🏗 Scaffold-Starknet 2";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description,
   },
   icons: {
-    icon: [{ url: "/favicon.png", sizes: "32x32", type: "image/png" }],
+    icon: [{ url: "/icon-starknet.svg", sizes: "32x32", type: "image/svg" }],
   },
 };
 
