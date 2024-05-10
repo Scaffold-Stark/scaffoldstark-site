@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         style={{ backgroundImage: `url(/assets/heroPattern.svg)`, backgroundRepeat: "repeat" }}
       >
         <div className="flex items-center gap-2">
-          <div className="flex relative w-14 h-14 bg-[#00215E] p-3 rounded">
+          <div className="flex relative w-14 h-14 bg-[#00215E] p-3 rounded-full">
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.svg" />
           </div>
           <p className="text-3xl m-0 font-medium mt-1">Scaffold-Starknet</p>
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
             <a
               id="Github"
               href="https://github.com/scaffold-eth/scaffold-eth-2"
-              className="btn btn-outline btn-sm px-5 h-10 bg-neutral text-white normal-case font-normal text-lg flex items-center gap-2"
+              className="btn btn-outline btn-sm px-5 h-10 bg-neutral text-base-100  normal-case font-normal text-lg flex items-center gap-2"
             >
               Github
               <Image src="/ghIcon.webp" alt="github icon" height={25} width={25} />
