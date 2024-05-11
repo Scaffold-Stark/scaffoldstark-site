@@ -27,11 +27,11 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4">
           <h1 className="text-center text-3xl lg:text-5xl max-w-md lg:max-w-2xl px-3 m-0">
-            Everything you need to build dApps on Ethereum
+            Everything you need to build dApps on Starknet
           </h1>
           <p className="m-0 text-center max-w-xl px-3">
-            A modern, clean version of Scaffold-ETH with NextJS, RainbowKit, Wagmi and Typescript. Supports Hardhat and
-            Foundry.
+            A modern, clean version of Scaffold-Starknet with NextJS, RainbowKit, Wagmi and Typescript. Supports Hardhat
+            and Foundry.
           </p>
           <div className="flex flex-col gap-5 items-center mb-2">
             <CopyToClipboard
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
             >
               <div className="mx-2 flex border-2 border-gray-300 rounded-xl px-3 sm:px-5 py-1 gap-2">
                 <p className="m-0 text-center text-sm sm:text-base">
-                  git clone https://github.com/scaffold-eth/scaffold-eth-2.git
+                  git clone https://github.com/Quantum3-Labs/scaffoldstarknet.io.git
                 </p>
                 {cloneCommandCopied ? (
                   <CheckCircleIcon
@@ -123,8 +123,8 @@ const Home: NextPage = () => {
               Experiment with Solidity using a frontend that adapts to your smart contract
             </h2>
             <p className="m-auto text-center lg:text-left lg:mx-0 max-w-[300px] lg:max-w-none lg:w-3/4">
-              Debug and refine your smart contracts with a live-updating frontend. Scaffold-ETH 2 is an ideal stack for
-              progressing from rapid prototyping to production-grade dApps.
+              Debug and refine your smart contracts with a live-updating frontend. Scaffold-Starknet 2 is an ideal stack
+              for progressing from rapid prototyping to production-grade dApps.
             </p>
           </div>
           <div className="max-w-[400px] lg:max-w-none">
