@@ -17,7 +17,7 @@ Before you begin, you need to install the following tools:
 
 ```
 git clone https://github.com/Quantum3-Labs/scaffoldstarknet.io.git
-cd scaffoldeth.io
+cd scaffoldstarknet.com
 yarn install
 ```
 
