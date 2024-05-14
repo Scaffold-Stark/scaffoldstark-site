@@ -30,12 +30,11 @@ const Home: NextPage = () => {
             Everything you need to build dApps on Starknet
           </h1>
           <p className="m-0 text-center max-w-xl px-3">
-            A modern, clean version of Scaffold-Starknet with NextJS, RainbowKit, Wagmi and Typescript. Supports Hardhat
-            and Foundry.
+            Built using NextJS, Starknet.js, Scarb, Starknet-React, Cairo and Typescript.
           </p>
           <div className="flex flex-col gap-5 items-center mb-2">
             <CopyToClipboard
-              text={"git clone https://github.com/scaffold-eth/scaffold-eth-2.git"}
+              text={"git clone https://github.com/Quantum3-Labs/scaffold-stark-2.git"}
               onCopy={() => {
                 setCloneCommandCopied(true);
                 setTimeout(() => {
@@ -45,7 +44,7 @@ const Home: NextPage = () => {
             >
               <div className="mx-2 flex border-2 border-gray-300 rounded-xl px-3 sm:px-5 py-1 gap-2">
                 <p className="m-0 text-center text-sm sm:text-base">
-                  git clone https://github.com/Quantum3-Labs/scaffoldstarknet.io.git
+                  git clone https://github.com/Quantum3-Labs/scaffold-stark-2.git
                 </p>
                 {cloneCommandCopied ? (
                   <CheckCircleIcon
@@ -72,7 +71,7 @@ const Home: NextPage = () => {
                 }}
               >
                 <div className="max-w-sm flex border-2 border-gray-300 rounded-xl px-3 sm:px-5 py-1 gap-2">
-                  <p className="m-0 text-center text-sm sm:text-base">npx create-eth@latest</p>
+                  <p className="m-0 text-center text-sm sm:text-base">npx create-starknet</p>
                   {npxCommandCopied ? (
                     <CheckCircleIcon
                       className="text-xl font-normal h-6 w-4 cursor-pointer flex-shrink-0"
@@ -86,21 +85,22 @@ const Home: NextPage = () => {
                   )}
                 </div>
               </CopyToClipboard>
-              <div className="badge badge-warning">Beta</div>
+              <div className="badge badge-warning">Coming soon!</div>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-4 items-center justify-center">
             <a
               id="Docs"
-              href="https://docs.scaffoldeth.io/"
+              href="https://github.com/Quantum3-Labs/ss2-docs"
+              target="_blank"
               className="btn btn-outline btn-sm px-5 h-10 bg-base-100 normal-case font-normal text-lg"
             >
               Docs
             </a>
             <a
               id="Github"
-              href="https://github.com/scaffold-eth/scaffold-eth-2"
+              href="https://github.com/Quantum3-Labs/scaffold-stark-2"
               className="btn btn-outline btn-sm px-5 h-10 bg-neutral text-base-100  normal-case font-normal text-lg flex items-center gap-2"
             >
               Github
@@ -120,7 +120,7 @@ const Home: NextPage = () => {
             </div>
 
             <h2 className="text-2xl lg:text-4xl lg:w-4/5 text-center lg:text-left font-medium">
-              Experiment with Solidity using a frontend that adapts to your smart contract
+              Experiment with Cairo using a frontend that adapts to your smart contract
             </h2>
             <p className="m-auto text-center lg:text-left lg:mx-0 max-w-[300px] lg:max-w-none lg:w-3/4">
               Debug and refine your smart contracts with a live-updating frontend. Scaffold-Starknet 2 is an ideal stack
@@ -155,7 +155,7 @@ const Home: NextPage = () => {
                 daisyUI to style your dapp and give it a modern and appealing design.
               </p>
               <p className="m-auto text-center lg:text-left lg:mx-0 max-w-[300px] lg:max-w-none lg:pr-6 link">
-                <a id="Components" href="https://docs.scaffoldeth.io/components/">
+                <a id="Components" href="https://github.com/Quantum3-Labs/ss2-docs" target="_blank">
                   Check out all the components
                 </a>
               </p>
@@ -174,15 +174,15 @@ const Home: NextPage = () => {
             </div>
 
             <h2 className="text-2xl lg:text-4xl text-center lg:text-left font-medium">
-              Custom Wagmi <br /> hooks and utils
+              Custom Starknet-React <br /> hooks and utils
             </h2>
             <p className="m-auto text-center lg:text-left lg:mx-0 max-w-[300px] lg:max-w-none lg:pr-6">
-              Designed to simplify interactions with your deployed smart contracts. These hooks are wrappers around{" "}
-              <span className="italic">Wagmi</span>, an easy-to-use interface with typescript autocompletions for
-              reading from, writing to, and monitoring events emitted by your smart contracts.
+              Collection of React hooks wrapper around starknet-react to simplify interactions with smart contracts with
+              typescript autocompletion, for reading from, writing to, and monitoring events emitted by your smart
+              contracts.
             </p>
             <p className="m-auto text-center lg:text-left lg:mx-0 max-w-[300px] lg:max-w-none lg:pr-6 link">
-              <a id="Hooks" href="https://docs.scaffoldeth.io/hooks/">
+              <a id="Hooks" href="https://github.com/Quantum3-Labs/ss2-docs" target="_blank">
                 Check out all the available hooks
               </a>
             </p>
