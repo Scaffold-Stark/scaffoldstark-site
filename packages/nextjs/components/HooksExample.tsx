@@ -1,4 +1,9 @@
 import { ReactNode } from "react";
+import { Space_Grotesk } from "@next/font/google";
+
+const SpaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+});
 
 const Red = ({ children }: { children: ReactNode }) => <span className="text-[#FF5962]">{children}</span>;
 
@@ -10,57 +15,27 @@ const Purple = ({ children }: { children: ReactNode }) => <span className="text-
 
 export const HooksExample = () => {
   return (
-    <div className="w-full flex-grow  bg-white rounded-2xl p-6 drop-shadow-[0px_0px_10px_rgba(139,178,241,0.50)]">
-      <div className="bg-base-300/40 w-full h-full border border-primary rounded-3xl p-4 lg:p-6 text-xs lg:text-sm  font-mono overflow-x-scroll whitespace-nowrap  lg:overflow-auto lg:whitespace-normal">
-        <p className="my-3">
-          <Red>import</Red>
-          {" { "} useScaffoldContractWrite {" } "}
-          <Red>from</Red> <Cyan>&quot;~~/hooks/scaffold-eth&quot;</Cyan>;
-        </p>
-
+    <div className={`w-full flex-grow ${SpaceGrotesk.className}`}>
+      <div className="w-full h-full border border-[#BB16E8] rounded-3xl p-4 lg:p-6 text-xs lg:text-sm overflow-x-scroll whitespace-nowrap  lg:overflow-auto lg:whitespace-normal">
         <p className="my-3">
           <Red>const</Red>
-          {" { "}writeAsync, isLoading, isMining{" } "}
+          {" { "}writeAsync{" } "}
           <Cyan> = </Cyan>
-          <br />
           <Purple>useScaffoldContractWrite</Purple>({"{"}
           <br />
           <span className="inline-block ml-4">
-            <Cyan>contractName</Cyan>: <Cyan dark>&quot;YourContract&quot;</Cyan>,
+            <span className="text-[#9F0099]">contractName</span>: <Cyan dark>&quot;YourContract&quot;</Cyan>,
             <br />
-            <Cyan>functionName</Cyan>: <Cyan dark>&quot;setPurpose&quot;</Cyan>,
+            <span className="text-[#9F0099]">functionName</span>: <Cyan dark>&quot;setPurpose&quot;</Cyan>,
             <br />
-            <Cyan>args</Cyan>: [<Cyan dark>&quot;The value to set&quot;</Cyan>],
+            <span className="text-[#9F0099]">args</span>: [<Cyan dark>&quot;The value to set&quot;</Cyan>],
             <br />
-            <Cyan>blockConfirmation</Cyan>: <Cyan dark>1</Cyan>,
-            <br />
-            <Purple>onBlockConfirmation</Purple>: (txnReceipt) =&gt; {"{"}
-            <br />
-            <span className="inline-block ml-4">
-              console.<Purple>log</Purple>(<Cyan>&quot;Transaction blockHash&quot;</Cyan>, &nbsp;txnReceipt.
-              <Cyan>blockHash</Cyan>
-              );
-            </span>
+            <span className="text-[#9F0099]">blockConfirmation</span>: <Cyan dark>1</Cyan>,
             <br />
             {"}"}
           </span>
           <br />
           {"}"});
-        </p>
-        <p className="text-gray-400 my-3">
-          {"//"} To send the transaction, you can call the writeAsync function <br className="lg:hidden" /> returned by
-          the hook. Here&apos;s an example usage:
-        </p>
-        <p className="my-3">
-          <Red>{"<"}button</Red> className<Cyan>=&quot;btn btn-primary&quot;</Cyan> onClick<Cyan>=</Cyan>
-          {"{"}() <Cyan>=&gt;</Cyan> writeAsync(){"}"}
-          <Red>{">"}</Red>
-          <br />
-          <span className="inline-block ml-4">Send Tx</span>
-          <br />
-          <Red>
-            {"<"}/button{">"}
-          </Red>
         </p>
       </div>
     </div>

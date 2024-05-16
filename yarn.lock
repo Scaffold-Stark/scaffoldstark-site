@@ -1439,6 +1439,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/font@npm:^14.2.3":
+  version: 14.2.3
+  resolution: "@next/font@npm:14.2.3"
+  peerDependencies:
+    next: "*"
+  checksum: 49eb27f772756374284c95a2d03f9a1e6d5f83b27d9277ba4f3b4ac4e461ca7a5f46425cdcbb50bc35a20200a1afcc4615f2281d3a2ccecd8e10496812345d7f
+  languageName: node
+  linkType: hard
+
 "@next/swc-darwin-arm64@npm:14.0.4":
   version: 14.0.4
   resolution: "@next/swc-darwin-arm64@npm:14.0.4"
@@ -2301,6 +2310,7 @@ __metadata:
   resolution: "@se-2/nextjs@workspace:packages/nextjs"
   dependencies:
     "@heroicons/react": ~2.0.11
+    "@next/font": ^14.2.3
     "@rainbow-me/rainbowkit": ~2.0.2
     "@tanstack/react-query": ~5.28.6
     "@trivago/prettier-plugin-sort-imports": ~4.1.1
