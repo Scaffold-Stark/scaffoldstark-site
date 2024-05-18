@@ -33,9 +33,9 @@ const Home: NextPage = () => {
           <div className="flex relative w-14 h-14 p-3 rounded-full">
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.svg" />
           </div>
-          <p className="text-3xl m-0 font-medium mt-1">Scaffold-Starknet</p>
+          <p className="text-3xl m-0 font-medium mt-1 text-[#290C4F]">Scaffold-Starknet</p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4">
+        <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4 text-[#363636]">
           <h1 className="text-center text-3xl lg:text-5xl max-w-md lg:max-w-2xl px-3 m-0">
             Open-source toolkit for building dApps on Starknet
           </h1>
@@ -121,7 +121,7 @@ const Home: NextPage = () => {
       </div>
 
       {/* Debug Contracts */}
-      <div className={` bg-[#FBFBFB] ${SpaceGrotesk.className}`}>
+      <div className={` bg-[#FBFBFB] text-[#000] ${SpaceGrotesk.className}`}>
         <div className="container max-w-[90%] lg:max-w-7xl m-auto py-16 lg:py-20 lg:pl-12 lg:pr-6 flex flex-col-reverse lg:flex-row items-center gap-5 lg:gap-0">
           <div className="space-y-6">
             <div className="flex items-center justify-center lg:flex-col lg:items-start lg:justify-start gap-2 pt-4 lg:pt-0">
@@ -137,13 +137,13 @@ const Home: NextPage = () => {
             </p>
           </div>
           <div className="max-w-[400px] lg:max-w-none">
-            <Image src="/debug.webp" alt="Debug contracts" width={1400} height={1400} />
+            <Image src="/wallet.png" alt="Debug contracts" width={1400} height={1400} />
           </div>
         </div>
       </div>
 
       {/* SE-2 Components */}
-      <div className={` bg-[#FFF8FC] ${SpaceGrotesk.className}`}>
+      <div className={` bg-[#FFF8FC] text-[#000] ${SpaceGrotesk.className}`}>
         <div className="container max-w-[90%] lg:max-w-7xl m-auto py-16 lg:py-20 lg:px-12 flex flex-col lg:flex-row justify-between items-center gap-5 lg:gap-0">
           <div className="flex flex-col items-center">
             <div className="max-w-[400px] lg:max-w-none">
@@ -167,7 +167,7 @@ const Home: NextPage = () => {
       </div>
 
       {/* Hooks and Utils */}
-      <div className={` bg-[#FBFBFB] ${SpaceGrotesk.className}`}>
+      <div className={` bg-[#FBFBFB] text-[#000] ${SpaceGrotesk.className}`}>
         <div className="container max-w-[80%] lg:max-w-7xl m-auto py-24 lg:py-20 lg:pl-12 lg:pr-6 flex flex-col-reverse lg:flex-row items-center gap-5 lg:gap-28">
           <div className="space-y-6 flex-shrink lg:w-2/3 lg:self-start lg:mt-14">
             <div className="flex items-center justify-center lg:flex-col lg:items-start lg:justify-start gap-2 pt-4 lg:pt-0">
@@ -186,7 +186,7 @@ const Home: NextPage = () => {
       </div>
 
       {/* Block Explorer */}
-      <div className={` bg-[#FFF8FC] ${SpaceGrotesk.className}`}>
+      <div className={` bg-[#FFF8FC] text-[#000] ${SpaceGrotesk.className}`}>
         <div className="container max-w-[90%] lg:max-w-7xl m-auto py-16 lg:py-20 lg:px-12 flex flex-col lg:flex-row justify-between items-center gap-5 lg:gap-0">
           <div className="flex flex-col items-center">
             <div className="max-w-[400px] lg:max-w-none">
@@ -209,12 +209,14 @@ const Home: NextPage = () => {
         </div>
       </div>
 
-      <div className={`flex flex-col items-center py-8 gap-12 md:gap-20 bg-white pt-20 ${SpaceGrotesk.className}`}>
+      <div
+        className={`flex flex-col items-center py-8 gap-12 md:gap-20 bg-white pt-20 text-[#000] ${SpaceGrotesk.className}`}
+      >
         <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4">
           <h1 className="text-center text-2xl lg:text-3xl max-w-md lg:max-w-2xl px-3 m-0">Community</h1>
           <div className="border border-solid border-[#E2E8F0] rounded-[135px] flex py-8">
             <div className="border-r-[#E2E8F0] px-20 border-r-[1px]">
-              <Image src="/newsletter.png" alt="icon" width={130} height={130}></Image>
+              <Image src="/newsletter.svg" alt="icon" width={130} height={130}></Image>
             </div>
             <div className="flex flex-col justify-center px-16">
               <p className="m-0 max-w-xl px-3">
