@@ -73,7 +73,7 @@ const Home: NextPage = () => {
             <div className="divider px-6 sm:px-20 m-0">OR</div>
             <div className="flex items-center gap-2 mx-2">
               <CopyToClipboard
-                text={"npx create-eth@latest"}
+                text={"npx create-stark@latest"}
                 onCopy={() => {
                   setNpxCommandCopied(true);
                   setTimeout(() => {
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
                 }}
               >
                 <div className="max-w-sm flex border-2 border-gray-300 rounded-xl px-3 sm:px-5 py-1 gap-2">
-                  <p className="m-0 text-center text-sm sm:text-base">npx create-starknet</p>
+                  <p className="m-0 text-center text-sm sm:text-base">npx create-stark@latest</p>
                   {npxCommandCopied ? (
                     <CheckCircleIcon
                       className="text-xl font-normal h-6 w-4 cursor-pointer flex-shrink-0"
@@ -102,16 +102,16 @@ const Home: NextPage = () => {
           <div className={`flex flex-wrap gap-4 items-center justify-center ${SpaceGrotesk.className}`}>
             <a
               id="Docs"
-              href="https://github.com/Quantum3-Labs/ss2-docs"
+              href="https://www.docs.scaffoldstark.com/"
               target="_blank"
-              className="btn btn-outline btn-sm px-8 h-10 bg-base-100 normal-case font-normal text-lg rounded-[14px] border-gradient"
+              className="btn btn-outline btn-sm px-8 h-10 bg-white normal-case font-normal text-lg rounded-[14px] border-gradient text-[#363636]"
             >
               Docs
             </a>
             <a
               id="Github"
               href="https://github.com/Quantum3-Labs/scaffold-stark-2"
-              className="btn btn-outline btn-sm px-5 h-10 bg-gradient text-base-100 normal-case font-normal text-lg flex items-center gap-2 border-none rounded-[14px]"
+              className="btn btn-outline btn-sm px-5 h-10 bg-gradient normal-case font-normal text-lg flex items-center gap-2 border-none rounded-[14px] text-white"
             >
               Github
               <Image src="/github.png" alt="github icon" height={25} width={25} />
