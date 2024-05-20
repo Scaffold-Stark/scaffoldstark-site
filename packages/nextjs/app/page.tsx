@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       <div
         className="flex flex-col items-center py-8 gap-12 md:gap-20"
         style={{
-          backgroundImage: `url(/background.png)`,
+          backgroundImage: `url(/background.svg)`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
           </p>
           <div className={`flex flex-col gap-5 items-center mb-2 ${SpaceGrotesk.className}`}>
             <CopyToClipboard
-              text={"git clone https://github.com/Quantum3-Labs/scaffold-stark-2.git"}
+              text={"git clone https://github.com/Quantum3-Labs/scaffold-stark-2 --recurse-submodules"}
               onCopy={() => {
                 setCloneCommandCopied(true);
                 setTimeout(() => {
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
             >
               <div className="mx-2 flex border-2 border-gray-300 rounded-xl px-3 sm:px-5 py-1 gap-2">
                 <p className="m-0 text-center text-sm sm:text-base">
-                  git clone https://github.com/Quantum3-Labs/scaffold-stark-2.git
+                  git clone https://github.com/Quantum3-Labs/scaffold-stark-2 --recurse-submodules
                 </p>
                 {cloneCommandCopied ? (
                   <CheckCircleIcon
