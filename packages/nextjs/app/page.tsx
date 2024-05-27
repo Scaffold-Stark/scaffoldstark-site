@@ -168,7 +168,7 @@ const Home: NextPage = () => {
 
       {/* Hooks and Utils */}
       <div className={` bg-[#FBFBFB] text-[#000] ${SpaceGrotesk.className}`}>
-        <div className="container max-w-[80%] lg:max-w-7xl m-auto py-24 lg:py-20 lg:pl-12 lg:pr-6 flex flex-col-reverse lg:flex-row items-center gap-5 lg:gap-28">
+        <div className="container max-w-[80%] lg:max-w-7xl m-auto py-24 lg:py-20 lg:pl-12 lg:pr-6 flex flex-col-reverse lg:flex-row items-center gap-9 lg:gap-28">
           <div className="space-y-6 flex-shrink lg:w-2/3 lg:self-start lg:mt-14">
             <div className="flex items-center justify-center lg:flex-col lg:items-start lg:justify-start gap-2 pt-4 lg:pt-0">
               <p className="text-center lg:text-left text-xl m-0 font-light">CUSTOM HOOKS</p>
@@ -193,7 +193,7 @@ const Home: NextPage = () => {
               <Image src="/pana.svg" alt="SS-2" width={416} height={416} />
             </div>
           </div>
-          <div className="space-y-6 flex flex-col items-center lg:items-end">
+          <div className="space-y-6 flex flex-col items-center lg:items-end pl-28">
             <div className="flex items-center justify-center lg:flex-col lg:items-start lg:justify-start gap-2 lg:w-3/4 pt-4 lg:pt-0">
               <p className="text-center lg:text-left text-xl m-0 font-light">COMPONENTS</p>
             </div>
@@ -223,7 +223,13 @@ const Home: NextPage = () => {
                 You can build and learn together with our community, joining over 800 members in creating products,
                 prototypes, and tutorials to enrich the web3 ecosystem.
               </p>
-              <span className="m-0 max-w-xl px-3 text-[#5C94FF] pt-4">Join Us →</span>
+              <a
+                href="https://t.me/+wO3PtlRAreo4MDI9"
+                target="_blank"
+                className="m-0 max-w-xl px-3 text-[#5C94FF] pt-4"
+              >
+                Join Us →
+              </a>
             </div>
           </div>
         </div>
