@@ -33,7 +33,7 @@ const Home: NextPage = () => {
           <div className="flex relative w-14 h-14 p-3 rounded-full">
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.svg" />
           </div>
-          <p className="text-3xl m-0 font-medium mt-1 text-[#290C4F]">Scaffold-Starknet</p>
+          <p className="text-3xl m-0 font-medium mt-1 text-[#290C4F]">Scaffold-Stark</p>
         </div>
         <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4 text-[#363636]">
           <h1 className="text-center text-3xl lg:text-5xl max-w-md lg:max-w-2xl px-3 m-0">
