@@ -7,7 +7,6 @@ WORKDIR /app
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
 COPY packages/nextjs/package.json ./packages/nextjs/package.json
-COPY packages/hardhat/package.json ./packages/hardhat/package.json
 RUN yarn install --frozen-lockfile
 
 FROM base AS builder
