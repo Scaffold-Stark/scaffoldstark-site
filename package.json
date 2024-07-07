@@ -1,39 +1,40 @@
 {
-  "name": "se-2",
+  "name": "ss-2",
   "version": "0.0.1",
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/nextjs",
+      "packages/hardhat"
     ]
   },
   "scripts": {
-    "account": "yarn workspace @se-2/hardhat account",
-    "chain": "yarn workspace @se-2/hardhat chain",
-    "compile": "yarn workspace @se-2/hardhat compile",
-    "deploy": "yarn workspace @se-2/hardhat deploy",
-    "flatten": "yarn workspace @se-2/hardhat flatten",
-    "fork": "yarn workspace @se-2/hardhat fork",
+    "account": "yarn workspace @ss-2/hardhat account",
+    "chain": "yarn workspace @ss-2/hardhat chain",
+    "compile": "yarn workspace @ss-2/hardhat compile",
+    "deploy": "yarn workspace @ss-2/hardhat deploy",
+    "flatten": "yarn workspace @ss-2/hardhat flatten",
+    "fork": "yarn workspace @ss-2/hardhat fork",
     "format": "yarn next:format && yarn hardhat:format",
-    "generate": "yarn workspace @se-2/hardhat generate",
-    "hardhat-verify": "yarn workspace @se-2/hardhat hardhat-verify",
-    "hardhat:format": "yarn workspace @se-2/hardhat format",
-    "hardhat:lint": "yarn workspace @se-2/hardhat lint",
-    "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
-    "hardhat:test": "yarn workspace @se-2/hardhat test",
+    "generate": "yarn workspace @ss-2/hardhat generate",
+    "hardhat-verify": "yarn workspace @ss-2/hardhat hardhat-verify",
+    "hardhat:format": "yarn workspace @ss-2/hardhat format",
+    "hardhat:lint": "yarn workspace @ss-2/hardhat lint",
+    "hardhat:lint-staged": "yarn workspace @ss-2/hardhat lint-staged",
+    "hardhat:test": "yarn workspace @ss-2/hardhat test",
     "postinstall": "husky install",
-    "next:build": "yarn workspace @se-2/nextjs build",
-    "next:check-types": "yarn workspace @se-2/nextjs check-types",
-    "next:format": "yarn workspace @se-2/nextjs format",
-    "next:lint": "yarn workspace @se-2/nextjs lint",
-    "next:serve": "yarn workspace @se-2/nextjs serve",
+    "next:build": "yarn workspace @ss-2/nextjs build",
+    "next:check-types": "yarn workspace @ss-2/nextjs check-types",
+    "next:format": "yarn workspace @ss-2/nextjs format",
+    "next:lint": "yarn workspace @ss-2/nextjs lint",
+    "next:serve": "yarn workspace @ss-2/nextjs serve",
     "precommit": "lint-staged",
     "prepare": "install-self-peers -- --ignore-scripts",
-    "start": "yarn workspace @se-2/nextjs dev",
+    "start": "yarn workspace @ss-2/nextjs dev",
     "test": "yarn hardhat:test",
-    "vercel": "yarn workspace @se-2/nextjs vercel",
-    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
-    "verify": "yarn workspace @se-2/hardhat verify"
+    "vercel": "yarn workspace @ss-2/nextjs vercel",
+    "vercel:yolo": "yarn workspace @ss-2/nextjs vercel:yolo",
+    "verify": "yarn workspace @ss-2/hardhat verify"
   },
   "resolutions": {
     "usehooks-ts@^2.7.2": "patch:usehooks-ts@npm:^2.7.2#./.yarn/patches/usehooks-ts-npm-2.7.2-fceffe0e43.patch"
