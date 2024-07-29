@@ -1,7 +1,5 @@
 import React from "react";
 import { Space_Grotesk } from "@next/font/google";
-import { HeartIcon } from "@heroicons/react/24/outline";
-import { BuidlGuidlLogo } from "~~/components/assets/BuidlGuidlLogo";
 
 const SpaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -21,31 +19,6 @@ export const Footer = () => {
                 className="link"
               >
                 Fork me
-              </a>
-            </div>
-            <span>·</span>
-            <div className="flex justify-center items-center gap-2">
-              <p className="m-0 text-center">
-                Built with <HeartIcon className="inline-block h-4 w-4" /> by
-              </p>
-              <a
-                className="flex justify-center items-center gap-1"
-                href="https://quantum3labs.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <BuidlGuidlLogo className="w-3 h-5 pb-1" />
-                <span className="link">Q3 Labs</span>
-              </a>
-              at
-              <a
-                className="flex justify-center items-center gap-1"
-                href="https://buidlguidl.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <BuidlGuidlLogo className="w-3 h-5 pb-1" />
-                <span className="link">BuidlGuidl</span>
               </a>
             </div>
             <span>·</span>

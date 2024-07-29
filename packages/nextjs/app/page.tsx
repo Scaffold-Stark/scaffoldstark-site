@@ -45,7 +45,7 @@ const Home: NextPage = () => {
           </p>
           <div className={`flex flex-col gap-5 items-center mb-2 ${SpaceGrotesk.className}`}>
             <CopyToClipboard
-              text={"git clone https://github.com/Quantum3-Labs/scaffold-stark-2 --recurse-submodules"}
+              text={"git clone https://github.com/Quantum3-Labs/scaffold-stark-2.git"}
               onCopy={() => {
                 setCloneCommandCopied(true);
                 setTimeout(() => {
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
             >
               <div className="mx-2 flex border-2 border-gray-300 rounded-xl px-3 sm:px-5 py-1 gap-2">
                 <p className="m-0 text-center text-sm sm:text-base">
-                  git clone https://github.com/Quantum3-Labs/scaffold-stark-2 --recurse-submodules
+                  git clone https://github.com/Quantum3-Labs/scaffold-stark-2.git
                 </p>
                 {cloneCommandCopied ? (
                   <CheckCircleIcon
@@ -115,6 +115,14 @@ const Home: NextPage = () => {
             >
               Github
               <Image src="/github.png" alt="github icon" height={25} width={25} />
+            </a>
+            <a
+              id="Docs"
+              href="https://scaffold-stark-demo.vercel.app/debug"
+              target="_blank"
+              className="btn btn-outline btn-sm px-8 h-10 bg-white normal-case font-normal text-lg rounded-[14px] border-gradient text-[#363636]"
+            >
+              Demo
             </a>
           </div>
         </div>
