@@ -27,6 +27,12 @@ export const Footer = () => {
                 Support
               </a>
             </div>
+            <span>·</span>
+            <div className="text-center hidden md:block">
+              <a href="/brandkit" rel="noreferrer" className="link">
+                Brand Assets
+              </a>
+            </div>
           </div>
         </ul>
       </div>

@@ -145,7 +145,7 @@ const Home: NextPage = () => {
             </p>
           </div>
           <div className="max-w-[400px] lg:max-w-none">
-            <Image src="/wallet.png" alt="Debug contracts" width={1400} height={1400} />
+            <Image src="/wallet.svg" alt="Debug contracts" width={1400} height={1400} />
           </div>
         </div>
       </div>
@@ -231,13 +231,24 @@ const Home: NextPage = () => {
                 You can build and learn together with our community, joining over 800 members in creating products,
                 prototypes, and tutorials to enrich the web3 ecosystem.
               </p>
-              <a
-                href="https://t.me/+wO3PtlRAreo4MDI9"
-                target="_blank"
-                className="m-0 max-w-xl px-3 text-[#5C94FF] pt-4"
-              >
-                Join Us →
-              </a>
+              <div className="flex gap-7 mt-5">
+                <a
+                  className="flex gap-4 rounded-[14px] py-2 px-4 items-center border border-[#9B5584]"
+                  href="https://t.me/+wO3PtlRAreo4MDI9"
+                  target="_blank"
+                >
+                  <Image src="/telegram.svg" alt="telegram" width={25} height={25} />
+                  <span className="text-[18px]">Join Telegram</span>
+                </a>
+                <a
+                  className="flex gap-4 bg-gradient rounded-[14px] py-2 px-4 items-center"
+                  href="https://app.onlydust.com/p/speedrun-scaffold-stark"
+                  target="_blank"
+                >
+                  <Image src="/onlydust.svg" alt="logo-onlydust" width={30} height={30}></Image>
+                  <span className="text-white text-[18px]">Join Onlydust</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
