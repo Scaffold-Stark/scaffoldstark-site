@@ -21,7 +21,7 @@ const ManropeFont = Manrope({
 
 function Page() {
   return (
-    <div>
+    <div className="bg-white">
       <div
         className="flex flex-col justify-center items-center py-8 gap-4 md:gap-4 h-[630px]"
         style={{
