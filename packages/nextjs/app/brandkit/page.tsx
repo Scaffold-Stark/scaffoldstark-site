@@ -35,7 +35,7 @@ function Page() {
           <div className="flex relative w-14 h-14 p-3 rounded-full">
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.svg" />
           </div>
-          <p className="text-3xl m-0 font-medium mt-1 text-[#290C4F]">Scaffold-Stark</p>
+          <p className={`text-3xl m-0 font-medium mt-1 text-[#290C4F] ${SpaceGrotesk.className}`}>Scaffold-Stark</p>
         </div>
         <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4 text-black">
           <h1 className={`text-center text-3xl lg:text-3xl max-w-md lg:max-w-2xl px-3 m-0 ${SpaceGrotesk.className}`}>
@@ -50,7 +50,7 @@ function Page() {
             <div className=" flex flex-col justify-center items-center py-10">
               <Image src="icon.svg" alt="logo" width={80} height={80} />
             </div>
-            <div className="border border-t-[#7646C8] flex justify-center items-center py-6">
+            <div className="border-t border-t-[#7646C8] flex justify-center items-center py-6">
               <a href="/icon.svg" download="icon.svg" className={`text-gradient text-xl ${SpaceGrotesk.className}`}>
                 Download
               </a>
@@ -59,9 +59,9 @@ function Page() {
           <div className="border border-[#7646C8] w-5/12">
             <div className="flex gap-4 justify-center items-center py-10">
               <Image src="icon.svg" alt="logo" width={80} height={80} />
-              <span className="text-3xl font-medium">Scaffold-Stark</span>
+              <span className={`text-3xl font-medium ${SpaceGrotesk.className}`}>Scaffold-Stark</span>
             </div>
-            <div className="border border-t-[#7646C8] flex justify-center items-center py-6">
+            <div className="border-t border-t-[#7646C8] flex justify-center items-center py-6">
               <a
                 href="/logo-name.png"
                 download="logo-name.png"
