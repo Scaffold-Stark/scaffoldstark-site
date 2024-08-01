@@ -62,7 +62,11 @@ function Page() {
               <span className="text-3xl font-medium">Scaffold-Stark</span>
             </div>
             <div className="border border-t-[#7646C8] flex justify-center items-center py-6">
-              <a href="/icon.svg" download="icon.svg" className={`text-gradient text-xl ${SpaceGrotesk.className}`}>
+              <a
+                href="/logo-name.png"
+                download="logo-name.png"
+                className={`text-gradient text-xl ${SpaceGrotesk.className}`}
+              >
                 Download
               </a>
             </div>
