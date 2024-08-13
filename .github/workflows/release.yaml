@@ -29,11 +29,15 @@ jobs:
       - name: Stop if commit message contains [skip ci]
         run: |
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message is: $COMMIT_MESSAGE"
           if [[ "$COMMIT_MESSAGE" == *"[skip ci]"* ]]; then
             echo "Skipping build due to [skip ci] in commit message."
             exit 0
           fi
-
+        shell: bash
+        env:
+          REGION: us-east-1
+  
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
