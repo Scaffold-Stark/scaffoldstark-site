@@ -22,6 +22,8 @@ jobs:
       TAG: ${{ steps.bump-version.outputs.NEW_VERSION }}
 
     steps:
+      - name: Test commit
+        run: echo ${{ github.event.head_commit.message }}
 
       - name: Checkout Files
         uses: actions/checkout@v4
