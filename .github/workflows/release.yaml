@@ -14,7 +14,6 @@ env:
 jobs:
 
   build:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-22.04
     outputs:
       REGISTRY: ${{ steps.build-deploy.outputs.REGISTRY }}
@@ -22,9 +21,14 @@ jobs:
       TAG: ${{ steps.bump-version.outputs.NEW_VERSION }}
 
     steps:
-      - name: Test commit
-        run: echo ${{ github.event.head_commit.message }}
-
+      - name: Stop if commit message contains [skip ci]
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          if [[ "$COMMIT_MESSAGE" == *"[skip ci]"* ]]; then
+            echo "Skipping build due to [skip ci] in commit message."
+            exit 0
+          fi
+  
       - name: Checkout Files
         uses: actions/checkout@v4
         with:
