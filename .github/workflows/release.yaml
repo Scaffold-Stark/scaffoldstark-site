@@ -15,27 +15,27 @@ jobs:
 
   check_commit:
     runs-on: ubuntu-latest
+    outputs:
+      SHOULD_RUN: ${{ steps.check_commit.outputs.SHOULD_RUN }}
     steps:
       - name: Checkout Files
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
-      - name: check if message skip ci
+      - name: check if skip ci
         id: check_commit
         run: |
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           if [[ "$COMMIT_MESSAGE" == *"[skip ci]"* ]]; then
-            echo "::set-output name=match::true"
+            echo "SHOULD_RUN=true" >> "$GITHUB_OUTPUT"
           else
             echo "Match is false"
           fi
-    outputs:
-      match: ${{ steps.check_commit.outputs.match }}
   
   build:
     needs: check_commit
-    if: ${{ needs.check_commit.outputs.match != 'true' }}
+    if: ${{ needs.check_commit.outputs.SHOULD_RUN != 'true' }}
     runs-on: ubuntu-22.04
     outputs:
       REGISTRY: ${{ steps.build-deploy.outputs.REGISTRY }}
