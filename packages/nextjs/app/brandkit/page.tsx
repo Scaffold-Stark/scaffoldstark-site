@@ -59,7 +59,7 @@ function Page() {
           <div className="border border-[#7646C8] w-5/12">
             <div className="flex gap-4 justify-center items-center py-10">
               <Image src="icon.svg" alt="logo" width={80} height={80} />
-              <span className={`text-3xl font-medium ${SpaceGrotesk.className}`}>Scaffold-Stark</span>
+              <span className={`text-3xl font-medium text-black ${SpaceGrotesk.className}`}>Scaffold-Stark</span>
             </div>
             <div className="border-t border-t-[#7646C8] flex justify-center items-center py-6">
               <a
@@ -78,13 +78,13 @@ function Page() {
         <span className="mt-4 text-[24px] text-gradient-2 font-bold font-arial">Typography</span>
         <div className="w-full mt-6">
           <div className="flex justify-between border-b border-b-[#E2E8F0] py-6">
-            <div className={`flex flex-col ${DmSans.className}`}>
+            <div className={`flex flex-col text-black ${DmSans.className}`}>
               <span className="text-xs">DM Sans By Colophon Foundry</span>
               <span className="text-2xl">DM Sans</span>
             </div>
             <div className="flex justify-center">
               <a
-                className={`border border-[#9B5584] py-3 px-9 rounded-[14px] ${SpaceGrotesk.className}`}
+                className={`border border-[#9B5584] py-3 px-9 rounded-[14px] text-black ${SpaceGrotesk.className}`}
                 href="https://fonts.google.com/specimen/DM+Sans?query=dm+sans"
                 target="_blank"
               >
@@ -93,13 +93,13 @@ function Page() {
             </div>
           </div>
           <div className="flex justify-between border-b border-b-[#E2E8F0] py-6">
-            <div className={`flex flex-col ${InterFont.className}`}>
+            <div className={`flex flex-col text-black ${InterFont.className}`}>
               <span className="text-xs">Inter By Rasmus Andersson</span>
               <span className="text-2xl">Inter</span>
             </div>
             <div className="flex justify-center">
               <a
-                className={`border border-[#9B5584] py-3 px-9 rounded-[14px] ${SpaceGrotesk.className}`}
+                className={`border border-[#9B5584] py-3 px-9 rounded-[14px] text-black ${SpaceGrotesk.className}`}
                 href="https://fonts.google.com/specimen/Inter?query=dm+sans"
                 target="_blank"
               >
@@ -108,13 +108,13 @@ function Page() {
             </div>
           </div>
           <div className="flex justify-between border-b border-b-[#E2E8F0] py-6">
-            <div className={`flex flex-col ${ManropeFont.className}`}>
+            <div className={`flex flex-col text-black ${ManropeFont.className}`}>
               <span className="text-xs">Manrope By Mikhail Sharanda</span>
               <span className="text-2xl">Manrope</span>
             </div>
             <div className="flex justify-center">
               <a
-                className={`border border-[#9B5584] py-3 px-9 rounded-[14px] ${SpaceGrotesk.className}`}
+                className={`border border-[#9B5584] py-3 px-9 rounded-[14px] text-black ${SpaceGrotesk.className}`}
                 href="https://fonts.google.com/specimen/Manrope?query=dm+sans"
                 target="_blank"
               >
