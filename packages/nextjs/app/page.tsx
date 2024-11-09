@@ -201,7 +201,7 @@ const Home: NextPage = () => {
               <Image src="/pana.svg" alt="SS-2" width={416} height={416} />
             </div>
           </div>
-          <div className="space-y-6 flex flex-col items-center lg:items-end pl-28">
+          <div className="space-y-6 flex flex-col items-center lg:items-end lg:pl-28">
             <div className="flex items-center justify-center lg:flex-col lg:items-start lg:justify-start gap-2 lg:w-3/4 pt-4 lg:pt-0">
               <p className="text-center lg:text-left text-xl m-0 font-light">COMPONENTS</p>
             </div>
@@ -218,35 +218,46 @@ const Home: NextPage = () => {
       </div>
 
       <div
-        className={`flex flex-col items-center py-8 gap-12 md:gap-20 bg-white pt-20 text-[#000] ${SpaceGrotesk.className}`}
+        className={`flex flex-col items-center py-10 gap-10 md:gap-16 bg-white pt-20 text-black ${SpaceGrotesk.className}`}
       >
-        <div className="flex flex-col justify-center items-center gap-8 mb-14 px-4">
-          <h1 className="text-center text-2xl lg:text-3xl max-w-md lg:max-w-2xl px-3 m-0">Community</h1>
-          <div className="border border-solid border-[#E2E8F0] rounded-[135px] flex py-8">
-            <div className="border-r-[#E2E8F0] px-20 border-r-[1px]">
-              <Image src="/newsletter.svg" alt="icon" width={130} height={130}></Image>
+        <div className="flex flex-col justify-center items-center gap-6 md:gap-8 mb-10 md:mb-14 px-4">
+          <h1 className="text-center text-2xl md:text-3xl lg:text-4xl max-w-md md:max-w-lg lg:max-w-2xl px-4 m-0">
+            Community
+          </h1>
+
+          {/* Main Community Content */}
+          <div className="md:border border-gray-300 rounded-[135px] flex flex-col md:flex-row items-center pt-3 pb-6 md:py-8">
+            {/* Newsletter Icon Section */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-300 px-10 md:px-16 pb-4 md:pb-0">
+              <Image src="/newsletter.svg" alt="icon" width={130} height={130} />
             </div>
-            <div className="flex flex-col justify-center px-16">
-              <p className="m-0 max-w-xl px-3">
+
+            {/* Community Information Section */}
+            <div className="flex flex-col items-center md:items-start px-8 md:px-12 mt-4 md:mt-0">
+              <p className="m-0 text-center md:text-left max-w-sm md:max-w-md px-3">
                 You can build and learn together with our community, joining over 800 members in creating products,
                 prototypes, and tutorials to enrich the web3 ecosystem.
               </p>
-              <div className="flex gap-7 mt-5">
+
+              {/* Links Section */}
+              <div className="flex flex-wrap items-center justify-center gap-5 mt-8 md:mt-5">
                 <a
-                  className="flex gap-4 rounded-[14px] py-2 px-4 items-center border border-[#9B5584]"
+                  className="flex gap-3 rounded-lg py-2 px-4 items-center border border-[#9B5584]"
                   href="https://t.me/+wO3PtlRAreo4MDI9"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Image src="/telegram.svg" alt="telegram" width={25} height={25} />
-                  <span className="text-[18px]">Join Telegram</span>
+                  <Image src="/telegram.svg" alt="telegram" width={24} height={24} />
+                  <span className="text-[16px] md:text-[18px]">Join Telegram</span>
                 </a>
                 <a
-                  className="flex gap-4 bg-gradient rounded-[14px] py-2 px-4 items-center"
+                  className="flex gap-3 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg py-2 px-4 items-center text-white"
                   href="https://app.onlydust.com/p/speedrun-scaffold-stark"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Image src="/onlydust.svg" alt="logo-onlydust" width={30} height={30}></Image>
-                  <span className="text-white text-[18px]">Join Onlydust</span>
+                  <Image src="/onlydust.svg" alt="logo-onlydust" width={26} height={26} />
+                  <span className="text-[16px] md:text-[18px]">Join Onlydust</span>
                 </a>
               </div>
             </div>
