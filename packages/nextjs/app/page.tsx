@@ -225,21 +225,17 @@ const Home: NextPage = () => {
             Community
           </h1>
 
-          {/* Main Community Content */}
           <div className="md:border border-gray-300 rounded-[135px] flex flex-col md:flex-row items-center pt-3 pb-6 md:py-8">
-            {/* Newsletter Icon Section */}
             <div className="border-b md:border-b-0 md:border-r border-gray-300 px-10 md:px-16 pb-4 md:pb-0">
               <Image src="/newsletter.svg" alt="icon" width={130} height={130} />
             </div>
 
-            {/* Community Information Section */}
             <div className="flex flex-col items-center md:items-start px-8 md:px-12 mt-4 md:mt-0">
               <p className="m-0 text-center md:text-left max-w-sm md:max-w-md px-3">
                 You can build and learn together with our community, joining over 800 members in creating products,
                 prototypes, and tutorials to enrich the web3 ecosystem.
               </p>
 
-              {/* Links Section */}
               <div className="flex flex-wrap items-center justify-center gap-5 mt-8 md:mt-5">
                 <a
                   className="flex gap-3 rounded-lg py-2 px-4 items-center border border-[#9B5584]"
