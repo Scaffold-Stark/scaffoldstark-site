@@ -15,7 +15,7 @@ const Purple = ({ children }: { children: ReactNode }) => <span className="text-
 
 export const HooksExample = () => {
   return (
-    <div className={`w-[50rem] flex-grow ${SpaceGrotesk.className}`}>
+    <div className={`lg:w-[50rem] flex-grow ${SpaceGrotesk.className}`}>
       <div className="w-full h-full border border-[#BB16E8] rounded-3xl p-4 lg:p-6 text-xs lg:text-sm overflow-x-scroll whitespace-nowrap lg:overflow-auto lg:whitespace-normal">
         <p className="my-3">
           <Red>const</Red> {" { "} writeAsync {" } "}
