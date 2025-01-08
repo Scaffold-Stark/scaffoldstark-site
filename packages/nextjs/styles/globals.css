@@ -2,13 +2,20 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-:root,
-[data-theme] {
-  background: oklch(var(--b2));
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
   min-height: 100vh;
+  background-color: white;
+}
+
+.content {
+  max-width: 1240px;
+  padding: 0 15px;
+  margin: 0 auto;
 }
 
 h1,
@@ -19,58 +26,36 @@ h4 {
   line-height: 1;
 }
 
-p {
-  margin: 1rem 0;
+li {
+  margin-bottom: 18px;
+}
+li::marker {
+  color: #181872;
+  font-size: 32px;
 }
 
-.btn {
-  @apply shadow-md;
-}
-
-.btn.btn-ghost {
-  @apply shadow-none;
-}
-
-.bg-gradient {
-  background: rgb(24, 24, 114);
-  background: linear-gradient(90deg, rgba(24, 24, 114, 1) 0%, rgba(155, 85, 132, 1) 66%);
-}
-
-.border-gradient {
-  border: 1px solid #9b5584;
-}
-
-.text-gradient {
-  background-image: linear-gradient(90deg, rgba(24, 24, 114, 1) 0%, rgba(155, 85, 132, 1) 66%);
-  -webkit-background-clip: text;
+.title-section {
+  background: var(--Starknet-Gradient, linear-gradient(270deg, #9b5584 0%, #181872 108.63%));
   background-clip: text;
-  color: transparent;
-}
-
-.text-gradient-2{
-  background-image: var(--gradient, linear-gradient(90deg, #42D2F1 0%, #da65ef 66%));
   -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   -webkit-text-fill-color: transparent;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -1.08px;
 }
 
-.card-1{
-  background: linear-gradient(270deg, #A7ECFF 0%, #E8B6FF 100%);
+.subTitle-section {
+  color: #fc34ff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.card-2{
-  background: var(--gradient, linear-gradient(90deg, #42D2F1 0%, #B248DD 100%));
-}
-
-.card-3{
-  background: linear-gradient(90deg, #3752CD 0%, #8B45FD 100%);
-}
-
-.card-4{
-  background: linear-gradient(270deg, #4E4EDA 0%, #2F3050 100%);
-}
-
-.font-arial{
-  font-family: Arial, Helvetica, sans-serif;
+.c {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
