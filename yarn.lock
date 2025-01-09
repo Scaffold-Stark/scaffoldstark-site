@@ -7391,6 +7391,7 @@ __metadata:
     husky: ~8.0.3
     lint-staged: ~13.2.2
     next: ~14.0.4
+    swiper: ^11.2.0
     vercel: ~32.4.1
   languageName: unknown
   linkType: soft
@@ -7672,6 +7673,13 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^11.2.0":
+  version: 11.2.0
+  resolution: "swiper@npm:11.2.0"
+  checksum: 6400adafaad06035d2f47cc061a2aed5a6b66537707d15ef3c27f662be3dfce960b243adfd9b6569169068e62c11389f4e12696cdf8296e650529c0f7e7f55ae
   languageName: node
   linkType: hard
 

@@ -2,11 +2,11 @@ import Image from "next/image";
 
 const CustomHook = () => {
   return (
-    <div className="grid grid-cols-6 gap-10 items-center content">
+    <div className="grid grid-cols-7 gap-16 items-center content">
       <div className="col-span-3">
-        <Image src={"/assets/component.png"} width={450} height={450} alt="component" className="mx-auto" />
+        <Image src={"/assets/component.png"} width={450} height={450} alt="component" />
       </div>
-      <div className="max-w-[632px] col-span-3 item-spacing-col">
+      <div className="max-w-[632px] col-span-4 item-spacing-col">
         <p className="subTitle-section">COMPONENTS</p>
         <p
           className="text-4xl font-medium"
@@ -19,7 +19,7 @@ const CustomHook = () => {
         >
           Collection of common web3 components to quickly build your frontend.
         </p>
-        <p className="text-white text-xl">
+        <p className="text-white text-xl max-w-[560px]">
           Accelerate your dapp development using our pre-built components for common web3 use cases.
         </p>
       </div>
@@ -29,11 +29,11 @@ const CustomHook = () => {
 
 const Component = () => {
   return (
-    <div className="flex items-center gap-5 content">
-      <div className="item-spacing-col max-w-[486px]">
+    <div className="flex items-center gap-8 content">
+      <div className="item-spacing-col max-w-[480px]">
         <p className="subTitle-section">CUSTOM HOOKS</p>
         <p
-          className="text-4xl font-medium"
+          className="text-4xl font-medium max-w-[400px]"
           style={{
             background: "linear-gradient(270deg, #9B5584 0%, #ADADFF 108.63%)",
             backgroundClip: "text",

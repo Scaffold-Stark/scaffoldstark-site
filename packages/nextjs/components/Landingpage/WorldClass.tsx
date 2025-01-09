@@ -1,4 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const GradientButton = ({ icon, text }: { icon: string; text: string }) => {
   return (
@@ -18,11 +25,104 @@ const GradientButton = ({ icon, text }: { icon: string; text: string }) => {
   );
 };
 
+const ItemSlide = ({
+  desc,
+  avatar,
+  name,
+  position,
+}: {
+  desc: string;
+  avatar: string;
+  name: string;
+  position: string;
+}) => {
+  return (
+    <div>
+      <p className="text-[#BABABA] text-xl mb-[60px]">{desc}</p>
+      <div className="flex items-center gap-3">
+        <div>
+          {!avatar ? (
+            <div className="w-12 h-12 rounded-full bg-white"></div>
+          ) : (
+            <Image src={avatar} alt="avatar" width={48} height={48} />
+          )}
+        </div>
+        <div>
+          <p className="text-xl font-medium bg-gradient-to-br from-rose-200 via-purple-300 to-purple-400 inline-block text-transparent bg-clip-text">
+            {name}
+          </p>
+          <p className="text-[#BABABA] text-sm">{position}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FounderSlider = () => {
+  const data = [
+    {
+      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
+      avatar: "",
+      name: "Nadai",
+      position: "Founder at Scaffold-Stark",
+    },
+    {
+      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
+      avatar: "",
+      name: "Carlos Ramos",
+      position: "Founder at Quantum3 Labs",
+    },
+    {
+      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
+      avatar: "",
+      name: "Carlos Ramos",
+      position: "Founder at Quantum3 Labs",
+    },
+    {
+      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
+      avatar: "",
+      name: "Nadai",
+      position: "Founder at Scaffold-Stark",
+    },
+    {
+      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
+      avatar: "",
+      name: "Carlos Ramos",
+      position: "Founder at Quantum3 Labs",
+    },
+  ];
+  const [activeIndex, setActiveIndex] = useState(0);
+  return (
+    <div className="mx-auto">
+      <Swiper
+        modules={[Navigation]}
+        centeredSlides={true}
+        loop={true}
+        spaceBetween={20}
+        slidesPerView={2.5}
+        className="w-full cursor-grab"
+        onSlideChange={(swiper: any) => setActiveIndex(swiper.realIndex)}
+      >
+        {data.map((item, index) => (
+          <SwiperSlide
+            key={index}
+            className={`transition-transform duration-300 ${
+              index === activeIndex ? "-translate-y-5" : "translate-y-0"
+            }`}
+          >
+            <ItemSlide {...item} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
+
 const ScaffoldStark = () => {
   return (
     <div>
       <div
-        className="flex"
+        className="flex rounded-l-3xl rounded-r-3xl"
         style={{
           borderRadius: "c",
           borderRight: "2px solid #B24DFF",
@@ -38,7 +138,7 @@ const ScaffoldStark = () => {
             <p className="text-[25px]">Scaffold-Stark</p>
           </div>
           <div className="flex-1 item-spacing-col justify-end">
-            <p className="text-xl">
+            <p className="text-xl max-w-[700px]">
               You can build and learn together with our community, joining over 500 members in creating products,
               prototypes, and tutorials to enrich the web3 ecosystem.
             </p>
@@ -56,28 +156,39 @@ const ScaffoldStark = () => {
 
 export const WorldClass = () => {
   return (
-    <section className="">
+    <section>
       <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mb-0.5" />
-      <div className="bg-[#0F0F0F]">
-        <p
-          className="text-[54px] font-bold text-center"
-          style={{
-            background: "linear-gradient(180deg, #FFF 0%, #999 100%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            lineHeight: "114%",
-          }}
-        >
-          World-class developers use <br /> Scaffold-Stark
-        </p>
-        <p className="text-[#BABABA] text-xl text-center mt-5">
-          You can build and learn together with our community, joining over 300 members in creating <br /> products,
-          prototypes, and tutorials to enrich the web3 ecosystem.
-        </p>
+      <div className="bg-[#0F0F0F] pt-20 pb-14">
+        <div>
+          <p
+            className="text-[54px] font-bold text-center"
+            style={{
+              background: "linear-gradient(180deg, #FFF 0%, #999 100%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              lineHeight: "114%",
+            }}
+          >
+            World-class developers use <br /> Scaffold-Stark
+          </p>
+          <p className="text-[#BABABA] text-xl text-center mt-5">
+            You can build and learn together with our community, joining over 300 members in creating <br /> products,
+            prototypes, and tutorials to enrich the web3 ecosystem.
+          </p>
+        </div>
+        <div className="mt-14">
+          <FounderSlider />
+        </div>
+        <div className="!mt-[180px] content">
+          <ScaffoldStark />
+        </div>
+        <div className="flex items-center gap-4 justify-center mt-20">
+          <a className="font-medium cursor-pointer underline">Edit me</a>
+          <div className="w-1 h-1 bg-white rounded-full"></div>
+          <a className="font-medium cursor-pointer underline">Brand Assets</a>
+        </div>
       </div>
-      <ScaffoldStark />
-      <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mt-0.5 rotate-180" />
     </section>
   );
 };

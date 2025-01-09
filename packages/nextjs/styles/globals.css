@@ -13,9 +13,41 @@ body {
 }
 
 .content {
-  max-width: 1240px;
+  max-width: 1230px;
   padding: 0 15px;
   margin: 0 auto;
+}
+
+.header-item-text {
+  font-size: 20px;
+}
+
+.header-item-btn {
+  width: 100px;
+  text-align: center;
+  padding: 8px 23px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid var(--Starknet-Gradient, #9b5584);
+  background: linear-gradient(180deg, #ffb0ff 0%, #7748cd 100%);
+  box-shadow: 4px 0px 2.6px 0px rgba(255, 255, 255, 0.25) inset, 0px -4px 2.6px 0px rgba(0, 0, 0, 0.37) inset,
+    0px 3px 2.6px 0px rgba(255, 255, 255, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
+.header-item-github-btn {
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: var(--Starknet-Gradient, linear-gradient(270deg, #9b5584 0%, #181872 108.63%));
+  box-shadow: 4px 0px 2.6px 0px rgba(255, 255, 255, 0.25) inset, 0px -4px 2.6px 0px rgba(0, 0, 0, 0.37) inset,
+    0px 3px 2.6px 0px rgba(255, 255, 255, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
+.copy-icon {
+  border-radius: 10px;
+  border: 1px solid var(--Starknet-Gradient, #9b5584);
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
 h1,
@@ -54,8 +86,29 @@ li::marker {
   line-height: normal;
 }
 
-.c {
+.item-spacing-col {
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+.swiper {
+  overflow: inherit !important;
+}
+
+.swiper-slide {
+  border-radius: 15px;
+  padding: 30px 32px 36px 32px;
+}
+
+.swiper-slide-active {
+  border: 1px solid #f06bff !important;
+  background: linear-gradient(180deg, rgba(255, 164, 250, 0.12) 0%, #160026 100%) !important;
+  transform: translateY(-20px) !important;
+}
+
+.swiper-slide-next,
+.swiper-slide-prev {
+  border: 1px solid rgb(67, 66, 66) !important;
+  background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%) !important;
 }
