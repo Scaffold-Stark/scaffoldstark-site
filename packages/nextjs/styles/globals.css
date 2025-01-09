@@ -129,12 +129,16 @@ li::marker {
 .swiper-slide {
   border-radius: 15px;
   padding: 30px 32px 36px 32px;
+  height: auto !important;
+}
+
+.swiper-wrapper {
+  align-items: stretch;
 }
 
 .swiper-slide-active {
   border: 1px solid #f06bff !important;
   background: linear-gradient(180deg, rgba(255, 164, 250, 0.12) 0%, #160026 100%) !important;
-  transform: translateY(-20px) !important;
 }
 
 .swiper-slide-next,

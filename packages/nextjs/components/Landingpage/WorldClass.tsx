@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
 import Image from "next/image";
 import { Footer } from "./Footer";
 import "swiper/css";
@@ -40,14 +39,14 @@ const ItemSlide = ({
   position: string;
 }) => {
   return (
-    <div>
-      <p className="text-[#BABABA] text-xl mb-[60px]">{desc}</p>
+    <div className="flex flex-col h-full gap-20">
+      <p className="text-[#BABABA] text-xl flex-1">{desc}</p>
       <div className="flex items-center gap-3">
         <div>
           {!avatar ? (
             <div className="w-12 h-12 rounded-full bg-white"></div>
           ) : (
-            <Image src={avatar} alt="avatar" width={48} height={48} />
+            <Image src={avatar} alt="avatar" width={48} height={48} className="rounded-full" />
           )}
         </div>
         <div>
@@ -64,37 +63,42 @@ const ItemSlide = ({
 const FounderSlider = () => {
   const data = [
     {
-      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
-      avatar: "",
-      name: "Nadai",
-      position: "Founder at Scaffold-Stark",
+      desc: "“Scaffold Stark is the best way for developers to launch apps on Starknet, it is fast and optimized for almost all use cases, the team is constantly pushing towards having more production friendly framework.”",
+      avatar: "/assets/mehdi.png",
+      name: "Mehdi",
+      position: "Founder at Stormbit Finance",
     },
     {
-      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
-      avatar: "",
-      name: "Carlos Ramos",
-      position: "Founder at Quantum3 Labs",
+      desc: "“'ve found Scaffold-Stark's debugging process exceptional. The framework streamlines complex data type handling, significantly reducing development overhead. Its built-in error handling and debugging tools have cut our development time in half while maintaining code quality.”",
+      avatar: "/assets/gian.png",
+      name: "Gian",
+      position: "Founder at The Marquis",
     },
     {
-      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
-      avatar: "",
-      name: "Carlos Ramos",
-      position: "Founder at Quantum3 Labs",
+      desc: "“Tools like @ScaffoldStark will greatly help new developers to create projects on @Starknet, for example at hackathons I'm excited to see what new ideas will be developed with this toolkit.”",
+      avatar: "/assets/omar.png",
+      name: "Omar",
+      position: "Developer Relations at Starknet Foundation",
     },
     {
-      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
-      avatar: "",
-      name: "Nadai",
-      position: "Founder at Scaffold-Stark",
+      desc: "“Coming from an Ethereum / EVM background, it would have so time consuming to get started on building apps on Starknet with Scaffold-Stark, specially during a hackathon, also the framework is structured on a similar way to Scaffold-Eth, so its very easy to understand how it works.”",
+      avatar: "/assets/shiv.png",
+      name: "Shiv",
+      position: "Contributor at Scaffold-Eth",
     },
     {
-      desc: "“ You can build and learn together with our community, joining over 300 members in creating products, prototypes, and tutorials to enrich the web3 ecosystem ”",
-      avatar: "",
-      name: "Carlos Ramos",
-      position: "Founder at Quantum3 Labs",
+      desc: "“Scaffold-Stark simplified the onboarding process for developers looking to build on Starknet. Its developer friendly structure makes transitioning from Ethereum seamless, while offering power tools to experiment and scale Starknet projects easier.”",
+      avatar: "/assets/andee.png",
+      name: "Andee",
+      position: "Founder at RYG.Labs",
+    },
+    {
+      desc: "“Scaffold Stark is a game-changer for building on Starknet. It drastically reduces the time needed to set up the development environment, and debugging smart contracts becomes a straightforward task thanks to the intuitive interface they’ve added. Highly recommended for any developer diving into Starknet!”",
+      avatar: "/assets/oxvato.png",
+      name: "0xVato",
+      position: "Founder",
     },
   ];
-  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="mx-auto">
       <Swiper
@@ -102,18 +106,14 @@ const FounderSlider = () => {
         centeredSlides={true}
         loop={true}
         spaceBetween={20}
-        slidesPerView={2.5}
-        className="w-full cursor-grab"
-        onSlideChange={(swiper: any) => setActiveIndex(swiper.realIndex)}
+        slidesPerView={3.5}
+        className="w-full cursor-grab flex items-stretch"
       >
         {data.map((item, index) => (
-          <SwiperSlide
-            key={index}
-            className={`transition-transform duration-300 ${
-              index === activeIndex ? "-translate-y-5" : "translate-y-0"
-            }`}
-          >
-            <ItemSlide {...item} />
+          <SwiperSlide key={index}>
+            <div className="h-full">
+              <ItemSlide {...item} />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -198,7 +198,9 @@ export const WorldClass = () => {
         <div className="!mt-[180px] content">
           <ScaffoldStark />
         </div>
-        <Footer />
+        <div className="mt-20">
+          <Footer />
+        </div>
       </div>
     </section>
   );
