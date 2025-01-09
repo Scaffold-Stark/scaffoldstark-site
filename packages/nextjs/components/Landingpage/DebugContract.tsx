@@ -1,8 +1,7 @@
-import { useState } from "react";
 import Image from "next/image";
+import { REDIRECT_LINK } from "~~/helper/redirect";
 
 export const DebugContract = () => {
-  const [isHovered, setIsHovered] = useState(false);
   return (
     <section className="content flex items-center !pt-10">
       <div className="item-spacing-col">
@@ -12,32 +11,18 @@ export const DebugContract = () => {
           Debug and refine your smart contracts with a live-updating frontend. Scaffold-Stark is an ideal stack for
           progressing from rapid prototyping to production-grade dApps.
         </p>
-        <div
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="cursor-pointer relative h-8"
-        >
+        <div className="flex flex-col gap-2 mt-16">
           <div
-            className={`absolute top-0 left-0 flex gap-2 transition-all duration-300 ${
-              isHovered ? "opacity-100" : "opacity-0"
-            }`}
+            className="flex gap-2 hover-text w-fit"
+            onClick={() => window.open(REDIRECT_LINK.scaffoldDemo, "_blank")}
           >
             <p className="title-section !text-lg">Checkout this sample scaffold-stark dApp</p>
-            <Image src="/assets/redirect-icon.svg" alt="redirect" width={15} height={15} />
+            <img src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" />
           </div>
 
-          <div
-            className={`absolute top-0 left-0 transition-all duration-300 ${isHovered ? "opacity-0" : "opacity-100"}`}
-          >
+          <div className="mt-2 hover-text w-fit" onClick={() => window.open(REDIRECT_LINK.speedrun, "_blank")}>
             <p className="title-section !text-lg">Learn how to use it</p>
           </div>
-
-          <div
-            className="h-0.5 w-12 absolute bottom-0 left-0"
-            style={{
-              background: "var(--Starknet-Gradient, linear-gradient(270deg, #9B5584 0%, #181872 108.63%))",
-            }}
-          />
         </div>
       </div>
       <div>

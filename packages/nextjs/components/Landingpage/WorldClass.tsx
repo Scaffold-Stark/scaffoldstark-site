@@ -6,8 +6,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { REDIRECT_LINK } from "~~/helper/redirect";
 
-const GradientButton = ({ icon, text }: { icon: string; text: string }) => {
+const GradientButton = ({ icon, text, onClick }: { icon: string; text: string; onClick: () => void }) => {
   return (
     <div
       className="cursor-pointer px-6 py-4 flex items-center justify-center gap-2.5 w-[218px]"
@@ -18,6 +19,7 @@ const GradientButton = ({ icon, text }: { icon: string; text: string }) => {
         boxShadow:
           "4px 0px 2.6px 0px rgba(255, 255, 255, 0.25) inset, 0px -4px 2.6px 0px rgba(0, 0, 0, 0.37) inset, 0px 3px 2.6px 0px rgba(255, 255, 255, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.05)",
       }}
+      onClick={onClick}
     >
       <p className="text-xl">{text}</p>
       <Image src={icon} alt="icon" width={26} height={26} />
@@ -143,9 +145,21 @@ const ScaffoldStark = () => {
               prototypes, and tutorials to enrich the web3 ecosystem.
             </p>
             <div className="flex gap-3">
-              <GradientButton icon="/assets/telegram-icon.svg" text="Join Telegram" />
-              <GradientButton icon="/assets/onlydust-icon.svg" text="Join Onlydust" />
-              <GradientButton icon="/assets/x-icon.svg" text="Follow Us" />
+              <GradientButton
+                icon="/assets/telegram-icon.svg"
+                text="Join Telegram"
+                onClick={() => window.open(REDIRECT_LINK.telegram, "_blank")}
+              />
+              <GradientButton
+                icon="/assets/onlydust-icon.svg"
+                text="Join Onlydust"
+                onClick={() => window.open(REDIRECT_LINK.onlydust, "_blank")}
+              />
+              <GradientButton
+                icon="/assets/x-icon.svg"
+                text="Follow Us"
+                onClick={() => window.open(REDIRECT_LINK.twitter, "_blank")}
+              />
             </div>
           </div>
         </div>
@@ -184,7 +198,12 @@ export const WorldClass = () => {
           <ScaffoldStark />
         </div>
         <div className="flex items-center gap-4 justify-center mt-20">
-          <a className="font-medium cursor-pointer underline">Edit me</a>
+          <a
+            className="font-medium cursor-pointer underline"
+            onClick={() => window.open(REDIRECT_LINK.editme, "_blank")}
+          >
+            Edit me
+          </a>
           <div className="w-1 h-1 bg-white rounded-full"></div>
           <a className="font-medium cursor-pointer underline">Brand Assets</a>
         </div>

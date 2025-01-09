@@ -10,6 +10,23 @@
 body {
   min-height: 100vh;
   background-color: white;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+li {
+  margin-bottom: 18px;
+}
+li::marker {
+  color: #181872;
+  font-size: 32px;
 }
 
 .content {
@@ -50,20 +67,12 @@ body {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
-h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 0.5rem;
-  line-height: 1;
-}
-
-li {
-  margin-bottom: 18px;
-}
-li::marker {
-  color: #181872;
-  font-size: 32px;
+.bg-texture {
+  background-image: url("/assets/bg-texture.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100%;
 }
 
 .title-section {
@@ -92,6 +101,27 @@ li::marker {
   gap: 18px;
 }
 
+.hover-text {
+  position: relative;
+  cursor: pointer;
+}
+
+.hover-text::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(270deg, #9b5584 0%, #181872 108.63%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hover-text:hover::after {
+  opacity: 1;
+}
+
 .swiper {
   overflow: inherit !important;
 }
@@ -111,4 +141,20 @@ li::marker {
 .swiper-slide-prev {
   border: 1px solid rgb(67, 66, 66) !important;
   background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%) !important;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(-35px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
