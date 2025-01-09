@@ -17,7 +17,7 @@ export const DebugContract = () => {
             onClick={() => window.open(REDIRECT_LINK.scaffoldDemo, "_blank")}
           >
             <p className="title-section !text-lg">Checkout this sample scaffold-stark dApp</p>
-            <img src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" />
+            <Image src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" />
           </div>
 
           <div className="mt-2 hover-text w-fit" onClick={() => window.open(REDIRECT_LINK.speedrun, "_blank")}>

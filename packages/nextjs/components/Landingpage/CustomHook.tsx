@@ -242,8 +242,30 @@ const Component = () => {
         </p>
         <p className="text-white text-xl">Simplify interactions with smart contracts with typescript autocompletion</p>
       </div>
-      <div>
-        <Image src={"/assets/custom-hook.png"} width={767} height={330} alt="hooks" className="mx-auto" />
+      <div className="relative">
+        <Image src={"/assets/custom-hook.png"} width={767} height={330} alt="hooks" className="mx-auto relative z-20" />
+        <Image
+          src={"/assets/customhook-blur1.svg"}
+          alt="blur"
+          width={550}
+          height={400}
+          className="absolute left-1/2 top-1/2 z-10 blur-animate1"
+          style={{
+            fill: "linear-gradient(94deg, #D6DA9D 2.48%, #B9747C 21.91%, #71599D 42.34%, #8472BD 66.25%, #5B91B5 79.08%, #73C5B1 98.14%)",
+            filter: "blur(22.75px)",
+          }}
+        />
+        <Image
+          src={"/assets/customhook-blur2.svg"}
+          alt="blur"
+          width={550}
+          height={400}
+          className="absolute left-1/2 top-1/2 z-10 blur-animate2"
+          style={{
+            fill: "linear-gradient(240deg, #D6DA9D 21.99%, #B9747C 37.66%, #71599D 54.13%, #8472BD 73.42%, #5B91B5 83.76%, #73C5B1 99.13%)",
+            filter: "blur(30.450000762939453px)",
+          }}
+        />
       </div>
     </div>
   );

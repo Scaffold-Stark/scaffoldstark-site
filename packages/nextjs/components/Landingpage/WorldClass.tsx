@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import Image from "next/image";
+import { Footer } from "./Footer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -197,16 +198,7 @@ export const WorldClass = () => {
         <div className="!mt-[180px] content">
           <ScaffoldStark />
         </div>
-        <div className="flex items-center gap-4 justify-center mt-20">
-          <a
-            className="font-medium cursor-pointer underline"
-            onClick={() => window.open(REDIRECT_LINK.editme, "_blank")}
-          >
-            Edit me
-          </a>
-          <div className="w-1 h-1 bg-white rounded-full"></div>
-          <a className="font-medium cursor-pointer underline">Brand Assets</a>
-        </div>
+        <Footer />
       </div>
     </section>
   );

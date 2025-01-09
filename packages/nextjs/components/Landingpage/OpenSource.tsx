@@ -1,6 +1,6 @@
 import Image from "next/image";
+import { Header } from "./Header";
 import toast from "react-hot-toast";
-import { REDIRECT_LINK } from "~~/helper/redirect";
 
 const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
   const handleCopy = async () => {
@@ -23,30 +23,7 @@ export const OpenSource = () => {
     <div className="relative bg-texture">
       <div className="bg-[#0F0F0F] relative z-50">
         <div className="max-w-[1222px] mx-auto !px-0 border-r border-l border-[#484848] relative">
-          <div className="relative z-20 flex justify-between items-center border-b border-[#484848] p-6">
-            <div className="flex items-center gap-5">
-              <Image src={"/assets/logo.png"} alt="logo" width={44} height={44} />
-              <p className="text-[25px] font-medium">Scaffold-Stark</p>
-            </div>
-            <div className="flex gap-2">
-              <p className="header-item-btn" onClick={() => window.open(REDIRECT_LINK.speedrun, "_blank")}>
-                Learn
-              </p>
-              <p className="header-item-btn" onClick={() => window.open(REDIRECT_LINK.scaffoldDoc, "_blank")}>
-                Docs
-              </p>
-              <p className="header-item-btn" onClick={() => window.open(REDIRECT_LINK.scaffoldDemo, "_blank")}>
-                Demo
-              </p>
-              <div
-                className="header-item-github-btn flex items-center w-fit gap-2.5"
-                onClick={() => window.open(REDIRECT_LINK.scaffoldGit, "_blank")}
-              >
-                <p>Github</p>
-                <Image src={"/assets/github-icon.svg"} alt="icon" width={24} height={24} />
-              </div>
-            </div>
-          </div>
+          <Header />
           <div className="relative z-20 px-6 grid grid-cols-7 gap-5 py-20">
             <div className="col-span-3 relative z-20">
               <h1 className="font-medium text-[54px] mb-[35px]">
@@ -61,9 +38,9 @@ export const OpenSource = () => {
             <Image
               src={"/assets/opensource-pc.gif"}
               alt="gif"
-              width={10000}
+              width={1000}
               height={10000}
-              className="absolute top-0 z-10 w-full h-full"
+              className="absolute top-0 right-0 z-10 h-full"
             />
           </div>
           <div className="flex border-t border-b border-[#484848] w-full relative z-20">
