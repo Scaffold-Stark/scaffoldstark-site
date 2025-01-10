@@ -147,6 +147,41 @@ li::marker {
   opacity: 1;
 }
 
+.swiper-pagination {
+  display: none !important;
+  bottom: -50px !important;
+  width: fit-content !important;
+  padding: 4px !important;
+  border-radius: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(40, 40, 40, 0.9),
+    rgba(40, 40, 40, 0.9) 2px,
+    rgba(30, 30, 30, 0.9) 2px,
+    rgba(30, 30, 30, 0.9) 4px
+  );
+  display: flex;
+  gap: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 !important;
+  background: black !important;
+  opacity: 1 !important;
+  border: none !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
 .swiper {
   overflow: inherit !important;
 }
@@ -277,6 +312,9 @@ li::marker {
 }
 
 @media (max-width: 1024px) {
+  .swiper-pagination {
+    display: flex !important;
+  }
   .swiper-slide {
     padding: 16px;
     /* margin-right: 10px !important; */

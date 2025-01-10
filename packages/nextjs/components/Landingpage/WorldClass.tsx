@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { REDIRECT_LINK } from "~~/helper/redirect";
 
@@ -108,7 +108,7 @@ const FounderSlider = () => {
   return (
     <div className="mx-auto">
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Pagination]}
         centeredSlides={true}
         loop={true}
         spaceBetween={20}
@@ -121,6 +121,7 @@ const FounderSlider = () => {
         observeParents={true}
         updateOnWindowResize={true}
         grabCursor={true}
+        pagination={true}
         touchRatio={1.5}
         preventClicks={true}
         preventClicksPropagation={true}
