@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
+import { DecoreLayout } from "../DecoreLayout";
 import { Footer } from "./Footer";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,7 +12,7 @@ import { REDIRECT_LINK } from "~~/helper/redirect";
 const GradientButton = ({ icon, text, onClick }: { icon: string; text: string; onClick: () => void }) => {
   return (
     <div
-      className="cursor-pointer px-6 py-4 flex items-center justify-center gap-2.5 w-[218px]"
+      className="cursor-pointer px-6  lg:py-4 py-3 flex items-center justify-center gap-2.5 lg:w-[218px] w-fit"
       style={{
         borderRadius: "10px",
         border: "1px solid #9B5584",
@@ -21,7 +22,7 @@ const GradientButton = ({ icon, text, onClick }: { icon: string; text: string; o
       }}
       onClick={onClick}
     >
-      <p className="text-xl">{text}</p>
+      <p className="lg:text-xl text-sm">{text}</p>
       <Image src={icon} alt="icon" width={26} height={26} />
     </div>
   );
@@ -39,8 +40,8 @@ const ItemSlide = ({
   position: string;
 }) => {
   return (
-    <div className="flex flex-col h-full gap-20">
-      <p className="text-[#BABABA] text-xl flex-1">{desc}</p>
+    <div className="flex flex-col h-full lg:gap-20 gap-3">
+      <p className="text-[#BABABA] lg:text-xl text-xs flex-1">{desc}</p>
       <div className="flex items-center gap-3">
         <div>
           {!avatar ? (
@@ -50,10 +51,10 @@ const ItemSlide = ({
           )}
         </div>
         <div>
-          <p className="text-xl font-medium bg-gradient-to-br from-rose-200 via-purple-300 to-purple-400 inline-block text-transparent bg-clip-text">
+          <p className="lg:text-xl text-xs font-medium bg-gradient-to-br from-rose-200 via-purple-300 to-purple-400 inline-block text-transparent bg-clip-text">
             {name}
           </p>
-          <p className="text-[#BABABA] text-sm">{position}</p>
+          <p className="text-[#BABABA] lg:text-sm text-xs">{position}</p>
         </div>
       </div>
     </div>
@@ -99,6 +100,11 @@ const FounderSlider = () => {
       position: "Founder",
     },
   ];
+  const breakpoints = {
+    1280: {
+      slidesPerView: 3.5,
+    },
+  };
   return (
     <div className="mx-auto">
       <Swiper
@@ -106,11 +112,24 @@ const FounderSlider = () => {
         centeredSlides={true}
         loop={true}
         spaceBetween={20}
-        slidesPerView={3.5}
+        slidesPerView={1.5}
+        breakpoints={breakpoints}
         className="w-full cursor-grab flex items-stretch"
+        speed={500}
+        watchSlidesProgress={true}
+        observer={true}
+        observeParents={true}
+        updateOnWindowResize={true}
+        grabCursor={true}
+        touchRatio={1.5}
+        preventClicks={true}
+        preventClicksPropagation={true}
+        preloadImages={false}
+        lazy={true}
+        watchOverflow={true}
       >
         {data.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={`slide-${index}`}>
             <div className="h-full">
               <ItemSlide {...item} />
             </div>
@@ -125,7 +144,7 @@ const ScaffoldStark = () => {
   return (
     <div>
       <div
-        className="flex rounded-l-3xl rounded-r-3xl"
+        className="flex md:flex-row flex-col-reverse rounded-l-3xl rounded-r-3xl"
         style={{
           borderRadius: "c",
           borderRight: "2px solid #B24DFF",
@@ -134,18 +153,24 @@ const ScaffoldStark = () => {
           boxShadow: "9px 8px 4px 0px rgba(150, 104, 149, 0.25) inset, 0px 0px 98.8px 0px rgba(184, 91, 255, 0.00)",
         }}
       >
-        <Image src={"/assets/scaffold-stark.png"} alt="scaffold" width={417} height={378} className="rounded-l-3xl" />
-        <div className="p-11 flex flex-col">
+        <Image
+          src={"/assets/scaffold-stark.png"}
+          alt="scaffold"
+          width={417}
+          height={378}
+          className="lg:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
+        />
+        <div className="lg:p-11 p-8 flex flex-col">
           <div className="flex items-center gap-5">
             <Image src={"/assets/logo.png"} alt="logo" width={44} height={44} />
             <p className="text-[25px]">Scaffold-Stark</p>
           </div>
           <div className="flex-1 item-spacing-col justify-end">
-            <p className="text-xl max-w-[700px]">
+            <p className="lg:text-xl text-sm lg:max-w-[700px] max-w-max lg:mb-0 lg:mt-0 mt-10 mb-3">
               You can build and learn together with our community, joining over 500 members in creating products,
               prototypes, and tutorials to enrich the web3 ecosystem.
             </p>
-            <div className="flex gap-3">
+            <div className="flex lg:flex-row flex-col gap-3">
               <GradientButton
                 icon="/assets/telegram-icon.svg"
                 text="Join Telegram"
@@ -172,11 +197,14 @@ const ScaffoldStark = () => {
 export const WorldClass = () => {
   return (
     <section>
-      <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mb-0.5" />
-      <div className="bg-[#0F0F0F] pt-20 pb-14 overflow-x-hidden">
+      {/* <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mb-0.5" /> */}
+      <div className="relative rotate-180 z-10 lg:top-0 top-[52px]">
+        <DecoreLayout />
+      </div>
+      <div className="bg-[#0F0F0F] lg:pt-20 pt-14 pb-14  overflow-x-hidden relative z-30">
         <div>
           <p
-            className="text-[54px] font-bold text-center"
+            className="lg:text-[54px] text-[22px] font-bold text-center"
             style={{
               background: "linear-gradient(180deg, #FFF 0%, #999 100%)",
               WebkitBackgroundClip: "text",
@@ -187,12 +215,12 @@ export const WorldClass = () => {
           >
             World-class developers use <br /> Scaffold-Stark
           </p>
-          <p className="text-[#BABABA] text-xl text-center mt-5">
+          <p className="text-[#BABABA] lg:text-xl text-sm text-center lg:mt-5 mt-3">
             You can build and learn together with our community, joining over 300 members in creating <br /> products,
             prototypes, and tutorials to enrich the web3 ecosystem.
           </p>
         </div>
-        <div className="mt-14">
+        <div className="lg:mt-14 mt-8">
           <FounderSlider />
         </div>
         <div className="!mt-[180px] content">

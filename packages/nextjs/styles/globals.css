@@ -98,6 +98,19 @@ li::marker {
   font-family: "Space Grotesk", sans-serif;
 }
 
+.title-section-li {
+  background: var(--Starknet-Gradient, linear-gradient(270deg, #9b5584 0%, #181872 108.63%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -1.08px;
+  font-family: "Inter", serif;
+}
+
 .subTitle-section {
   color: #fc34ff;
   font-size: 16px;
@@ -149,14 +162,15 @@ li::marker {
 }
 
 .swiper-slide-active {
+  scale: 1.05;
   border: 1px solid #f06bff !important;
   background: linear-gradient(180deg, rgba(255, 164, 250, 0.12) 0%, #160026 100%) !important;
 }
 
-.swiper-slide-next,
-.swiper-slide-prev {
-  border: 1px solid rgb(67, 66, 66) !important;
-  background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%) !important;
+.swiper-slide {
+  margin: 0 10px;
+  border: 1px solid rgb(67, 66, 66);
+  background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
 }
 
 .brand-assets-title {
@@ -241,7 +255,30 @@ li::marker {
 }
 
 @media (max-width: 756px) {
+  .item-spacing-col {
+    gap: 8px;
+  }
+  .title-section {
+    font-size: 22px;
+  }
+  .subTitle-section {
+    font-size: 13px;
+  }
   .brand-assets-title {
     font-size: 22px;
+  }
+  .title-section-li {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  li::marker {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .swiper-slide {
+    padding: 16px;
+    /* margin-right: 10px !important; */
   }
 }
