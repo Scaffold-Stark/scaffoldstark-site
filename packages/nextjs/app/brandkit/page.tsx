@@ -9,7 +9,7 @@ import { Footer } from "~~/components/Landingpage/Footer";
 
 function Page() {
   return (
-    <div className="bg-white flex flex-col gap-28">
+    <div className="bg-white flex flex-col md:gap-28 gap-12">
       <BrandAssetsBanner />
       <NetworkLogo />
       <ScaffoldFont />
@@ -19,7 +19,10 @@ function Page() {
         <div className="relative rotate-180">
           <DecoreLayout />
         </div>
-        <div className="bg-[#0F0F0F] py-5">
+        <div className="bg-[#0F0F0F] py-5 relative z-50 md:block hidden">
+          <Footer />
+        </div>
+        <div className="bg-[#0F0F0F] pt-10 absolute w-full -bottom-[10px] z-50 md:hidden block">
           <Footer />
         </div>
       </div>

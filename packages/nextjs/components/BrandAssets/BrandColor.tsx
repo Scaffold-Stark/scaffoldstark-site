@@ -31,7 +31,7 @@ const CardMain = ({ title, bgColor }: { title: string; bgColor: string }) => {
     <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3]">
       <div className="p-1">
         <div
-          className={`w-full h-[163px] flex items-center justify-center rounded-md`}
+          className={`w-full lg:h-[163px] h-[96.4px] flex items-center justify-center rounded-md`}
           style={{
             background: `${bgColor}`,
           }}
@@ -41,8 +41,8 @@ const CardMain = ({ title, bgColor }: { title: string; bgColor: string }) => {
         <p className="text-lg text-black font-bold">{title}</p>
         <p className="text-[#6B7280] text-sm">{bgColor}</p>
       </div>
-      <div className="cursor-pointer flex pt-3.5 border-t border-[#D5D5D5]">
-        <p className="text-lg text-black font-bold w-full text-center">Copy Code</p>
+      <div className="cursor-pointer flex items-center md:mt-0.5 mt-0 h-10 border-t border-[#D5D5D5]">
+        <p className="md:text-lg text-xs md:mt-2 mt-0 text-black font-bold w-full text-center">Copy Code</p>
       </div>
     </div>
   );
@@ -63,19 +63,25 @@ const CardGradiant = ({
     <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3]">
       <div className="p-1">
         <div>
-          <Image src={background} alt="logo" width={400} height={400} className="w-auto h-auto" />
+          <Image
+            src={background}
+            alt="logo"
+            width={400}
+            height={400}
+            className="lg:w-auto w-full lg:h-auto h-[96.4px]"
+          />
         </div>
       </div>
       <div className="px-4 py-2">
-        <p className="text-lg text-black font-bold">{title}</p>
+        <p className="md:text-lg text-sm text-black font-bold">{title}</p>
         <div className="flex items-center gap-4">
-          <p className="text-[#6B7280] text-sm">{from}</p>
-          <p className="text-[#6B7280] text-sm">{to}</p>
+          <p className="text-[#6B7280] md:text-sm text-xs">{from}</p>
+          <p className="text-[#6B7280] md:text-sm text-xs">{to}</p>
         </div>
       </div>
       <div className="cursor-pointer flex border-t border-[#D5D5D5]">
-        <p className="text-lg text-black font-bold border-r border-[#D5D5D5] w-full text-center p-3">Copy</p>
-        <p className="text-lg text-black font-bold w-full text-center p-3">Copy</p>
+        <p className="md:text-lg text-xs text-black font-bold border-r border-[#D5D5D5] w-full text-center p-3">Copy</p>
+        <p className="md:text-lg text-xs text-black font-bold w-full text-center p-3">Copy</p>
       </div>
     </div>
   );
@@ -83,12 +89,12 @@ const CardGradiant = ({
 
 export const BrandColor = () => {
   return (
-    <div className="content">
+    <div>
       <p className="brand-assets-title text-center">Brand Color</p>
-      <p className="text-[#6B7280] text-lg text-center mt-2">
-        Make sure there is good contrast between the logo and <br /> background to provide legibility.
+      <p className="text-[#6B7280] text-lg text-center md:mt-2 mt-1 px-2 leading-5">
+        Make sure there is good contrast between the logo and background to provide legibility.
       </p>
-      <div className="mt-11 grid grid-cols-4 gap-2">
+      <div className="grid lg:grid-cols-4 grid-cols-2 gap-2 content !mt-11">
         {MAIN_DATA.map((item, index) => (
           <CardMain key={index} {...item} />
         ))}

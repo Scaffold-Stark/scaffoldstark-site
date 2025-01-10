@@ -2,12 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Space Grotesk", serif;
 }
 body {
   min-height: 100vh;
@@ -29,6 +29,14 @@ li {
 li::marker {
   color: #181872;
   font-size: 32px;
+}
+
+.font-inter {
+  font-family: "Inter", serif !important;
+}
+
+.font-grotesk {
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .content {
@@ -87,6 +95,7 @@ li::marker {
   font-weight: 500;
   line-height: 120%;
   letter-spacing: -1.08px;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .subTitle-section {
@@ -95,6 +104,7 @@ li::marker {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .item-spacing-col {
@@ -227,5 +237,11 @@ li::marker {
   100% {
     opacity: 0;
     transform: translate(calc(-50% - 10px), -50%);
+  }
+}
+
+@media (max-width: 756px) {
+  .brand-assets-title {
+    font-size: 22px;
   }
 }

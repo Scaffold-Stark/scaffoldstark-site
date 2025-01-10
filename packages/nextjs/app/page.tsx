@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   return (
     <>
       <MetaHeader />
-      <div>
+      <div className="flex flex-col gap-28">
         <OpenSource />
         <DebugContract />
         <HookComponent />

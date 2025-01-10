@@ -27,10 +27,10 @@ export const OpenSource = () => {
           <Header />
           <div className="relative z-20 px-6 grid grid-cols-7 gap-5 py-20">
             <div className="col-span-3 relative z-20">
-              <h1 className="font-medium text-[54px] mb-[35px]">
+              <h1 className="font-medium text-[54px] mb-[35px] font-grotesk">
                 <span className="font-bold text-[#B386FF]">Open-source</span> toolkit for building dApps on Starknet
               </h1>
-              <p className="max-w-[508px] text-xl text-[#BABABA]">
+              <p className="max-w-[508px] text-xl text-[#BABABA] font-inter">
                 Built using NextJS, Starknet.js, Scarb, Starknet-React, Starknet Foundry and Typescript. Designed to
                 make it easier for developers to create, deploy and interact with smart contracts.
               </p>
@@ -46,11 +46,11 @@ export const OpenSource = () => {
           </div>
           <div className="flex border-t border-b border-[#484848] w-full relative z-20">
             <div className="flex items-center gap-8 border-r border-[#484848] p-5">
-              <p className="text-[23px] font-medium">npx create-starknet</p>
+              <p className="text-[23px] font-medium font-grotesk text-ellipsis">npx create-starknet</p>
               <CopyButton textToCopy="npx create-starknet" />
             </div>
             <div className="flex flex-1 items-center gap-8 p-[22px] py-5">
-              <p className="text-[23px] font-medium">
+              <p className="text-[23px] font-medium font-grotesk text-ellipsis">
                 git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git
               </p>
               <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" />
