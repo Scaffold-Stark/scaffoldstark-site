@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const ComingSoon = () => {
   return (
-    <section className="grid grid-cols-6 gap-10 items-center content !py-10">
+    <section className="grid grid-cols-6 gap-10 items-center content">
       <div className="col-span-3">
         <Image src={"/assets/comingsoon.png"} alt="rocket" width={416} height={416} />
       </div>

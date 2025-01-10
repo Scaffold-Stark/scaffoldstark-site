@@ -68,7 +68,7 @@ const Card = ({
 
 export const NetworkLogo = () => {
   return (
-    <div className="py-24">
+    <div>
       <p className="brand-assets-title text-center">Network Logo</p>
       <p className="text-[#6B7280] text-lg text-center mt-2">
         Make sure there is good contrast between the logo and <br /> background to provide legibility.

@@ -83,7 +83,7 @@ const CardGradiant = ({
 
 export const BrandColor = () => {
   return (
-    <div className="content !py-11">
+    <div className="content">
       <p className="brand-assets-title text-center">Brand Color</p>
       <p className="text-[#6B7280] text-lg text-center mt-2">
         Make sure there is good contrast between the logo and <br /> background to provide legibility.

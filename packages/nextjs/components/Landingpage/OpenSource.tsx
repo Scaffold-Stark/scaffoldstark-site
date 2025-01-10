@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { DecoreLayout } from "../DecoreLayout";
 import { Header } from "./Header";
 import toast from "react-hot-toast";
 
@@ -22,7 +23,7 @@ export const OpenSource = () => {
   return (
     <div className="relative bg-texture">
       <div className="bg-[#0F0F0F] relative z-50">
-        <div className="max-w-[1222px] mx-auto !px-0 border-r border-l border-[#484848] relative">
+        <div className="max-w-[1200px] mx-auto !px-0 border-r border-l border-[#484848] relative">
           <Header />
           <div className="relative z-20 px-6 grid grid-cols-7 gap-5 py-20">
             <div className="col-span-3 relative z-20">
@@ -58,13 +59,16 @@ export const OpenSource = () => {
           <div className="bg-[#0F0F0F] h-20"></div>
         </div>
       </div>
-      <Image
+      {/* <Image
         src={"/assets/decore-top.png"}
         alt="decore"
         width={10000}
         height={10000}
         className="absolute -bottom-14 z-10 rotate-180"
-      />
+      /> */}
+      <div className="relative -top-[52px]">
+        <DecoreLayout />
+      </div>
     </div>
   );
 };

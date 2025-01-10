@@ -3,7 +3,7 @@ import { REDIRECT_LINK } from "~~/helper/redirect";
 
 export const DebugContract = () => {
   return (
-    <section className="content flex items-center !pt-10">
+    <section className="content flex items-center">
       <div className="item-spacing-col">
         <p className="subTitle-section">DEBUG CONTRACT</p>
         <p className="title-section max-w-[380px]">Your frontend auto-adapts to your smart contract as you edit it.</p>

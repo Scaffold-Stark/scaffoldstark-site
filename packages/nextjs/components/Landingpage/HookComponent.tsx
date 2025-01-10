@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { DecoreLayout } from "../DecoreLayout";
 
 const Infor = () => {
   return (
@@ -273,8 +274,11 @@ const Component = () => {
 
 export const HookComponent = () => {
   return (
-    <section className="">
-      <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mb-0.5" />
+    <section>
+      {/* <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mb-0.5" /> */}
+      <div className="relative rotate-180">
+        <DecoreLayout />
+      </div>
       <div className="bg-[#0F0F0F] py-20">
         <div className="px-4">
           <CustomHook />
@@ -294,7 +298,10 @@ export const HookComponent = () => {
           <Component />
         </div>
       </div>
-      <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mt-0.5 rotate-180" />
+      {/* <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mt-0.5 rotate-180" /> */}
+      <div className="relative -top-[52px]">
+        <DecoreLayout />
+      </div>
     </section>
   );
 };
