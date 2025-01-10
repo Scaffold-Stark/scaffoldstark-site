@@ -173,7 +173,7 @@ export const WorldClass = () => {
   return (
     <section>
       <Image src={"/assets/decore-top.png"} alt="decore" width={10000} height={10000} className="-mb-0.5" />
-      <div className="bg-[#0F0F0F] pt-20 pb-14">
+      <div className="bg-[#0F0F0F] pt-20 pb-14 overflow-x-hidden">
         <div>
           <p
             className="text-[54px] font-bold text-center"

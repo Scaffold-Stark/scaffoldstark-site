@@ -17,9 +17,13 @@ export const BrandAssetsBanner = () => {
                 The marketing of Scaffold-Stark in any form of digital or printed communications requires compliance
                 with the following guidelines.
               </p>
-              <div className="mt-6">
-                <button className="header-item-btn !py-3 !w-full max-w-[195px]">Download Logo</button>
-              </div>
+              <a
+                className="header-item-btn !py-3 !w-full max-w-[195px] mt-6"
+                href="/assets/logo-text-scaffold.png"
+                download={"/assets/logo-text-scaffold.png"}
+              >
+                Download Logo
+              </a>
             </div>
             <div className="lg:col-span-3 col-span-6 mx-auto max-lg:order-first">
               <Image

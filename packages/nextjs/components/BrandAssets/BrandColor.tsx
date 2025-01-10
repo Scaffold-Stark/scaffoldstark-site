@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { copyToClipBoard } from "~~/utils";
 
 const MAIN_DATA = [
   {
@@ -41,7 +42,10 @@ const CardMain = ({ title, bgColor }: { title: string; bgColor: string }) => {
         <p className="text-lg text-black font-bold">{title}</p>
         <p className="text-[#6B7280] text-sm">{bgColor}</p>
       </div>
-      <div className="cursor-pointer flex items-center md:mt-0.5 mt-0 h-10 border-t border-[#D5D5D5]">
+      <div
+        className="cursor-pointer flex items-center md:mt-0.5 mt-0 h-10 border-t border-[#D5D5D5]"
+        onClick={() => copyToClipBoard(bgColor)}
+      >
         <p className="md:text-lg text-xs md:mt-2 mt-0 text-black font-bold w-full text-center">Copy Code</p>
       </div>
     </div>
@@ -80,8 +84,18 @@ const CardGradiant = ({
         </div>
       </div>
       <div className="cursor-pointer flex border-t border-[#D5D5D5]">
-        <p className="md:text-lg text-xs text-black font-bold border-r border-[#D5D5D5] w-full text-center p-3">Copy</p>
-        <p className="md:text-lg text-xs text-black font-bold w-full text-center p-3">Copy</p>
+        <p
+          className="md:text-lg text-xs text-black font-bold border-r border-[#D5D5D5] w-full text-center p-3"
+          onClick={() => copyToClipBoard(from)}
+        >
+          Copy
+        </p>
+        <p
+          className="md:text-lg text-xs text-black font-bold w-full text-center p-3"
+          onClick={() => copyToClipBoard(to)}
+        >
+          Copy
+        </p>
       </div>
     </div>
   );

@@ -33,15 +33,23 @@ export const ScaffoldFont = () => {
 
             <div className="flex items-center justify-between border-b border-[#484848] py-4 pl-9 pr-5 relative z-30">
               <p className="text-lg font-medium">Space Grotesk Download</p>
-              <div className="bg-white p-2.5 rounded-lg cursor-pointer flex items-center justify-center">
+              <a
+                className="bg-white p-2.5 rounded-lg cursor-pointer flex items-center justify-center"
+                download={"/fonts/Space_Grotesk.zip"}
+                href="/fonts/Space_Grotesk.zip"
+              >
                 <Image src="/assets/clould-dowload.svg" alt="cloud" width={20} height={20} />
-              </div>
+              </a>
             </div>
             <div className="flex items-center justify-between border-b border-[#484848] py-4 pl-9 pr-5 relative z-30">
               <p className="text-lg font-medium">Inter Download</p>
-              <div className="bg-white p-2.5 rounded-lg cursor-pointer flex items-center justify-center">
+              <a
+                className="bg-white p-2.5 rounded-lg cursor-pointer flex items-center justify-center"
+                download={"/fonts/Inter.zip"}
+                href="/fonts/Inter.zip"
+              >
                 <Image src="/assets/clould-dowload.svg" alt="cloud" width={20} height={20} />
-              </div>
+              </a>
             </div>
           </div>
         </div>

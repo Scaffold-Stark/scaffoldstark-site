@@ -1,20 +1,11 @@
 import Image from "next/image";
 import { DecoreLayout } from "../DecoreLayout";
 import { Header } from "./Header";
-import toast from "react-hot-toast";
+import { copyToClipBoard } from "~~/utils";
 
 const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-      toast.success("Copied successfull!");
-    } catch (err) {
-      console.error("Failed to copy text:", err);
-    }
-  };
-
   return (
-    <div className="bg-white py-[11px] px-[13px] cursor-pointer copy-icon" onClick={handleCopy}>
+    <div className="bg-white py-[11px] px-[13px] cursor-pointer copy-icon" onClick={() => copyToClipBoard(textToCopy)}>
       <Image src={"/assets/copy-icon.svg"} alt="icon" width={15} height={15} />
     </div>
   );
@@ -50,7 +41,7 @@ export const OpenSource = () => {
               <CopyButton textToCopy="npx create-starknet" />
             </div>
             <div className="flex flex-1 items-center gap-8 p-[22px] py-5">
-              <p className="text-[23px] font-medium font-grotesk text-ellipsis">
+              <p className="text-[23px] font-medium font-grotesk text-ellipsis tracking-widest">
                 git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git
               </p>
               <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" />

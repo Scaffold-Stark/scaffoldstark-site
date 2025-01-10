@@ -3,24 +3,28 @@ import Image from "next/image";
 const DATA_CARD = [
   {
     logo: "/assets/logo-text-scaffold.png",
+    logoSVG: "/assets/logo-text-scaffold-svg.svg",
     title: "Light logotype",
     bgColor: "#FFF",
     logoColor: "#0C0C4F",
   },
   {
     logo: "/assets/logo.png",
+    logoSVG: "/assets/logo-svg.svg",
     title: "Light logo",
     bgColor: "#FFF",
     logoColor: "#0C0C4F",
   },
   {
     logo: "/assets/logo-text-scaffold-pink.png",
+    logoSVG: "/assets/logo-text-scaffold-pink-svg.svg",
     title: "Dark logotype",
     bgColor: "#000",
     logoColor: "#A38CFF",
   },
   {
     logo: "/assets/scaffold-pink.png",
+    logoSVG: "/assets/scaffold-pink-svg.svg",
     title: "Dark logo",
     bgColor: "#000",
     logoColor: "#A38CFF",
@@ -32,11 +36,13 @@ const Card = ({
   title,
   bgColor,
   logoColor,
+  logoSVG,
 }: {
   logo: string;
   title: string;
   bgColor: string;
   logoColor: string;
+  logoSVG?: string;
 }) => {
   return (
     <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3]">
@@ -59,8 +65,16 @@ const Card = ({
         <p className="text-[#6B7280] md:text-sm text-xs">{logoColor}</p>
       </div>
       <div className="cursor-pointer flex border-t border-[#D5D5D5]">
-        <p className="md:text-lg text-xs text-black font-bold border-r border-[#D5D5D5] w-full text-center p-3">PNG</p>
-        <p className="md:text-lg text-xs text-black font-bold w-full text-center p-3">SVG</p>
+        <a
+          className="md:text-lg text-xs text-black font-bold border-r border-[#D5D5D5] w-full text-center p-3"
+          download={logo}
+          href={logo}
+        >
+          PNG
+        </a>
+        <a className="md:text-lg text-xs text-black font-bold w-full text-center p-3" download={logoSVG} href={logoSVG}>
+          SVG
+        </a>
       </div>
     </div>
   );
