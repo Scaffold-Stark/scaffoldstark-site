@@ -125,8 +125,8 @@ const FounderSlider = () => {
         touchRatio={1.5}
         preventClicks={true}
         preventClicksPropagation={true}
-        preloadImages={false}
-        lazy={true}
+        // preloadImages={false}
+        // lazy={true}
         watchOverflow={true}
       >
         {data.map((item, index) => (
