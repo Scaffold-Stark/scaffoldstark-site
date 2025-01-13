@@ -7,7 +7,7 @@ export const DebugContract = () => {
       <div className="item-spacing-col col-span-1">
         <p className="subTitle-section">DEBUG CONTRACT</p>
         <p className="title-section max-w-[380px]">Your frontend auto-adapts to your smart contract as you edit it.</p>
-        <p className="text-[#6B7280] lg:text-lg text-sm max-w-[530px]">
+        <p className="text-[#6B7280] lg:text-lg text-sm max-w-[530px] font-inter">
           Debug and refine your smart contracts with a live-updating frontend. Scaffold-Stark is an ideal stack for
           progressing from rapid prototyping to production-grade dApps.
         </p>
@@ -16,12 +16,12 @@ export const DebugContract = () => {
             className="flex gap-2 hover-text w-fit"
             onClick={() => window.open(REDIRECT_LINK.scaffoldDemo, "_blank")}
           >
-            <p className="title-section !text-lg font-inter">Checkout this sample scaffold-stark dApp</p>
+            <p className="title-section !text-lg font-inter !font-bold">Checkout this sample scaffold-stark dApp</p>
             <Image src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" />
           </div>
 
           <div className="mt-2 hover-text w-fit" onClick={() => window.open(REDIRECT_LINK.speedrun, "_blank")}>
-            <p className="title-section !text-lg font-inter">Learn how to use it</p>
+            <p className="title-section !text-lg font-inter !font-bold">Learn how to use it</p>
           </div>
         </div>
       </div>

@@ -195,7 +195,7 @@ const Infor = () => {
           </div>
         </div>
       </div>
-      <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-max lg:text-left text-center lg:hidden block">
+      <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-max lg:text-left text-center lg:hidden block font-inter">
         Accelerate your dapp development using our pre-built components for common web3 use cases.
       </p>
     </div>
@@ -222,7 +222,7 @@ const CustomHook = () => {
         >
           Collection of common web3 components to quickly build your frontend.
         </p>
-        <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-max lg:text-left text-center lg:block hidden">
+        <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-max lg:text-left text-center lg:block hidden font-inter">
           Accelerate your dapp development using our pre-built components for common web3 use cases.
         </p>
       </div>
@@ -246,7 +246,7 @@ const Component = () => {
         >
           Collection of React hooks wrapper around starknet-react
         </p>
-        <p className="text-white lg:text-xl text-sm text-center lg:text-left lg:block hidden">
+        <p className="text-white lg:text-xl text-sm text-center lg:text-left lg:block hidden font-inter">
           Simplify interactions with smart contracts with typescript autocompletion
         </p>
       </div>
@@ -275,7 +275,7 @@ const Component = () => {
           }}
         />
       </div>
-      <p className="text-white lg:text-xl text-sm text-center lg:text-left lg:hidden block relative z-40 mt-5">
+      <p className="text-white lg:text-xl text-sm text-center lg:text-left lg:hidden block relative z-40 mt-5 font-inter">
         Simplify interactions with smart contracts with typescript autocompletion
       </p>
     </div>

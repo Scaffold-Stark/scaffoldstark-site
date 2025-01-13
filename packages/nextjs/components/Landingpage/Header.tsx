@@ -19,7 +19,7 @@ const HeaderPC = () => {
       </div>
       <div className="flex gap-2">
         {MENU_ITEMS.slice(0, 3).map(item => (
-          <p key={item.text} className="header-item-btn" onClick={() => window.open(item.link, "_blank")}>
+          <p key={item.text} className="header-item-btn font-grotesk" onClick={() => window.open(item.link, "_blank")}>
             {item.text}
           </p>
         ))}
@@ -27,7 +27,7 @@ const HeaderPC = () => {
           className="header-item-github-btn flex items-center w-fit gap-2.5"
           onClick={() => window.open(REDIRECT_LINK.scaffoldGit, "_blank")}
         >
-          <p>Github</p>
+          <p className="font-grotesk">Github</p>
           <Image src={"/assets/github-icon.svg"} alt="icon" width={24} height={24} />
         </div>
       </div>

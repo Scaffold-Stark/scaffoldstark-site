@@ -22,7 +22,7 @@ const GradientButton = ({ icon, text, onClick }: { icon: string; text: string; o
       }}
       onClick={onClick}
     >
-      <p className="lg:text-xl text-sm">{text}</p>
+      <p className="lg:text-xl text-sm font-grotesk">{text}</p>
       <Image src={icon} alt="icon" width={26} height={26} />
     </div>
   );
@@ -41,7 +41,7 @@ const ItemSlide = ({
 }) => {
   return (
     <div className="flex flex-col h-full lg:gap-20 gap-3">
-      <p className="text-[#BABABA] lg:text-xl text-xs flex-1">{desc}</p>
+      <p className="text-[#BABABA] lg:text-xl text-xs flex-1 font-inter">{desc}</p>
       <div className="flex items-center gap-3">
         <div>
           {!avatar ? (
@@ -51,10 +51,10 @@ const ItemSlide = ({
           )}
         </div>
         <div>
-          <p className="lg:text-xl text-xs font-medium bg-gradient-to-br from-rose-200 via-purple-300 to-purple-400 inline-block text-transparent bg-clip-text">
+          <p className="lg:text-xl text-xs font-medium bg-gradient-to-br from-rose-200 via-purple-300 to-purple-400 inline-block text-transparent bg-clip-text font-inter">
             {name}
           </p>
-          <p className="text-[#BABABA] lg:text-sm text-xs">{position}</p>
+          <p className="text-[#BABABA] lg:text-sm text-xs font-inter">{position}</p>
         </div>
       </div>
     </div>
@@ -167,7 +167,7 @@ const ScaffoldStark = () => {
             <p className="text-[25px]">Scaffold-Stark</p>
           </div>
           <div className="flex-1 item-spacing-col justify-end">
-            <p className="lg:text-xl text-sm lg:max-w-[700px] max-w-max lg:mb-0 lg:mt-0 mt-10 mb-3">
+            <p className="lg:text-xl text-sm lg:max-w-[700px] max-w-max lg:mb-0 lg:mt-0 mt-10 mb-3 font-inter">
               You can build and learn together with our community, joining over 500 members in creating products,
               prototypes, and tutorials to enrich the web3 ecosystem.
             </p>
@@ -205,7 +205,7 @@ export const WorldClass = () => {
       <div className="bg-[#0F0F0F] lg:pt-20 pt-14 pb-14  overflow-x-hidden relative z-30">
         <div>
           <p
-            className="lg:text-[54px] text-[22px] font-bold text-center"
+            className="lg:text-[54px] text-[22px] font-bold text-center font-grotesk"
             style={{
               background: "linear-gradient(180deg, #FFF 0%, #999 100%)",
               WebkitBackgroundClip: "text",
@@ -216,7 +216,7 @@ export const WorldClass = () => {
           >
             World-class developers use <br /> Scaffold-Stark
           </p>
-          <p className="text-[#BABABA] lg:text-xl text-sm text-center lg:mt-5 mt-3">
+          <p className="text-[#BABABA] lg:text-xl text-sm text-center lg:mt-5 mt-3 font-inter">
             You can build and learn together with our community, joining over 300 members in creating <br /> products,
             prototypes, and tutorials to enrich the web3 ecosystem.
           </p>
