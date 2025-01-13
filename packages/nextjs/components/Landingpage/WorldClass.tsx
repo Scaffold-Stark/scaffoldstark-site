@@ -12,7 +12,7 @@ import { REDIRECT_LINK } from "~~/helper/redirect";
 const GradientButton = ({ icon, text, onClick }: { icon: string; text: string; onClick: () => void }) => {
   return (
     <div
-      className="cursor-pointer px-6  lg:py-4 py-3 flex items-center justify-center gap-2.5 lg:w-[218px] w-fit"
+      className="cursor-pointer px-6  lg:py-4 py-3 flex items-center justify-center gap-2.5 w-fit"
       style={{
         borderRadius: "10px",
         border: "1px solid #9B5584",
@@ -148,7 +148,7 @@ const ScaffoldStark = () => {
   return (
     <div className="relative z-40">
       <div
-        className="flex md:flex-row flex-col-reverse rounded-l-3xl rounded-r-3xl "
+        className="grid md:grid-cols-3 grid-cols-1 rounded-l-3xl rounded-r-3xl "
         style={{
           borderRight: "2px solid #B24DFF",
           borderLeft: "1px solid #B24DFF",
@@ -156,21 +156,23 @@ const ScaffoldStark = () => {
           boxShadow: "9px 8px 4px 0px rgba(150, 104, 149, 0.25) inset, 0px 0px 98.8px 0px rgba(184, 91, 255, 0.00)",
         }}
       >
-        <Image
-          src={"/assets/scaffold-stark.png"}
-          alt="scaffold"
-          width={417}
-          height={378}
-          className="md:block hidden lg:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
-        />
-        <Image
-          src={"/assets/scaffold-stark-mb.png"}
-          alt="scaffold"
-          width={417}
-          height={378}
-          className="md:hidden block lg:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
-        />
-        <div className="lg:p-11 p-8 flex flex-col">
+        <div className="col-span-1 md:order-1 order-2 flex">
+          <Image
+            src={"/assets/scaffold-stark.png"}
+            alt="scaffold"
+            width={417}
+            height={378}
+            className="md:block hidden md:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full "
+          />
+          <Image
+            src={"/assets/scaffold-stark-mb.png"}
+            alt="scaffold"
+            width={417}
+            height={378}
+            className="md:hidden block md:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
+          />
+        </div>
+        <div className="lg:p-11 p-8 flex flex-col col-span-2 md:order-2 order-1">
           <div className="flex items-center gap-5">
             <Image src={"/assets/logo.png"} alt="logo" width={44} height={44} />
             <p className="text-[25px]">Scaffold-Stark</p>
