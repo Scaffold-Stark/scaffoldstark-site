@@ -98,7 +98,7 @@ const FounderSlider = () => {
       desc: "“Scaffold Stark is a game-changer for building on Starknet. It drastically reduces the time needed to set up the development environment, and debugging smart contracts becomes a straightforward task thanks to the intuitive interface they’ve added. Highly recommended for any developer diving into Starknet!”",
       avatar: "/assets/oxvato.png",
       name: "0xVato",
-      position: "Founder",
+      position: "Founder at ChipiPay",
     },
   ];
   const breakpoints = {
