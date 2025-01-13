@@ -24,7 +24,7 @@ export const DebugContract = () => {
             onClick={() => window.open(REDIRECT_LINK.scaffoldDemo, "_blank")}
           >
             <p className="title-section !text-lg font-inter !font-bold">Checkout this sample scaffold-stark dApp</p>
-            <Image src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" />
+            <Image src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" className="w-auto h-auto" />
           </div>
 
           <div
@@ -32,7 +32,7 @@ export const DebugContract = () => {
             onClick={() => window.open(REDIRECT_LINK.speedrun, "_blank")}
           >
             <p className="title-section !text-lg font-inter !font-bold">Learn how to use it</p>
-            <Image src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" />
+            <Image src="/assets/redirect-icon.svg" alt="redirect" width="15" height="15" className="w-auto h-auto" />
           </div>
         </div>
       </div>

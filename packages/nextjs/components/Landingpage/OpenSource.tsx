@@ -10,7 +10,7 @@ const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
       className="bg-white md:py-[11px] py-2 md:px-[13px] px-2 cursor-pointer copy-icon"
       onClick={() => copyToClipBoard(textToCopy)}
     >
-      <Image src={"/assets/copy-icon.svg"} alt="icon" width={15} height={15} />
+      <Image src={"/assets/copy-icon.svg"} alt="icon" width={15} height={15} className="w-auto h-auto" />
     </div>
   );
 };
@@ -22,7 +22,7 @@ export const OpenSource = () => {
           <Header />
           <div className="relative z-20 px-6 grid lg:grid-cols-7 grid-cols-1 md:gap-5 gap-0 lg:py-20 py-0 h-[500px] lg:h-auto">
             <div className="col-span-4 relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9">
-              <h1 className="max-w-[550px] md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 font-grotesk">
+              <h1 className="lg:max-w-[550px] max-w-full md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 font-grotesk">
                 <span className="font-bold text-[#B386FF]">Open-source </span>
                 <TypeAnimation
                   sequence={["toolkit for building dApps on Starknet", 1000, "", 500]}
