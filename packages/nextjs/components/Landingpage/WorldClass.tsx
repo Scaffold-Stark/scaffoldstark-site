@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { REDIRECT_LINK } from "~~/helper/redirect";
 
@@ -108,7 +108,7 @@ const FounderSlider = () => {
   return (
     <div className="mx-auto">
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Autoplay]}
         centeredSlides={true}
         loop={true}
         spaceBetween={20}
@@ -125,12 +125,15 @@ const FounderSlider = () => {
         touchRatio={1.5}
         preventClicks={true}
         preventClicksPropagation={true}
-        // preloadImages={false}
-        // lazy={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
         watchOverflow={true}
       >
         {data.map((item, index) => (
-          <SwiperSlide key={`slide-${index}`}>
+          <SwiperSlide key={`slide-${index}`} className="transition-all duration-500">
             <div className="h-full">
               <ItemSlide {...item} />
             </div>
@@ -143,11 +146,10 @@ const FounderSlider = () => {
 
 const ScaffoldStark = () => {
   return (
-    <div>
+    <div className="relative z-40">
       <div
-        className="flex md:flex-row flex-col-reverse rounded-l-3xl rounded-r-3xl"
+        className="flex md:flex-row flex-col-reverse rounded-l-3xl rounded-r-3xl "
         style={{
-          borderRadius: "c",
           borderRight: "2px solid #B24DFF",
           borderLeft: "1px solid #B24DFF",
           background: "linear-gradient(270deg, #9B5584 0%, #181872 108.63%)",
@@ -159,7 +161,14 @@ const ScaffoldStark = () => {
           alt="scaffold"
           width={417}
           height={378}
-          className="lg:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
+          className="md:block hidden lg:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
+        />
+        <Image
+          src={"/assets/scaffold-stark-mb.png"}
+          alt="scaffold"
+          width={417}
+          height={378}
+          className="md:hidden block lg:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
         />
         <div className="lg:p-11 p-8 flex flex-col">
           <div className="flex items-center gap-5">
@@ -191,6 +200,12 @@ const ScaffoldStark = () => {
           </div>
         </div>
       </div>
+      <div
+        className="absolute inset-0 z-50 rounded-3xl md:block hidden"
+        style={{
+          boxShadow: "9px 8px 4px 0px rgba(150, 104, 149, 0.25) inset",
+        }}
+      />
     </div>
   );
 };
