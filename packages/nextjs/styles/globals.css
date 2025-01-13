@@ -195,12 +195,12 @@ li::marker {
   position: relative;
 }
 
-.swiper-wrapper {
+.worldclass-pc .swiper-wrapper {
   display: flex;
   animation: scroll 20s linear infinite;
 }
 
-.swiper-wrapper:hover {
+.worldclass-pc .swiper-wrapper:hover {
   animation-play-state: paused;
 }
 
@@ -233,7 +233,8 @@ li::marker {
   transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
 }
 
-.swiper-slide:hover {
+.swiper-slide:hover,
+.worldclass-mb .swiper-slide-active {
   scale: 1.05;
   border: 1px solid #f06bff !important;
   background: linear-gradient(180deg, rgba(255, 164, 250, 0.12) 0%, #160026 100%) !important;

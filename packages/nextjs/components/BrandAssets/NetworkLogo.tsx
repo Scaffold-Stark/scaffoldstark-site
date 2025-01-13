@@ -23,7 +23,7 @@ const DATA_CARD = [
     logoColor: "#A38CFF",
   },
   {
-    logo: "/assets/scaffold-pink.png",
+    logo: "/assets/scaffold-pink-svg.svg",
     logoSVG: "/assets/scaffold-pink-svg.svg",
     title: "Dark logo",
     bgColor: "#000",

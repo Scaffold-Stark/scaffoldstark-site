@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Virtual } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { REDIRECT_LINK } from "~~/helper/redirect";
 
@@ -106,39 +106,61 @@ const FounderSlider = () => {
       slidesPerView: 3.5,
     },
   };
+
   return (
     <div className="mx-auto">
-      <Swiper
-        modules={[Navigation, Pagination, Virtual]}
-        centeredSlides={true}
-        loop={true}
-        spaceBetween={20}
-        slidesPerView={1.5}
-        breakpoints={breakpoints}
-        className="w-full flex items-stretch"
-        watchSlidesProgress={true}
-        observer={true}
-        observeParents={true}
-        updateOnWindowResize={true}
-        grabCursor={true}
-        pagination={true}
-        touchRatio={1.5}
-        speed={600}
-        preventClicks={true}
-        preventClicksPropagation={true}
-        allowTouchMove={false}
-        watchOverflow={true}
-      >
-        <div className="swiper-wrapper animate-scroll">
-          {data.map((item, index) => (
-            <SwiperSlide key={`slide-${index}`} className="transition-all duration-500">
-              <div className="h-full">
-                <ItemSlide {...item} />
-              </div>
-            </SwiperSlide>
-          ))}
-        </div>
-      </Swiper>
+      <div className="worldclass-pc md:block hidden">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          centeredSlides={true}
+          loop={true}
+          spaceBetween={20}
+          slidesPerView={1.5}
+          breakpoints={breakpoints}
+          className="w-full items-stretch flex"
+          watchSlidesProgress={true}
+          observer={true}
+          observeParents={true}
+          updateOnWindowResize={true}
+          pagination={true}
+          preventClicks={true}
+          preventClicksPropagation={true}
+          allowTouchMove={false}
+          watchOverflow={true}
+        >
+          <div className="swiper-wrapper animate-scroll">
+            {data.map((item, index) => (
+              <SwiperSlide key={`slide-${index}`} className="transition-all duration-500 ease-out">
+                <div className="h-full">
+                  <ItemSlide {...item} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </div>
+        </Swiper>
+      </div>
+      <div className="worldclass-mb md:hidden block">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          centeredSlides={true}
+          loop={true}
+          spaceBetween={20}
+          pagination={true}
+          slidesPerView={1.5}
+          breakpoints={breakpoints}
+          className="w-full items-stretch flex"
+        >
+          <div className="swiper-wrapper animate-scroll">
+            {data.map((item, index) => (
+              <SwiperSlide key={`slide-${index}`} className="transition-all duration-500 ease-out">
+                <div className="h-full">
+                  <ItemSlide {...item} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </div>
+        </Swiper>
+      </div>
     </div>
   );
 };
@@ -147,7 +169,7 @@ const ScaffoldStark = () => {
   return (
     <div className="relative z-40">
       <div
-        className="grid md:grid-cols-3 grid-cols-1 rounded-l-3xl rounded-r-3xl "
+        className="grid lg:grid-cols-3 grid-cols-1 rounded-l-3xl rounded-r-3xl "
         style={{
           borderRight: "2px solid #B24DFF",
           borderLeft: "1px solid #B24DFF",
@@ -155,23 +177,23 @@ const ScaffoldStark = () => {
           boxShadow: "9px 8px 4px 0px rgba(150, 104, 149, 0.25) inset, 0px 0px 98.8px 0px rgba(184, 91, 255, 0.00)",
         }}
       >
-        <div className="col-span-1 md:order-1 order-2 flex">
+        <div className="col-span-1 lg:order-1 order-2 flex">
           <Image
-            src={"/assets/scaffold-stark.png"}
+            src={"/assets/scaffold-stark.svg"}
             alt="scaffold"
             width={417}
             height={378}
-            className="md:block hidden md:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full "
+            className="lg:block hidden lg:rounded-l-3xl rounded-l-0 rounded-b-3xl lg:rounded-b-0 lg:rounded-r-none w-full "
           />
           <Image
-            src={"/assets/scaffold-stark-mb.png"}
+            src={"/assets/scaffold-stark-mb.svg"}
             alt="scaffold"
             width={417}
             height={378}
-            className="md:hidden block md:rounded-l-3xl rounded-l-0 rounded-b-3xl md:rounded-b-0 md:rounded-r-none w-full"
+            className="lg:hidden block lg:rounded-l-3xl rounded-l-0 rounded-b-3xl lg:rounded-b-0 lg:rounded-r-none w-full"
           />
         </div>
-        <div className="lg:p-11 p-8 flex flex-col col-span-2 md:order-2 order-1">
+        <div className="lg:p-11 p-8 flex flex-col col-span-2 lg:order-2 order-1">
           <div className="flex items-center gap-5">
             <Image src={"/assets/logo.png"} alt="logo" width={44} height={44} />
             <p className="text-[25px]">Scaffold-Stark</p>

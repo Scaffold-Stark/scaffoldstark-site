@@ -17,13 +17,13 @@ const GRADIENT_DATA = [
     title: "Main Gradient",
     from: "#181872",
     to: "#9B5584",
-    background: "/assets/main-gradient.png",
+    background: "/assets/main-gradient.svg",
   },
   {
     title: "Dark logo",
     from: "#FFB0FF",
     to: "#7748CD",
-    background: "/assets/darklogo.png",
+    background: "/assets/darklogo.svg",
   },
 ];
 
