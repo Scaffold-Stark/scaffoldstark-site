@@ -51,7 +51,7 @@ export const OpenSource = () => {
               <CopyButton textToCopy="npx create-starknet" />
             </div>
             <div className="flex flex-1 items-center justify-between md:gap-8 gap-3 p-5 border-y md:border-y-0 border-[#484848]">
-              <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis md:tracking-widest md:leading-8">
+              <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis md:leading-8">
                 git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git
               </p>
               <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" />
