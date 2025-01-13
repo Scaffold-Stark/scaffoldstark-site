@@ -8,7 +8,7 @@ export const ComingSoon = () => {
       </div>
       <div className="col-span-3 item-spacing-col mt-12 lg:mt-0">
         <p className="subTitle-section text-center lg:text-left">COMING SOON</p>
-        <ul className="lg:max-w-[670px] max-w-max list-disc ml-6 lg:pl-12 pl-6">
+        <ul className="lg:max-w-[670px] max-w-full list-disc ml-6 lg:pl-12 pl-6">
           <li className="title-section-li mb-3">
             Built-in Block Explorer to check transaction data easily during your tests
           </li>

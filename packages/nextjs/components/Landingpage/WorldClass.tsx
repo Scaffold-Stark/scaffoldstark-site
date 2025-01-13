@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import { DecoreLayout } from "../DecoreLayout";
+import TypeAnimation from "../TypeAnimation";
 import { Footer } from "./Footer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Virtual } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { REDIRECT_LINK } from "~~/helper/redirect";
 
@@ -47,7 +48,7 @@ const ItemSlide = ({
           {!avatar ? (
             <div className="w-12 h-12 rounded-full bg-white"></div>
           ) : (
-            <Image src={avatar} alt="avatar" width={48} height={48} className="rounded-full" />
+            <Image src={avatar} alt="avatar" width={48} height={48} className="rounded-full w-auto h-auto" />
           )}
         </div>
         <div>
@@ -108,14 +109,13 @@ const FounderSlider = () => {
   return (
     <div className="mx-auto">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination, Virtual]}
         centeredSlides={true}
         loop={true}
         spaceBetween={20}
         slidesPerView={1.5}
         breakpoints={breakpoints}
-        className="w-full cursor-grab flex items-stretch"
-        speed={500}
+        className="w-full flex items-stretch"
         watchSlidesProgress={true}
         observer={true}
         observeParents={true}
@@ -123,22 +123,21 @@ const FounderSlider = () => {
         grabCursor={true}
         pagination={true}
         touchRatio={1.5}
+        speed={600}
         preventClicks={true}
         preventClicksPropagation={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
+        allowTouchMove={false}
         watchOverflow={true}
       >
-        {data.map((item, index) => (
-          <SwiperSlide key={`slide-${index}`} className="transition-all duration-500">
-            <div className="h-full">
-              <ItemSlide {...item} />
-            </div>
-          </SwiperSlide>
-        ))}
+        <div className="swiper-wrapper animate-scroll">
+          {data.map((item, index) => (
+            <SwiperSlide key={`slide-${index}`} className="transition-all duration-500">
+              <div className="h-full">
+                <ItemSlide {...item} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </div>
       </Swiper>
     </div>
   );
@@ -178,7 +177,7 @@ const ScaffoldStark = () => {
             <p className="text-[25px]">Scaffold-Stark</p>
           </div>
           <div className="flex-1 item-spacing-col justify-end">
-            <p className="lg:text-xl text-sm lg:max-w-[700px] max-w-max lg:mb-0 lg:mt-0 mt-10 mb-3 font-inter">
+            <p className="lg:text-xl text-sm lg:max-w-[700px] max-w-full lg:mb-0 lg:mt-0 mt-10 mb-3 font-inter">
               You can build and learn together with our community, joining over 500 members in creating products,
               prototypes, and tutorials to enrich the web3 ecosystem.
             </p>
@@ -221,8 +220,12 @@ export const WorldClass = () => {
       </div>
       <div className="bg-[#0F0F0F] lg:pt-20 pt-14 pb-14  overflow-x-hidden relative z-30">
         <div>
-          <p
-            className="lg:text-[54px] text-[22px] font-bold text-center font-grotesk"
+          <TypeAnimation
+            sequence={["World-class developers use Scaffold-Stark"]}
+            wrapper="p"
+            cursor={false}
+            speed={50}
+            className="lg:text-[54px] text-[22px] font-bold text-center font-grotesk h-fit max-w-[680px] mx-auto"
             style={{
               background: "linear-gradient(180deg, #FFF 0%, #999 100%)",
               WebkitBackgroundClip: "text",
@@ -230,11 +233,9 @@ export const WorldClass = () => {
               WebkitTextFillColor: "transparent",
               lineHeight: "114%",
             }}
-          >
-            World-class developers use <br /> Scaffold-Stark
-          </p>
-          <p className="text-[#BABABA] lg:text-xl text-sm text-center lg:mt-5 mt-3 font-inter">
-            You can build and learn together with our community, joining over 300 members in creating <br /> products,
+          />
+          <p className="text-[#BABABA] lg:text-xl text-sm text-center lg:mt-5 mt-3 font-inter mx-auto max-w-[890px]">
+            You can build and learn together with our community, joining over 300 members in creating products,
             prototypes, and tutorials to enrich the web3 ecosystem.
           </p>
         </div>

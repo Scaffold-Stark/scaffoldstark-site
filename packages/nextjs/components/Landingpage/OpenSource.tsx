@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DecoreLayout } from "../DecoreLayout";
+import TypeAnimation from "../TypeAnimation";
 import { Header } from "./Header";
 import { copyToClipBoard } from "~~/utils";
 
@@ -20,11 +21,17 @@ export const OpenSource = () => {
         <div className="max-w-[1200px] mx-auto !px-0 xl:border-r xl:border-l border-[#484848] relative">
           <Header />
           <div className="relative z-20 px-6 grid lg:grid-cols-7 grid-cols-1 md:gap-5 gap-0 lg:py-20 py-0 h-[500px] lg:h-auto">
-            <div className="col-span-3 relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9">
-              <h1 className="font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 font-grotesk">
-                <span className="font-bold text-[#B386FF]">Open-source</span> toolkit for building dApps on Starknet
+            <div className="col-span-4 relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9">
+              <h1 className="max-w-[550px] md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 font-grotesk">
+                <span className="font-bold text-[#B386FF]">Open-source </span>
+                <TypeAnimation
+                  sequence={["toolkit for building dApps on Starknet", 1000, "", 500]}
+                  wrapper="span"
+                  cursor={false}
+                  speed={50}
+                />
               </h1>
-              <p className="lg:max-w-[508px] max-w-max md:text-xl text-sm text-center lg:text-left text-[#BABABA] font-inter">
+              <p className="lg:max-w-[508px] max-w-full md:text-xl text-sm text-center lg:text-left text-[#BABABA] font-inter">
                 Built using NextJS, Starknet.js, Scarb, Starknet-React, Starknet Foundry and Typescript. Designed to
                 make it easier for developers to create, deploy and interact with smart contracts.
               </p>

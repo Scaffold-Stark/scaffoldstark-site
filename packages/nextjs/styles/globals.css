@@ -131,6 +131,14 @@ li::marker {
   cursor: pointer;
 }
 
+.hover-text img {
+  opacity: 0;
+}
+
+.hover-text:hover img {
+  opacity: 1;
+}
+
 .hover-text::after {
   content: "";
   position: absolute;
@@ -182,30 +190,53 @@ li::marker {
   background: white !important;
 }
 
-.swiper {
-  overflow: inherit !important;
+.swiper-container {
+  overflow: hidden;
+  position: relative;
 }
 
-.swiper-slide {
-  border-radius: 15px;
-  padding: 30px 32px 36px 32px;
-  height: auto !important;
+.swiper-wrapper {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+
+.swiper-wrapper:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+.swiper {
+  overflow: inherit !important;
 }
 
 .swiper-wrapper {
   align-items: stretch;
 }
 
-.swiper-slide-active {
-  scale: 1.05;
-  border: 1px solid #f06bff !important;
-  background: linear-gradient(180deg, rgba(255, 164, 250, 0.12) 0%, #160026 100%) !important;
-}
-
 .swiper-slide {
   margin: 0 10px;
   border: 1px solid rgb(67, 66, 66);
   background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
+  transition: all 0.5s ease;
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 30px 32px 36px 32px;
+  height: auto !important;
+  transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
+}
+
+.swiper-slide:hover {
+  scale: 1.05;
+  border: 1px solid #f06bff !important;
+  background: linear-gradient(180deg, rgba(255, 164, 250, 0.12) 0%, #160026 100%) !important;
 }
 
 .brand-assets-title {
@@ -242,6 +273,20 @@ li::marker {
 .blur-animate2 {
   animation: fadeInOut2 2s ease-in-out infinite;
   opacity: 0;
+}
+
+.animate-custom-bounce {
+  animation: customBounce 3s ease-in-out infinite;
+}
+
+@keyframes customBounce {
+  0%,
+  100% {
+    top: 70%;
+  }
+  50% {
+    top: 80%;
+  }
 }
 
 @keyframes fadeInOut1 {

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DecoreLayout } from "../DecoreLayout";
+import TypeAnimation from "../TypeAnimation";
 
 const Infor = () => {
   return (
@@ -195,7 +196,7 @@ const Infor = () => {
           </div>
         </div>
       </div>
-      <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-max lg:text-left text-center lg:hidden block font-inter">
+      <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-full lg:text-left text-center lg:hidden block font-inter">
         Accelerate your dapp development using our pre-built components for common web3 use cases.
       </p>
     </div>
@@ -209,20 +210,22 @@ const CustomHook = () => {
         {/* <Image src={"/assets/component.png"} width={450} height={450} alt="component" /> */}
         <Infor />
       </div>
-      <div className="max-w-[632px] col-span-4 item-spacing-col order-1 lg:order-2 lg:mb-0 mb-16">
+      <div className="lg:max-w-[632px] max-w-full col-span-4 item-spacing-col order-1 lg:order-2 lg:mb-0 mb-16">
         <p className="subTitle-section lg:text-left text-center">COMPONENTS</p>
-        <p
-          className="lg:text-4xl font-medium text-[22px] lg:text-left text-center"
+        <TypeAnimation
+          sequence={["Collection of common web3 components to quickly build your frontend."]}
+          wrapper="span"
+          cursor={false}
+          speed={50}
+          className="lg:text-4xl font-medium text-[22px] lg:text-left text-center md:min-h-[130px] min-h-[50px]"
           style={{
             background: "linear-gradient(270deg, #9B5584 0%, #ADADFF 108.63%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
-        >
-          Collection of common web3 components to quickly build your frontend.
-        </p>
-        <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-max lg:text-left text-center lg:block hidden font-inter">
+        />
+        <p className="text-white lg:text-xl text-sm lg:max-w-[560px] max-w-full lg:text-left text-center lg:block hidden font-inter">
           Accelerate your dapp development using our pre-built components for common web3 use cases.
         </p>
       </div>
@@ -235,17 +238,19 @@ const Component = () => {
     <div className="flex lg:flex-row flex-col items-center gap-8 content">
       <div className="item-spacing-col max-w-[480px]">
         <p className="subTitle-section text-center lg:text-left">CUSTOM HOOKS</p>
-        <p
-          className="lg:text-4xl font-medium text-[22px] lg:max-w-[400px] max-w-max lg:text-left text-center"
+        <TypeAnimation
+          sequence={["  Collection of React hooks wrapper around starknet-react"]}
+          wrapper="p"
+          cursor={false}
+          speed={50}
+          className="lg:text-4xl font-medium text-[22px] lg:max-w-[400px] max-w-full lg:text-left text-center"
           style={{
             background: "linear-gradient(270deg, #9B5584 0%, #ADADFF 108.63%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
-        >
-          Collection of React hooks wrapper around starknet-react
-        </p>
+        />
         <p className="text-white lg:text-xl text-sm text-center lg:text-left lg:block hidden font-inter">
           Simplify interactions with smart contracts with typescript autocompletion
         </p>
