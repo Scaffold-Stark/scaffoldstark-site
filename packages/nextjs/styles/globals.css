@@ -49,6 +49,7 @@ li::marker {
 }
 
 .header-item-btn {
+  font-family: var(--font-grotesk);
   width: 100px;
   text-align: center;
   padding: 8px 23px;
@@ -213,7 +214,8 @@ li::marker {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 500;
+  font-family: var(--font-grotesk);
 }
 
 @keyframes float {

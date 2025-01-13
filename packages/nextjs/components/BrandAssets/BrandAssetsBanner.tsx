@@ -10,10 +10,10 @@ export const BrandAssetsBanner = () => {
           <Header />
           <div className="px-6 grid grid-cols-6 py-20">
             <div className="mt-14 lg:mt-0 lg:col-span-3 col-span-6 flex flex-col lg:items-start items-center justify-center max-lg:order-last">
-              <h2 className="font-medium md:text-[54px] text-3xl lg:mb-[35px] mb-3">
+              <h2 className="font-medium md:text-[54px] text-3xl lg:mb-[35px] mb-3 font-inter">
                 <span className="font-bold text-[#B386FF]">Brand</span> Assets
               </h2>
-              <p className="max-w-[508px] md:text-xl text-sm text-[#BABABA] lg:text-left text-center">
+              <p className="max-w-[508px] md:text-xl text-sm text-[#BABABA] lg:text-left text-center font-grotesk">
                 The marketing of Scaffold-Stark in any form of digital or printed communications requires compliance
                 with the following guidelines.
               </p>

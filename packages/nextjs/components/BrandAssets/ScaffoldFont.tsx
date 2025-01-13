@@ -12,7 +12,7 @@ export const ScaffoldFont = () => {
       <div className="border-r border-l border-[#484848] h-full max-w-[548px] mx-auto md:order-1 order-2">
         <div className="relative h-full flex items-center">
           <TextureBackground />
-          <div>
+          <div className="font-grotesk">
             <div className="px-9 py-14 border-b border-t border-[#484848]">
               <h2
                 className="md:text-[40px] text-[22px] font-bold"

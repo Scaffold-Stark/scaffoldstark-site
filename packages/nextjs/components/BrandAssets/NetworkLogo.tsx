@@ -45,7 +45,7 @@ const Card = ({
   logoSVG?: string;
 }) => {
   return (
-    <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3]">
+    <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3] font-grotesk">
       <div className="p-1">
         <div
           className={`px-2 w-full md:h-[183px] h-20 flex items-center justify-center rounded-md`}
@@ -84,7 +84,7 @@ export const NetworkLogo = () => {
   return (
     <div>
       <p className="brand-assets-title text-center">Network Logo</p>
-      <p className="text-[#6B7280] md:text-lg text-sm text-center md:mt-2 mt-1">
+      <p className="text-[#6B7280] mx-auto md:text-lg text-sm text-center md:mt-2 mt-1 font-grotesk max-w-[530px]">
         Make sure there is good contrast between the logo and background to provide legibility.
       </p>
       <div className="grid lg:grid-cols-4 grid-cols-2 gap-2 !mt-11 content">

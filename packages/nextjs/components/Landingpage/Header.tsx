@@ -14,8 +14,8 @@ const HeaderPC = () => {
   return (
     <div className="relative z-20 flex justify-between items-center border-b border-[#484848] p-6">
       <div className="flex items-center gap-5 cursor-pointer" onClick={() => (window.location.href = "/")}>
-        <Image src={"/assets/logo.png"} alt="logo" width={44} height={44} />
-        <p className="text-[25px] font-medium">Scaffold-Stark</p>
+        <Image src={"/assets/scaffold-pink-svg.svg"} alt="logo" width={44} height={44} />
+        <p className="text-[25px] font-medium font-grotesk text-[#A38CFF]">Scaffold-Stark</p>
       </div>
       <div className="flex gap-2">
         {MENU_ITEMS.slice(0, 3).map(item => (
@@ -46,13 +46,13 @@ const HeaderMB = () => {
   }, [isMenuOpen]);
 
   return (
-    <div className="py-3 px-6 flex items-center justify-between relative">
+    <div className="pt-6 pb-3 px-6 flex items-center justify-between relative">
       <div>
         <Image src={"/assets/logo-text-scaffold-pink.png"} alt="logo" width={170} height={30} />
       </div>
 
       {!isMenuOpen && (
-        <button onClick={() => setIsMenuOpen(true)} className="px-3 py-2 rounded-xl border border-white">
+        <button onClick={() => setIsMenuOpen(true)} className="px-3 py-1.5 rounded-xl border border-white font-grotesk">
           Menu
         </button>
       )}

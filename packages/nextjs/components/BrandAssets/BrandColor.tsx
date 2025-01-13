@@ -29,7 +29,7 @@ const GRADIENT_DATA = [
 
 const CardMain = ({ title, bgColor }: { title: string; bgColor: string }) => {
   return (
-    <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3]">
+    <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3] font-grotesk">
       <div className="p-1">
         <div
           className={`w-full lg:h-[163px] h-[96.4px] flex items-center justify-center rounded-md`}
@@ -64,7 +64,7 @@ const CardGradiant = ({
   to: string;
 }) => {
   return (
-    <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3]">
+    <div className="rounded-lg border border-[#D5D5D5] bg-[#F3F3F3] font-grotesk">
       <div className="p-1">
         <div>
           <Image
@@ -105,7 +105,7 @@ export const BrandColor = () => {
   return (
     <div>
       <p className="brand-assets-title text-center">Brand Color</p>
-      <p className="text-[#6B7280] text-lg text-center md:mt-2 mt-1 px-2 leading-5">
+      <p className="text-[#6B7280] md:text-lg text-sm text-center md:mt-2 mt-1 px-2 leading-5 font-grotesk max-w-[530px] mx-auto">
         Make sure there is good contrast between the logo and background to provide legibility.
       </p>
       <div className="grid lg:grid-cols-4 grid-cols-2 gap-2 content !mt-11">
