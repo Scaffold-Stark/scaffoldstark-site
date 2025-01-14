@@ -71,7 +71,7 @@ const FounderSlider = () => {
       position: "Founder at Stormbit Finance",
     },
     {
-      desc: "“'ve found Scaffold-Stark's debugging process exceptional. The framework streamlines complex data type handling, significantly reducing development overhead. Its built-in error handling and debugging tools have cut our development time in half while maintaining code quality.”",
+      desc: "“I've found Scaffold-Stark's debugging process exceptional. The framework streamlines complex data type handling, significantly reducing development overhead. Its built-in error handling and debugging tools have cut our development time in half while maintaining code quality.”",
       avatar: "/assets/gian.png",
       name: "Gian",
       position: "Founder at The Marquis",

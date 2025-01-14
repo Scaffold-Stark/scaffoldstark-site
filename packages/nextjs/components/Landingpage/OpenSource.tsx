@@ -54,8 +54,8 @@ export const OpenSource = () => {
           </div>
           <div className="flex flex-col md:flex-row md:border-t md:border-b border-[#484848] w-full relative z-20">
             <div className="flex items-center justify-between md:gap-8 gap-3 md:border-r border-y md:border-y-0 border-[#484848] p-5">
-              <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis">npx create-starknet</p>
-              <CopyButton textToCopy="npx create-starknet" />
+              <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis">npx create-stark@latest</p>
+              <CopyButton textToCopy="npx create-stark@latest" />
             </div>
             <div className="flex flex-1 items-center justify-between md:gap-8 gap-3 p-5 border-y md:border-y-0 border-[#484848]">
               <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis md:leading-8">
