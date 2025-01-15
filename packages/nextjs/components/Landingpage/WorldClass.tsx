@@ -13,7 +13,7 @@ import { REDIRECT_LINK } from "~~/helper/redirect";
 const GradientButton = ({ icon, text, onClick }: { icon: string; text: string; onClick: () => void }) => {
   return (
     <div
-      className="cursor-pointer px-6  lg:py-4 py-3 flex items-center justify-center gap-2.5 w-fit"
+      className="cursor-pointer relative z-50 px-6  lg:py-4 py-3 flex items-center justify-center gap-2.5 w-fit"
       style={{
         borderRadius: "10px",
         border: "1px solid #9B5584",
@@ -224,7 +224,7 @@ const ScaffoldStark = () => {
         </div>
       </div>
       <div
-        className="absolute inset-0 z-50 rounded-3xl md:block hidden"
+        className="absolute inset-0 z-40 rounded-3xl md:block hidden"
         style={{
           boxShadow: "9px 8px 4px 0px rgba(150, 104, 149, 0.25) inset",
         }}
