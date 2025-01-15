@@ -14,6 +14,9 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  images: {
+    minimumCacheTTL: 60 * 60 * 24 * 7,
+  },
   // standalone
   output: "standalone",
 };
