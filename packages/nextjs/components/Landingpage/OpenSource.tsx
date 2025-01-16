@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { DecoreLayout } from "../DecoreLayout";
 import TypeAnimation from "../TypeAnimation";
@@ -15,6 +16,17 @@ const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
   );
 };
 export const OpenSource = () => {
+  const [showSecondText, setShowSecondText] = useState(false);
+
+  useEffect(() => {
+    const firstAnimationTime = "Open-source".length * 50 + 1000;
+
+    const timer = setTimeout(() => {
+      setShowSecondText(true);
+    }, firstAnimationTime);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="relative bg-texture">
       <div className="bg-[#0F0F0F] relative z-50">
@@ -23,13 +35,21 @@ export const OpenSource = () => {
           <div className="relative z-20 px-6 grid lg:grid-cols-7 grid-cols-1 md:gap-5 gap-0 lg:py-20 py-0 h-[500px] lg:h-auto">
             <div className="col-span-4 relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9">
               <h1 className="lg:max-w-[550px] max-w-full md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 font-grotesk">
-                <span className="font-bold text-[#B386FF]">Open-source </span>
                 <TypeAnimation
-                  sequence={["toolkit for building dApps on Starknet", 1000, "", 500]}
+                  sequence={["Open-source"]}
                   wrapper="span"
                   cursor={false}
-                  speed={50}
+                  speed={60}
+                  className="font-bold text-[#B386FF]"
                 />
+                {showSecondText && (
+                  <TypeAnimation
+                    sequence={[" toolkit for building dApps on Starknet"]}
+                    wrapper="span"
+                    cursor={false}
+                    speed={60}
+                  />
+                )}
               </h1>
               <p className="lg:max-w-[508px] max-w-full md:text-xl text-sm text-center lg:text-left text-[#BABABA] font-inter">
                 Built using NextJS, Starknet.js, Scarb, Starknet-React, Starknet Foundry and Typescript. Designed to
@@ -54,11 +74,11 @@ export const OpenSource = () => {
           </div>
           <div className="flex flex-col md:flex-row md:border-t md:border-b border-[#484848] w-full relative z-20">
             <div className="flex items-center justify-between md:gap-8 gap-3 md:border-r border-y md:border-y-0 border-[#484848] p-5">
-              <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis">npx create-stark@latest</p>
+              <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis">npx create-stark@latest</p>
               <CopyButton textToCopy="npx create-stark@latest" />
             </div>
             <div className="flex flex-1 items-center justify-between md:gap-8 gap-3 p-5 border-y md:border-y-0 border-[#484848]">
-              <p className="md:text-[23px] text-sm font-medium font-grotesk text-ellipsis md:leading-8">
+              <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis md:leading-8">
                 git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git
               </p>
               <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" />
