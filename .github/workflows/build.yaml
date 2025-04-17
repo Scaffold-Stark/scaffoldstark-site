@@ -1,18 +1,10 @@
-name: Push to ECR and deploy to ECS
+name: Push to ECR
 
 on:
-  pull_request:
-    types: [closed]
-    # paths:
-    #   - 'packages/nextjs/**' # TODO : add this depending on the app
-    branches:
-      - main
-      - stg
   workflow_dispatch:
 
 env:
   AWS_REGION: ap-southeast-1
-  ECS_CLUSTER: prodCluster
 
 jobs:
   check-commit:
@@ -55,7 +47,7 @@ jobs:
             echo "SHOULD_RUN=true" >> "$GITHUB_OUTPUT"
           fi
 
-  build-and-deploy:
+  build-and-push:
     needs: check-commit
     if: needs.check-commit.outputs.SHOULD_RUN == 'true'
     runs-on: ubuntu-latest
@@ -103,51 +95,8 @@ jobs:
           docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:latest
           docker push $REGISTRY/$REPOSITORY:latest
           
-          # Save full image URI to environment for use in next step
-          echo "IMAGE_URI=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
+          echo "Successfully pushed image: $REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          echo "Successfully pushed image: $REGISTRY/$REPOSITORY:latest"
           
           # For security, remove the .env file
           rm -f .env
-
-      - name: Download Task Definition
-        run: |
-          aws ecs describe-task-definition --task-definition def-${{ needs.check-commit.outputs.ENVIRONMENT }}-${{ needs.check-commit.outputs.REPO_NAME }} --query taskDefinition > task-definition.json
-          
-          # Output the content for debugging
-          cat task-definition.json
-
-      - name: Update ECS Task Definition with New Image
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: task-definition.json
-          container-name: ${{ needs.check-commit.outputs.REPO_NAME }}
-          image: ${{ env.IMAGE_URI }}
-
-      - name: Deploy to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-        with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: service-${{ needs.check-commit.outputs.ENVIRONMENT }}-${{ needs.check-commit.outputs.REPO_NAME }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
-
-      - name: Notify Success to Slack Channel
-        id: slack-success
-        if: success()
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message: "✅ Deployment Successful!\nRepository: ${{ needs.check-commit.outputs.REPO_NAME }}\nEnvironment: ${{ needs.check-commit.outputs.ENVIRONMENT }}\nBuild Status: ${{ job.status }}\nTriggered by: ${{ github.actor }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
-      - name: Notify Failure to Slack Channel
-        id: slack-failure
-        if: failure()
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message: "❌ Deployment Failed!\nRepository: ${{ needs.check-commit.outputs.REPO_NAME }}\nEnvironment: ${{ needs.check-commit.outputs.ENVIRONMENT }}\nBuild Status: ${{ job.status }}\nTriggered by: ${{ github.actor }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

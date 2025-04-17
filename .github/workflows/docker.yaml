@@ -1,0 +1,61 @@
+name: Docker Build Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  AWS_REGION: ap-southeast-1
+
+jobs:
+  validate-dockerfile:
+    name: Check Dockerfile Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set Repository Name
+        id: repo-name
+        run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_OUTPUT
+
+      - name: Try to Download Environment Variables from S3
+        id: download-env
+        continue-on-error: true
+        run: |
+          aws s3 cp s3://quantum3labs/${{ steps.repo-name.outputs.REPO_NAME }}.dev.env .env 2>/dev/null || \
+          aws s3 cp s3://quantum3labs/${{ steps.repo-name.outputs.REPO_NAME }}.stg.env .env 2>/dev/null || \
+          touch .env
+          
+          echo "ENV file status: $([ -s .env ] && echo 'Found and not empty' || echo 'Empty or not found')"
+
+      - name: Build Docker Image
+        id: build-image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{ steps.repo-name.outputs.REPO_NAME }}
+          IMAGE_TAG: pr-${{ github.event.pull_request.number || github.sha }}
+        run: |
+          echo "Building Docker image with tag: $REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          
+          docker image inspect $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          
+          echo "Docker image built successfully"
+          
+          rm -f .env
