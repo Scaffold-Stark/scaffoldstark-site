@@ -78,10 +78,8 @@ export const OpenSource = () => {
               <CopyButton textToCopy="npx create-stark@latest" />
             </div>
             <div className="flex flex-1 items-center justify-between md:gap-8 gap-3 p-5 border-y md:border-y-0 border-[#484848]">
-              <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis md:leading-8">
-                git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git
-              </p>
-              <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" />
+              <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis md:leading-8"></p>
+              {/* <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" /> */}
             </div>
           </div>
           <div className="bg-[#0F0F0F] md:h-20 h-10"></div>
