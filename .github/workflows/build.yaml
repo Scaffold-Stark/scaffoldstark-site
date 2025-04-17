@@ -90,7 +90,7 @@ jobs:
           REPOSITORY: ${{ needs.check-commit.outputs.REPO_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG-${{ needs.check-commit.outputs.ENVIRONMENT }} .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG-${{ needs.check-commit.outputs.ENVIRONMENT }}
           docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG-${{ needs.check-commit.outputs.ENVIRONMENT }} $REGISTRY/$REPOSITORY:latest-${{ needs.check-commit.outputs.ENVIRONMENT }}
           docker push $REGISTRY/$REPOSITORY:latest-${{ needs.check-commit.outputs.ENVIRONMENT }}
