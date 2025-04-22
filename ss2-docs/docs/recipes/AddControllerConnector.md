@@ -170,4 +170,4 @@ If you want to deploy without pre-checks, use:
 yarn vercel:yolo
 ```
 
-For more details, refer to the [Vercel deployment guide](https://docs.scaffoldstark.com/deploying/deploy-nextjs-app). If you need to disable type linting checks, see [Disabling Type Checks](https://docs.scaffoldstark.com/disable-type-linting-error-checks).
+For more details, refer to the [Vercel deployment guide](https://scaffoldstark.com/docs/deploying/deploy-nextjs-app). If you need to disable type linting checks, see [Disabling Type Checks](https://scaffoldstark.com/docs/disable-type-linting-error-checks).

@@ -30,7 +30,7 @@ const config = {
       src: "https://plausible.io/js/plausible.js",
       async: true,
       defer: true,
-      "data-domain": "docs.scaffoldstark.com",
+      "data-domain": "scaffoldstark.com/docs",
     },
   ],
 
