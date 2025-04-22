@@ -1,6 +1,13 @@
-name: Deploy to ECS
+name: Deploy to Amazon ECR & ECS
 
 on:
+  pull_request:
+    types: [closed]
+    # paths:
+    #   - 'packages/nextjs/**' # TODO : add this depending on the app
+    branches:
+      - main
+      - stg
   workflow_dispatch:
 
 env:
@@ -9,8 +16,10 @@ env:
 
 jobs:
   check-commit:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     outputs:
+      SHOULD_RUN: ${{ steps.check_commit.outputs.SHOULD_RUN }}
       ENVIRONMENT: ${{ steps.check_commit.outputs.ENVIRONMENT }}
       REPO_NAME: ${{ steps.check_commit.outputs.REPO_NAME }}
     steps:
@@ -38,11 +47,22 @@ jobs:
           # Set repository name
           echo "REPO_NAME=${{ github.event.repository.name }}" >> "$GITHUB_ENV"
           echo "REPO_NAME=${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+          
+          # Check for [skip ci]
+          if [[ "$COMMIT_MESSAGE" == *"[skip ci]"* ]]; then
+            echo "SHOULD_RUN=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "SHOULD_RUN=true" >> "$GITHUB_OUTPUT"
+          fi
 
-  deploy:
+  build-and-deploy:
     needs: check-commit
+    if: needs.check-commit.outputs.SHOULD_RUN == 'true'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -54,16 +74,40 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Get Latest Image URI
+      - name: Create ECR Repository if it doesn't exist
         run: |
-          REGISTRY=${{ steps.login-ecr.outputs.registry }}
-          REPO_NAME=${{ needs.check-commit.outputs.REPO_NAME }}
-          ENVIRONMENT=${{ needs.check-commit.outputs.ENVIRONMENT }}
+          REPOSITORY="${{ needs.check-commit.outputs.REPO_NAME }}"
+          # Check if repository exists
+          if ! aws ecr describe-repositories --repository-names "$REPOSITORY" >/dev/null 2>&1; then
+            echo "Repository $REPOSITORY does not exist. Creating it..."
+            aws ecr create-repository --repository-name "$REPOSITORY" --image-scanning-configuration scanOnPush=true
+            echo "Repository $REPOSITORY created successfully."
+          else
+            echo "Repository $REPOSITORY already exists."
+          fi
+
+      - name: Download Environment Variables from S3
+        run: |
+          aws s3 cp s3://quantum3labs/${{ needs.check-commit.outputs.REPO_NAME }}.${{ needs.check-commit.outputs.ENVIRONMENT }}.env .env
+          echo "Successfully downloaded environment variables from S3"
+
+      - name: Build, Tag, and Push Docker Image to Amazon ECR
+        id: build-image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{ needs.check-commit.outputs.REPO_NAME }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:latest
+          docker push $REGISTRY/$REPOSITORY:latest
           
-          # Use the latest-{environment} tag
-          IMAGE_URI="${REGISTRY}/${REPO_NAME}:latest-${ENVIRONMENT}"
-          echo "Using image: ${IMAGE_URI}"
-          echo "IMAGE_URI=${IMAGE_URI}" >> $GITHUB_ENV
+          # Save full image URI to environment for use in next step
+          echo "IMAGE_URI=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
+          
+          # For security, remove the .env file
+          rm -f .env
 
       - name: Download Task Definition
         run: |
@@ -72,7 +116,7 @@ jobs:
           # Output the content for debugging
           cat task-definition.json
 
-      - name: Update ECS Task Definition with Latest Image
+      - name: Update ECS Task Definition with New Image
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
@@ -87,23 +131,3 @@ jobs:
           service: service-${{ needs.check-commit.outputs.ENVIRONMENT }}-${{ needs.check-commit.outputs.REPO_NAME }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-
-      - name: Notify Success to Slack Channel
-        id: slack-success
-        if: success()
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message: "✅ Deployment Successful!\nRepository: ${{ needs.check-commit.outputs.REPO_NAME }}\nEnvironment: ${{ needs.check-commit.outputs.ENVIRONMENT }}\nBuild Status: ${{ job.status }}\nTriggered by: ${{ github.actor }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
-      - name: Notify Failure to Slack Channel
-        id: slack-failure
-        if: failure()
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message: "❌ Deployment Failed!\nRepository: ${{ needs.check-commit.outputs.REPO_NAME }}\nEnvironment: ${{ needs.check-commit.outputs.ENVIRONMENT }}\nBuild Status: ${{ job.status }}\nTriggered by: ${{ github.actor }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

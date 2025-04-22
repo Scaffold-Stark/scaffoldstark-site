@@ -1,0 +1,83 @@
+---
+sidebar_position: 2
+toc_max_heading_level: 5
+---
+
+# Deploy Your NextJS App
+
+:::tip Hint
+We recommend connecting your GitHub repo to Vercel (through the Vercel UI) so it gets automatically deployed when pushing to `main`.
+:::tip Hint
+
+If you want to deploy directly from the CLI, run this and follow the steps to deploy to Vercel:
+
+```
+yarn vercel
+```
+
+Once you log in (email, GitHub, etc.), the default options should work. It'll give you a public URL.
+
+If you want to redeploy to the same production URL you can run:
+
+```
+yarn vercel --prod
+```
+
+If you omit the `--prod` flag it will deploy it to a preview/test URL.
+
+**Make sure to check the values of your Scaffold Configuration before deploying your NextJS App.**
+
+## Scaffold App Configuration
+
+You can configure different settings for your dapp at `packages/nextjs/scaffold.config.ts`.
+
+```ts
+export type ScaffoldConfig = {
+  targetNetworks: readonly Chain[];
+  pollingInterval: number;
+  rpcProviderUrl: string;
+  walletAutoConnect: boolean;
+  autoConnectTTL: number;
+
+  // other configs you might have
+  // e.g. tokenIcon: string;
+};
+```
+
+The configuration parameters are described below. Make sure to update the values according to your needs:
+
+#### - targetNetworks
+
+Array of blockchain networks where your dapp is deployed. Use values from `supportedChains.ts`.
+
+#### - pollingInterval
+
+The interval in milliseconds at which your front-end application polls the RPC servers for fresh data. _Note that this setting does not affect the local network._
+
+#### - rpcProviderUrl
+
+Default RPC url from Scaffold-Stark 2.
+If you are using your own RPC, you can put it within the `NEXT_PUBLIC_PROVIDER_URL` environment variable.
+
+#### - walletAutoConnect
+
+Set it to `true` to activate automatic wallet connection behavior:
+
+- If the user was connected into a wallet before, on page reload it reconnects automatically.
+- If the user is not connected to any wallet, on reload, it connects to the burner wallet _if it is enabled for the current network_. See `onlyLocalBurnerWallet`
+
+#### - autoConnectTTL
+
+This will determine how long should the application persist wallet connection (i.e. wallets will auto-connect with in the time period), in milliseconds
+
+You can extend this configuration file, adding new parameters that you need to use across your dapp **(make sure you update the above type `ScaffoldConfig`)**:
+
+```ts
+  tokenIcon: "💎",
+```
+
+To use the values from the `ScaffoldConfig` in any other file of your application, you first need to import it in those files:
+
+```ts
+import scaffoldConfig from "~~/scaffold.config";
+```
