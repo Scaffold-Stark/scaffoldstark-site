@@ -27,10 +27,10 @@ This example retrieves the data returned by the `userGreetingCounter` function o
 
 | Parameter | Type     | Description                                                                                                                                                                                                                        |
 | :-------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **strk**  | `object` | Object containing the contractName, functionName, args, and other optional parameters for Starknet. A more detailed description is available [here](https://docs.scaffoldstark.com/hooks/useScaffoldReadContract).                 |
-| **eth**   | `object` | Object containing the contractName, functionName, args, and other optional parameters for Ethereum smart contracts. A more detailed description is available [here](https://docs.scaffoldstark.com/hooks/useScaffoldReadContract). |
+| **strk**  | `object` | Object containing the contractName, functionName, args, and other optional parameters for Starknet. A more detailed description is available [here](https://scaffoldstark.com/docs/hooks/useScaffoldReadContract).                 |
+| **eth**   | `object` | Object containing the contractName, functionName, args, and other optional parameters for Ethereum smart contracts. A more detailed description is available [here](https://scaffoldstark.com/docs/hooks/useScaffoldReadContract). |
 
 ## Return Values
 
 - The retrieved data is stored in the `data` property of the returned object.
-- The extended object includes properties inherited from the `useScaffoldReadContract` hook. You can check the [Scaffold-Stark useScaffoldReadContract return values](https://docs.scaffoldstark.com/hooks/useScaffoldReadContract#return-values) and [Scaffold-ETH useScaffoldReadContract return values](https://docs.scaffoldeth.io/hooks/useScaffoldReadContract#return-values) for the types.
+- The extended object includes properties inherited from the `useScaffoldReadContract` hook. You can check the [Scaffold-Stark useScaffoldReadContract return values](https://scaffoldstark.com/docs/hooks/useScaffoldReadContract#return-values) and [Scaffold-ETH useScaffoldReadContract return values](https://docs.scaffoldeth.io/hooks/useScaffoldReadContract#return-values) for the types.
