@@ -32,9 +32,9 @@ export const OpenSource = () => {
       <div className="bg-[#0F0F0F] relative z-50">
         <div className="max-w-[1200px] mx-auto !px-0 xl:border-r xl:border-l border-[#484848] relative">
           <Header />
-          <div className="relative z-20 px-6 grid lg:grid-cols-7 grid-cols-1 md:gap-5 gap-0 lg:py-20 py-0 h-[500px] lg:h-auto">
-            <div className="col-span-4 relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9">
-              <h1 className="lg:max-w-[550px] max-w-full md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 font-grotesk">
+          <div className="relative z-20 grid lg:grid-cols-2 md:gap-5 gap-0 lg:py-20 py-0 lg:h-auto">
+            <div className="relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9 lg:border-r mt-14 md:mt-0 border-[#484848]">
+              <h1 className="lg:max-w-[550px] max-w-full md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 px-5 font-grotesk">
                 <TypeAnimation
                   sequence={["Open-source"]}
                   wrapper="span"
@@ -51,17 +51,21 @@ export const OpenSource = () => {
                   />
                 )}
               </h1>
-              <p className="lg:max-w-[508px] max-w-full md:text-xl text-sm text-center lg:text-left text-[#BABABA] font-inter">
+              <p className="lg:max-w-[508px] max-w-full md:text-xl text-sm text-center lg:text-left text-[#BABABA] px-5 font-inter">
                 Built using NextJS, Starknet.js, Scarb, Starknet-React, Starknet Foundry and Typescript. Designed to
                 make it easier for developers to create, deploy and interact with smart contracts.
               </p>
+              <div className="flex items-center justify-between md:gap-8 gap-3 border-y border-[#484848] p-5 mt-20 w-full">
+                <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis">npx create-stark@latest</p>
+                <CopyButton textToCopy="npx create-stark@latest" />
+              </div>
             </div>
             <Image
               src={"/assets/opensource-mb.gif"}
               alt="gif"
               width={1000}
               height={10000}
-              className="h-3/4 lg:hidden block absolute top-0 right-0 z-10"
+              className="lg:hidden block absolute -top-10 right-0 z-10"
             />
             <div className="lg:col-span-4 lg:block hidden relative md:order-1 order-2"></div>
             <Image
@@ -72,17 +76,7 @@ export const OpenSource = () => {
               className="absolute top-0 right-0 z-10 h-full lg:block hidden"
             />
           </div>
-          <div className="flex flex-col md:flex-row md:border-t md:border-b border-[#484848] w-full relative z-20">
-            <div className="flex items-center justify-between md:gap-8 gap-3 md:border-r border-y md:border-y-0 border-[#484848] p-5">
-              <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis">npx create-stark@latest</p>
-              <CopyButton textToCopy="npx create-stark@latest" />
-            </div>
-            <div className="flex flex-1 items-center justify-between md:gap-8 gap-3 p-5 border-y md:border-y-0 border-[#484848]">
-              <p className="md:text-[22px] text-sm font-medium font-grotesk text-ellipsis md:leading-8"></p>
-              {/* <CopyButton textToCopy="git clone https://github.com/Scaffold-Stark/scaffold-stark-2.git" /> */}
-            </div>
-          </div>
-          <div className="bg-[#0F0F0F] md:h-20 h-10"></div>
+          <div className="bg-[#0F0F0F] md:h-0 h-10"></div>
         </div>
       </div>
       {/* <Image
