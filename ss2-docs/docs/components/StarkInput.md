@@ -6,7 +6,7 @@ sidebar_position: 4
 
 Displays an input field for STRK/USD amount, with an option to convert between STRK and USD.
 
-![StarkInput Example](/img/EtherInput.gif) <!-- Update gif here -->
+![StarkInput Example](/img/StarkInput.gif)
 
 ## Import
 

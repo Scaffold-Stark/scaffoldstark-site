@@ -12,7 +12,7 @@ The `Balance` component displays the balance of a given Starknet (STRK) address 
 - **USD Conversion:** Option to toggle and display balance in USD, provided the exchange rates are available.
 - **Error & Loading States:** Handles network issues, loading delays, and empty address scenarios gracefully.
 
-![Balance Example](/img/Balance.gif) <!-- Update gif here -->
+![Balance Example](/img/Balance.gif)
 
 ## Import
 

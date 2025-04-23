@@ -6,11 +6,11 @@ sidebar_position: 9
 
 Use this hook to interact with the chain and give UI feedback on the transaction status.
 
-<!-- ![Transaction success](/img/transactorSuccess.gif) Update gif here -->
+![Transaction success](/img/transactorSuccess.gif)
 
 Any error will instead show a popup with nice error message.
 
-<!-- ![Error Example](/img/transactorFail.gif) update gif here -->
+![Error Example](/img/transactorFail.gif)
 
 ```ts
 const { contract: contractInstance } = useContract({
