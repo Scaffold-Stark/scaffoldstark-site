@@ -56,7 +56,7 @@ const config = {
           // sidebarCollapsible: false,
           sidebarCollapsed: true,
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/Scaffold-Stark/ss2-docs/edit/main/",
+          editUrl: "https://github.com/Scaffold-Stark/scaffoldstark-site/edit/main/ss2-docs",
 
           // TODO: reinstate once fixed
           exclude: ["**/StarknetContractWriteWithFeedback.md"],
@@ -91,7 +91,7 @@ const config = {
         },
         items: [
           {
-            href: "https://github.com/Scaffold-Stark/ss2-docs",
+            href: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/ss2-docs",
             label: "GitHub Docs",
             position: "right",
           },
@@ -114,7 +114,7 @@ const config = {
               },
               {
                 label: "Docs GitHub",
-                href: "https://github.com/Scaffold-Stark/ss2-docs",
+                href: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/ss2-docs",
               },
             ],
           },
