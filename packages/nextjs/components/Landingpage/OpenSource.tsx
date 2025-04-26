@@ -50,7 +50,7 @@ export const OpenSource = () => {
           <Header />
           <div className="relative z-20 mt-[70vw] sm:mt-[80vw] md:mt-[90vw] lg:mt-0 flex lg:h-auto">
             <div className="relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-10 md:py-32 lg:border-r mt-28 md:mt-0 border-[#484848]">
-              <h1 className="lg:max-w-[550px] max-w-full md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 px-5 font-grotesk">
+              <h1 className="lg:max-w-[550px] max-w-[36rem] md:min-w-[36rem] md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mx-auto mb-6 px-5 font-grotesk">
                 <TypeAnimation
                   sequence={["Open-source"]}
                   wrapper="span"
