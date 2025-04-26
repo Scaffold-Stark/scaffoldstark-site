@@ -29,12 +29,28 @@ export const OpenSource = () => {
   }, []);
   return (
     <div className="relative bg-texture">
-      <div className="bg-[#0F0F0F] relative z-50">
-        <div className="max-w-[1200px] mx-auto !px-0 xl:border-r xl:border-l border-[#484848] relative">
+      <div className="bg-[#0D0D0D] relative z-50">
+        <Image
+          src={"/assets/bg-texture.png"}
+          alt="img"
+          height={100}
+          width={1000}
+          className="absolute max-h-[110%] h-[110%] w-full"
+        />
+        <div className="max-w-[1200px] mx-auto !px-0 xl:border-r xl:border-l border-[#484848] relative overflow-hidden">
+          <div className="w-full">
+            <Image
+              src={"/assets/opensource-mb.gif"}
+              alt="gif"
+              width={10000}
+              height={10000}
+              className="lg:hidden block absolute -left-[75vw] -z-10 max-w-[250vw]"
+            />
+          </div>
           <Header />
-          <div className="relative z-20 grid lg:grid-cols-2 md:gap-5 gap-0 lg:py-20 py-0 lg:h-auto">
-            <div className="relative z-20 order-2 md:order-1 flex flex-col justify-end h-full py-9 lg:border-r mt-14 md:mt-0 border-[#484848]">
-              <h1 className="lg:max-w-[550px] max-w-full md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mb-6 px-5 font-grotesk">
+          <div className="relative mt-[70vw] sm:mt-[80vw] md:mt-[90vw] lg:mt-0 flex lg:h-auto">
+            <div className="relative order-2 md:order-1 flex flex-col justify-end h-full py-10 md:py-32 lg:border-r mt-28 md:mt-0 border-[#484848]">
+              <h1 className="lg:max-w-[550px] max-w-[36rem] md:min-w-[36rem] md:min-h-[177px] min-h-[104px] font-medium md:text-[54px] text-[32px] text-center lg:text-left md:mb-[35px] mx-auto mb-6 px-5 font-grotesk">
                 <TypeAnimation
                   sequence={["Open-source"]}
                   wrapper="span"
@@ -60,23 +76,15 @@ export const OpenSource = () => {
                 <CopyButton textToCopy="npx create-stark@latest" />
               </div>
             </div>
-            <Image
-              src={"/assets/opensource-mb.gif"}
-              alt="gif"
-              width={1000}
-              height={10000}
-              className="lg:hidden block absolute -top-10 right-0 z-10"
-            />
             <div className="lg:col-span-4 lg:block hidden relative md:order-1 order-2"></div>
             <Image
               src={"/assets/opensource-pc.gif"}
               alt="gif"
               width={1000}
               height={10000}
-              className="absolute top-0 right-0 z-10 h-full lg:block hidden"
+              className="absolute top-0 left-[22vw] xl:left-72 -z-10 h-full lg:block hidden"
             />
           </div>
-          <div className="bg-[#0F0F0F] md:h-0 h-10"></div>
         </div>
       </div>
       {/* <Image
