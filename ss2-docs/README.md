@@ -11,7 +11,7 @@ To run the Documentation site locally, but first ensure you have [Node.js](https
 Clone the repository, install all dependencies as well as build all local packages, and then start Docusaurus.
 
 ```
-git clone https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/ss2-docs.git
+git clone https://github.com/Scaffold-Stark/scaffoldstark-site.git
 cd ss2-docs
 npm install
 npm run start

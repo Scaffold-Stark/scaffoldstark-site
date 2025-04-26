@@ -56,7 +56,7 @@ const config = {
           // sidebarCollapsible: false,
           sidebarCollapsed: true,
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/ss2-docs/edit/main/",
+          editUrl: "https://github.com/Scaffold-Stark/scaffoldstark-site/edit/main/ss2-docs",
 
           // TODO: reinstate once fixed
           exclude: ["**/StarknetContractWriteWithFeedback.md"],
