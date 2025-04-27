@@ -15,8 +15,8 @@ RUN yarn install --frozen-lockfile
 
 # Dependencies stage for docs app
 FROM base AS docs-deps
-WORKDIR /app/ss2-docs
-COPY ss2-docs/package.json ss2-docs/yarn.lock ./
+WORKDIR /app/packages/docs
+COPY packages/docs/package.json packages/docs/yarn.lock ./
 # Create an empty .env.example to prevent the build error
 RUN touch .env.example
 # Copy environment file for docs as well
@@ -35,10 +35,10 @@ RUN yarn workspace @ss-2/nextjs build
 
 # Builder stage for docs app
 FROM base AS docs-builder
-WORKDIR /app/ss2-docs
-COPY --from=docs-deps /app/ss2-docs/node_modules ./node_modules
-COPY --from=docs-deps /app/ss2-docs/.env.example ./.env.example
-COPY ss2-docs .
+WORKDIR /app/packages/docs
+COPY --from=docs-deps /app/packages/docs/node_modules ./node_modules
+COPY --from=docs-deps /app/packages/docs/.env.example ./.env.example
+COPY packages/docs .
 # Copy environment file for docs build
 COPY .env ./
 RUN yarn build || (echo "Proceeding with partial build" && mkdir -p build)
@@ -53,12 +53,12 @@ COPY --from=main-builder /app/packages/nextjs/.next/standalone/packages/nextjs .
 COPY --from=main-builder /app/packages/nextjs/.next/static ./packages/nextjs/.next/static
 
 # Copy docs app
-COPY --from=docs-builder /app/ss2-docs/build ./ss2-docs/build
-COPY --from=docs-builder /app/ss2-docs/node_modules ./ss2-docs/node_modules
+COPY --from=docs-builder /app/packages/docs/build ./packages/docs/build
+COPY --from=docs-builder /app/packages/docs/node_modules ./packages/docs/node_modules
 
 # Create a simple start script
 RUN printf '#!/bin/sh\n\
-cd /app/ss2-docs && npx serve -s build -l 3001 --single &\n\
+cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
 cd /app/packages/nextjs && node server.js\n' > /app/start.sh
 RUN chmod +x /app/start.sh
 
