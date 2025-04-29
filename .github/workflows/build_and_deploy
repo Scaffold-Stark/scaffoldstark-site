@@ -1,4 +1,4 @@
-name: Build and Deploy to ECS
+name: Push to ECR and Deploy to ECS
 
 on:
   pull_request:
