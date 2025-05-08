@@ -10,25 +10,18 @@ description: Comprehensive guide to integrating the Cartridge Controller in Scaf
 
 This guide provides a complete implementation for integrating the [Cartridge Controller](https://docs.cartridge.gg/controller/overview) into your Scaffold-Stark project, enabling advanced wallet connections.
 
-## Prerequisites and Deployment Considerations
-
-### Important Deployment Requirements
-
-⚠️ **Crucial Notes Before Implementation**:
-
-**Local Development Limitations**
+:::danger Crucial Notes Before Implementation
 
 - The Cartridge Controller cannot be used in localhost environments without relying on ngrok or other alternatives. Additionally, developers must use Katana or [Slot](https://docs.cartridge.gg/slot/getting-started).
 - This guide focuses only on Sepolia and Mainnet deployments and integration with Vercel.
+
+:::
 
 ## Implementation Guide
 
 ### Step 1: Add Controller Dependency
 
 Update your `packages/nextjs/package.json` to include the Cartridge dependency:
-
-<details open>
-<summary>Add dependencies controller </summary>
 
 ```json title="nextjs/package.json"
 {
@@ -37,8 +30,6 @@ Update your `packages/nextjs/package.json` to include the Cartridge dependency:
   }
 }
 ```
-
-</details>
 
 ### Step 2: Create Controller Configuration
 
