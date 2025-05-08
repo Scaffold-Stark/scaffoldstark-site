@@ -1,3 +1,9 @@
+---
+sidebar_position: 6
+title: Developing on a Fork
+description: This guide shows how to run and interact with a local fork of Starknet mainnet.
+---
+
 # Developing on Fork
 
 This guide shows how to run and interact with a local fork of Starknet mainnet.
