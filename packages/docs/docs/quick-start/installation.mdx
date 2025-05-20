@@ -13,7 +13,13 @@ Before you begin, you need to install the following tools:
 - Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
 - [Git](https://git-scm.com/downloads)
 
-## Starkup
+## Install developer tools
+
+You can install the developer tools natively or use Dev Containers.
+
+### Option 1: Natively install developer tools
+
+#### 1.1 Starkup
 
 Tool for installing all the Starknet essentials for development. [Starkup](https://github.com/software-mansion/starkup) will install the latest stable versions of:
 
@@ -22,206 +28,115 @@ Tool for installing all the Starknet essentials for development. [Starkup](https
 - [asdf](https://asdf-vm.com/guide/getting-started.html) - Version manager to easily switch between tool versions
 - [Cairo 1.0 extension](https://marketplace.visualstudio.com/items?itemName=starkware.cairo1) for VSCode - Syntax highlighting and language support
 
-Currently, [starknet-devnet](https://0xspaceshard.github.io/starknet-devnet/) is not supported by `starkup` and needs to be installed separately (see instructions below).
+>Currently, [starknet-devnet](https://0xspaceshard.github.io/starknet-devnet/) is not supported by `starkup` and needs to be installed separately (see instructions below).
 
 To install `starkup`, run the following command:
 
 ```sh
-curl -sSf https://raw.githubusercontent.com/starkware-libs/starkup/main/install.sh | bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.sh | sh
 ```
 
-## Install scarb
+#### 1.2 Create your project
 
-To ensure the proper functioning of scaffold-stark, your `Scarb` version must be `2.11.4`. To accomplish this, first check your `Scarb` version:
-
-```sh
-scarb --version
-```
-
-If your Scarb version is not `2.11.4`, you need to install it.
-
-<details>
-<summary><b>Scarb Installation Process</b></summary>
-
- If you already have installed `Scarb` via `starkup`, you can setup this specific version with the following command:
-
-```sh
-asdf install scarb 2.11.4 && asdf set scarb 2.11.4
-```
-
-Otherwise, you can install Scarb `2.11.4` following the [installation instructions](https://docs.swmansion.com/scarb/download).
-We strongly recommend that you install
-Scarb via [starkup](https://github.com/software-mansion/starkup) or [asdf](https://docs.swmansion.com/scarb/download.html#install-via-asdf), a CLI tool that can manage
-multiple language runtime versions on a per-project basis.
-This will ensure that the version of Scarb you use to work on a project always matches the one defined in the
-project settings, avoiding problems related to version mismatches.
-
-Please refer to the [asdf documentation](https://asdf-vm.com/guide/getting-started.html) to install all
-prerequisites.
-
-Once you have `asdf` installed locally, you can download Scarb plugin with the following command:
+Open a terminal and run the following command:
 
 ```bash
-asdf plugin add scarb
+npx create-stark@latest
+cd my-dapp-example
+yarn install
 ```
 
-This will allow you to download specific versions. You can choose the same version as the Cairo's version, for example, 2.11.4, with the following command:
+Now you have a new project with the basic structure.
 
-```bash
-asdf install scarb 2.11.4
-```
+#### 1.3 Install Starknet Devnet using ASDF Fast Install
 
-and set a version:
+- Install [asdf](https://asdf-vm.com/guide/getting-started.html) in case you don't have it installed yet. It allows you to manage the other dependencies with ease.
 
-```bash
-asdf set scarb 2.11.4
-```
-
-Otherwise, you can simply run the following command in your terminal, and follow the onscreen instructions. This
-will install the version `2.11.4` of Scarb.
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh -s -- -v 2.11.4
-```
-
-</details>
-
-## Install Starknet Foundry
-
-If your Starknet Foundry version is not 0.41.0, you need to install it.
-
-```sh
-snforge --version
-```
-
-<details>
-<summary><b>Starknet Foundry Installation Process</b></summary>
-
-If you already have installed `Starknet Foundry` via `starkup`, you can setup this specific version with the following command:
-
-```sh
-asdf install starknet-foundry 0.41.0 && asdf set starknet-foundry 0.41.0
-```
-
-Otherwise, you can install Starknet Foundry `0.41.0` following the [installation instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation).
-We strongly recommend that you install Starknet Foundry via [starkup](https://github.com/software-mansion/starkup) or [asdf](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf).
-
-Once you have `asdf` installed locally, you can download Starknet Foundry plugin with the following command:
-
-```bash
-asdf plugin add starknet-foundry
-```
-
-This will allow you to download specific versions.
-
-```bash
-asdf install starknet-foundry 0.41.0
-```
-
-and set a version:
-
-```bash
-asdf set starknet-foundry 0.41.0
-```
-
-</details>
-
-## Install `starknet-devnet`
-
-To ensure the proper functioning of scaffold-stark, your starknet-devnet version must be 0.4.0.
-To accomplish this, first check your starknet-devnet version:
-
-```
-starknet-devnet --version
-```
-
-If your `starknet-devnet` version is not `0.4.0`, you need to install it.
-
-<details>
-<summary><b>Starknet Devnet Installation Process</b></summary>
-
-To install Starknet Devnet, please refer to the [installation instructions](https://0xspaceshard.github.io/starknet-devnet-rs/docs/running/install#install-with-asdf).  
-This will ensure that the version of Starknet Devnet you use always matches the one defined in the project settings, avoiding version mismatches.
-
-Please refer to the [`asdf` documentation](https://asdf-vm.com/guide/getting-started.html) to install all prerequisites.
-
-Once you have `asdf` installed locally, you can add the Starknet Devnet plugin with the following command:
+We are almost done, now we need to install `Starknet Devnet`. First let's register the Starknet Devnet plugin on `asdf`.
 
 ```bash
 asdf plugin add starknet-devnet
 ```
 
-This will allow you to download specific versions. You can install the compatible version **0.4.0** with:
+Now open your new created project. Since we have the required dependencies listed on a `.tool-versions` file, simply running the below command on the root folder will install `starknet-devnet`(and other dependencies such as `scarb` and `starknet-foundry`) with the version SPECIFIED on the `.tool-versions` file (not necessarily the latest):
 
 ```bash
-asdf install starknet-devnet 0.4.0
+asdf install
 ```
 
-and set a version:
+Now you are ready!!!. You can jump to [Quickstart 1](#quickstart-1-deploying-a-smart-contract-to-starknet-devnet) to start developing your dapp.
 
-```bash
-asdf set starknet-devnet 0.4.0
+#### 1.4 Troubleshooting
+
+- If you run into version errors after using `starkup` or `asdf`, you can try to install the dependencies manually. Check the details below.
+
+<details>
+
+#### Scarb version
+
+To ensure the proper functioning of scaffold-stark, your `Scarb` version must be `2.11.4`. To accomplish this, first check Scarb version:
+
+```sh
+scarb --version
 ```
 
-Otherwise, you can simply run the following command in your terminal and follow the on-screen instructions.  
-This will install the version **0.4.0** of Starknet Devnet:
+If your `Scarb` version is not `2.11.4`, you need to install it. If you already have installed `Scarb` via `starkup`, you can setup this specific version with the following command:
 
-```bash
-curl -L https://raw.githubusercontent.com/Shard-Labs/starknet-devnet/main/install.sh | bash -s -- -v 0.4.0
+```sh
+asdf install scarb 2.11.4 && asdf set scarb 2.11.4
 ```
 
-</details>
+Otherwise, you can install Scarb `2.11.4` following the [instructions](https://docs.swmansion.com/scarb/download.html#install-via-asdf).
 
-## Install Starknet Foundry
+#### Starknet Foundry version
 
-If your Starknet Foundry version is not 0.41.0, you need to install it.
+To ensure the proper functioning of the tests on scaffold-stark, your `Starknet Foundry` version must be `0.41.0`. To accomplish this, first check your `Starknet Foundry` version:
 
 ```sh
 snforge --version
 ```
 
-<details>
-<summary><b>Starknet Foundry Installation Process</b></summary>
+If your `Starknet Foundry` version is not `0.41.0`, you need to install it. If you already have installed `Starknet Foundry` via `starkup`, you can setup this specific version with the following command:
 
-To install Starknet Foundry, please refer to the [installation instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation).
-We strongly recommend that you install Starknet Foundry via [asdf](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf).
-
-Once you have `asdf` installed locally, you can download Starknet Foundry plugin with the following command:
-
-```bash
-asdf plugin add starknet-foundry
+```sh
+asdf install starknet-foundry 0.41.0 && asdf set starknet-foundry 0.41.0
 ```
 
-This will allow you to download specific versions.
+Otherwise, you can install Starknet Foundry `0.41.0` following the [instructions](https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html#installation-via-asdf).
 
-```bash
-asdf install starknet-foundry 0.41.0
+#### Starknet-devnet version
+
+To ensure the proper functioning of scaffold-stark, your `starknet-devnet` version must be `0.4.0`. To accomplish this, first check your `starknet-devnet` version:
+
+```sh
+starknet-devnet --version
 ```
 
-and set a version:
+If your `starknet-devnet` version is not `0.4.0`, you need to install it.
 
-```bash
-asdf set starknet-foundry 0.41.0
-```
+- Install starknet-devnet `0.4.0` via `asdf` ([instructions](https://github.com/gianalarcon/asdf-starknet-devnet/blob/main/README.md)).
 
 </details>
 
-## Alternative Option with Docker
+### Option 2. Dev Containers
 
-As an alternative to installing the tools locally (Scarb, Starknet Foundry, Starknet Devnet), you can use Docker. This is the recommended option for `Windows` users.
+#### 2.1 Install Docker Desktop
 
-<details>
-<summary><b>Docker Setup Process</b></summary>
+As an alternative to installing the tools locally (Scarb, Starknet Foundry, Starknet Devnet), you can use Docker, this is the recommended option for `Windows` users. Here's what you need to do:
 
-To set up your environment using Docker, follow these steps:
-
-1. Install [Docker](https://www.docker.com/get-started/)
+1. Install [Docker Desktop](https://www.docker.com/get-started/)
 2. Install [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-3. Use the provided `devcontainer.json` file to set up the environment:
-   - The configuration uses the `starknetfoundation/starknet-dev:2.11.4` image.
-   - This includes all required tools pre-installed, such as Scarb, Starknet Foundry, Starknet Devnet, and other dependencies.
+3. Create a new project folder.
 
-### Getting Started with Docker Setup
+- `npx create-stark@latest`
+- `cd my-dapp-example`
+
+4. Check your project folder contains a `devcontainer.json` file. This file is used to set up the environment:
+
+- The configuration uses the `starknetfoundation/starknet-dev:2.11.4` image.
+- This includes all required tools pre-installed, such as Scarb, Starknet Foundry, Starknet Devnet and other dependencies.
+
+#### 2.2 Getting Started with Docker Setup
 
 To start using the Docker-based setup:
 
@@ -232,20 +147,25 @@ To start using the Docker-based setup:
 
 > Once inside the container, you can start working with all the tools and dependencies pre-configured.
 
-</details>
+Now you are ready!!!
 
 ## Setup RPC specific version
 
-To ensure the proper functioning of the scaffold-stark with Testnet or Mainnet, your RPC version must be `0.8.x`. This repository contains `.env.example` files, where we provided the default RPC URL for the Starknet Testnet: `RPC_URL_SEPOLIA=https://starknet-sepolia.public.blastapi.io/rpc/v0_8`. Let's verify this RPC version is `0.8.x` by calling a `POST` request in an API platform like `Postman` or `Insommia` . Your API endpoint should be `https://starknet-sepolia.public.blastapi.io/rpc/v0_8` and the body should be:
+<details>
+
+To ensure the proper functioning of the scaffold-stark with Testnet or Mainnet, your RPC version must be `0.8.0`. This repository contains `.env.example` files, where we provided the default RPC URL for the Starknet Testnet: `RPC_URL_SEPOLIA=https://starknet-sepolia.public.blastapi.io/rpc/v0_8`. Let's verify this RPC version is `0.8.x` by calling a `POST` request in an API platform like `Postman` or `Insommia` . Your API endpoint should be `https://starknet-sepolia.public.blastapi.io/rpc/v0_8` and the body should be:
 
 ```json
 {
- "jsonrpc":"2.0",
- "method":"starknet_specVersion",
- "id":1
+  "jsonrpc": "2.0",
+  "method": "starknet_specVersion",
+  "id": 1
 }
 ```
+
 You have to paste the endpoint and body in the API platform and click on the `Send` button. If the response is `0.8.x`, then you are good to go. Otherwise, you have to get the correct RPC URL endpoint.
+
+</details>
 
 ## Compatible versions
 
@@ -269,7 +189,7 @@ npx create-stark@latest
 
 You will be presented with a series of prompts:
 
-- **Project Name:** Input your project name: Enter a name for your project, e.g., my-dapp-example.
+- **Where to install files?:** Enter your project name, e.g., my-dapp-example. Or input `.` to install in the current directory.
 - **Install packages?:** Press `Enter` for `yes` (default option) or type `n` and press `Enter` for no
 
 Once the setup is complete, navigate to the project directory:
