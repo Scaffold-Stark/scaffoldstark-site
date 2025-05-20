@@ -58,8 +58,8 @@ COPY --from=docs-builder /app/packages/docs/node_modules ./packages/docs/node_mo
 
 # Create a simple start script
 RUN printf '#!/bin/sh\n\
-cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
-cd /app/packages/nextjs && node server.js\n' > /app/start.sh
+	cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
+	cd /app/packages/nextjs && node server.js\n' > /app/start.sh
 RUN chmod +x /app/start.sh
 
 ARG PORT=3000

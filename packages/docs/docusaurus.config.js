@@ -91,7 +91,7 @@ const config = {
         },
         items: [
           {
-            href: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/ss2-docs",
+            href: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/packages/docs",
             label: "GitHub Docs",
             position: "right",
           },
@@ -114,7 +114,7 @@ const config = {
               },
               {
                 label: "Docs GitHub",
-                href: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/ss2-docs",
+                href: "https://github.com/Scaffold-Stark/scaffoldstark-site/tree/main/packages/docs",
               },
             ],
           },
