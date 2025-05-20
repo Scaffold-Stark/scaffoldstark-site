@@ -3,4 +3,11 @@ node_modules
 build
 .idea
 .env
-.yarn
+
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
