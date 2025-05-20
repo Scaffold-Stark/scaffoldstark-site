@@ -16,15 +16,12 @@ RUN yarn install --frozen-lockfile
 # Dependencies stage for docs app
 FROM base AS docs-deps
 WORKDIR /app/packages/docs
-COPY packages/docs/package.json ./package.json
-COPY packages/docs/yarn.lock ./yarn.lock 
-# Create an empty .env.example if it doesn't exist in your repo
+COPY packages/docs/package.json packages/docs/yarn.lock ./
+# Create an empty .env.example to prevent the build error
 RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
 RUN yarn install --frozen-lockfile || (echo "Ignoring yarn install error" && true)
-# Debug: show what files were created
-RUN ls -la
 
 # Builder stage for main app
 FROM base AS main-builder
@@ -39,10 +36,8 @@ RUN yarn workspace @ss-2/nextjs build
 # Builder stage for docs app
 FROM base AS docs-builder
 WORKDIR /app/packages/docs
-# Copy the node_modules directory and environment example
 COPY --from=docs-deps /app/packages/docs/node_modules ./node_modules
 COPY --from=docs-deps /app/packages/docs/.env.example ./.env.example
-# Copy source files
 COPY packages/docs .
 # Copy environment file for docs build
 COPY .env ./
