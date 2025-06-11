@@ -12,7 +12,7 @@ Clone the repository, install all dependencies as well as build all local packag
 
 ```
 git clone https://github.com/Scaffold-Stark/scaffoldstark-site.git
-cd ss2-docs
+cd packages/docs
 npm install
 npm run start
 ```
