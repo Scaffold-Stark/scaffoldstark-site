@@ -28,7 +28,7 @@ jobs:
         run: |
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
-          
+
           # Set environment based on branch
           if [[ "$CURRENT_BRANCH" == "main" ]]; then
             echo "ENVIRONMENT=prod" >> "$GITHUB_ENV"
@@ -40,7 +40,7 @@ jobs:
             echo "::error::Workflow can only run on main or stg branches"
             exit 1
           fi
-          
+
           # Set repository name
           echo "REPO_NAME=${{ github.event.repository.name }}" >> "$GITHUB_ENV"
           echo "REPO_NAME=${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
@@ -53,7 +53,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -90,10 +90,10 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG-${{ needs.check-commit.outputs.ENVIRONMENT }}
           docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG-${{ needs.check-commit.outputs.ENVIRONMENT }} $REGISTRY/$REPOSITORY:latest-${{ needs.check-commit.outputs.ENVIRONMENT }}
           docker push $REGISTRY/$REPOSITORY:latest-${{ needs.check-commit.outputs.ENVIRONMENT }}
-          
+
           echo "Successfully pushed image: $REGISTRY/$REPOSITORY:$IMAGE_TAG"
           echo "Successfully pushed image: $REGISTRY/$REPOSITORY:latest-${{ needs.check-commit.outputs.ENVIRONMENT }}"
-          
+
           # For security, remove the .env file
           rm -f .env
 
@@ -117,7 +117,7 @@ jobs:
           REGISTRY=${{ steps.login-ecr.outputs.registry }}
           REPO_NAME=${{ needs.check-commit.outputs.REPO_NAME }}
           ENVIRONMENT=${{ needs.check-commit.outputs.ENVIRONMENT }}
-          
+
           IMAGE_URI="${REGISTRY}/${REPO_NAME}:latest-${ENVIRONMENT}"
           echo "Using image: ${IMAGE_URI}"
           echo "IMAGE_URI=${IMAGE_URI}" >> $GITHUB_ENV
