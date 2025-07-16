@@ -2,15 +2,15 @@
 sidebar_position: 7
 ---
 
-# useScaffoldWatchContractEvent (Coming soon)
+# useScaffoldWatchContractEvent
 
 Use this hook to subscribe to events emitted by your smart contract, and receive real-time updates when these events are emitted.
 
 ```ts
 useScaffoldWatchContractEvent({
   contractName: "YourContract",
-  eventName: "GreetingChange",
-  // The onLogs function is called whenever a GreetingChange event is emitted by the contract.
+  eventName: "GreetingChanged",
+  // The onLogs function is called whenever a GreetingChanged event is emitted by the contract.
   // Parameters emitted by the event can be destructed using the below example
   // for this example: event GreetingChange(address greetingSetter, string newGreeting, bool premium, uint256 value);
   onLogs: logs => {
@@ -22,9 +22,8 @@ useScaffoldWatchContractEvent({
 });
 ```
 
-This example subscribes to the `GreetingChange` event emitted by the `YourContract` smart contract and logs the parameters from the event to the console when it's emitted.
+This example subscribes to the `GreetingChanged` event emitted by the `YourContract` smart contract and logs the parameters from the event to the console when it's emitted.
 
-This hook is a wrapper around wagmi's [useWatchContractEvent](https://wagmi.sh/react/api/hooks/useWatchContractEvent).
 
 ## Configuration
 
