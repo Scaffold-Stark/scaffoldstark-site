@@ -88,7 +88,7 @@ export default MultiSetData;
 
 ## Implementation Guide
 
-### Step 1: Create a New Component
+### 1. Create a New Component
 
 Create a new component in your `component` folder, named `MultiContractInteraction.tsx`. This component will handle multiple write operations on different contracts
 
@@ -98,7 +98,7 @@ export const MultiContractInteraction = () => {
 };
 ```
 
-### Step 2: Import Required Hooks and Utilities
+### 2. Import Required Hooks and Utilities
 
 - import the [`useScaffoldMultiWriteContract`](https://github.com/Scaffold-Stark/scaffold-stark-2/blob/main/packages/nextjs/hooks/scaffold-stark/useScaffoldMultiWriteContract.ts) from scaffold-stark package to handle multiple contract function calls.
 - Use [`
@@ -109,7 +109,7 @@ import { useScaffoldMultiWriteContract } from "~~/hooks/scaffold-stark/useScaffo
 import { notification } from "~~/utils/scaffold-stark";
 ```
 
-### Step 3: Set Up State Variables
+### 3. Set Up State Variables
 
 - Use the `useState` hook to track user inputs, `greeting` and `inputAmount`.
 
@@ -118,7 +118,7 @@ const [inputAmount, setInputAmount] = useState<bigint>(0n);
 const [greeting, setGreeting] = useState<string>("");
 ```
 
-### Step 4: Configure the [`useScaffoldMultiWriteContract`](https://github.com/Scaffold-Stark/scaffold-stark-2/blob/main/packages/nextjs/hooks/scaffold-stark/useScaffoldMultiWriteContract.ts) Hook
+### 4. Configure the [`useScaffoldMultiWriteContract`](https://github.com/Scaffold-Stark/scaffold-stark-2/blob/main/packages/nextjs/hooks/scaffold-stark/useScaffoldMultiWriteContract.ts) Hook
 
 - Configure the hook with the necessary contract calls. Here, we call the `setGreeting` and `setInputAmount` functions of `YourContract` and `Strk` in sequence.
 
@@ -146,7 +146,7 @@ const { sendAsync, isPending } = useScaffoldMultiWriteContract({
 
 - The `isPending` variable will manage the loading state of the button, and `sendAsync` will handle the contract transaction.
 
-### Step 5: Handle Submission
+### 5. Handle Submission
 
 - Create a `handleSetData` function that triggers the multi-write action. If successful, display a success notification; otherwise, log the error and display a failure message.
 
@@ -162,7 +162,7 @@ const handleSetData = async () => {
 };
 ```
 
-### Step 6: Create the UI
+### 6. Create the UI
 
 - Add inputs for `gretting` and `inputAmount`, and a button to submit the data.
 - Disable the button while the transaction is pending.

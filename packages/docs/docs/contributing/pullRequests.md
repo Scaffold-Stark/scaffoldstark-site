@@ -15,12 +15,19 @@ We follow the ["fork-and-pull" Git workflow](https://github.com/Scaffold-Stark/s
 5. Push changes to your fork
 6. Open a PR in our repository and tag one of the maintainers to review your PR
 
-Here are some tips for a high-quality pull request:
+## Tips for Pull Requests
 
-- Create a title for the PR that accurately defines the work done.
+- Create a title for the PR that accurately defines the work done with conventional commits with proper prefix. Make sure we can tell what you have done in the title.
+
+```
+fix: useScaffoldReadContract unable to read error
+feat: switch buttons within debug page
+docs: update README.md for new dependencies
+```
+
 - Structure the description neatly to make it easy to consume by the readers. For example, you can include bullet points and screenshots instead of having one large paragraph.
-- Add the link to the issue if applicable.
-- Have a good commit message that summarises the work done.
+- If the PR is an attempt that solves an issue, include `Fixes #XXX` or `Closes #XXX`in your description so that GitHub can link the issue and close it.
+- Have a good commit message that summarises the work done, use conventional commits like the above example as well.
 
 Once you submit your PR:
 

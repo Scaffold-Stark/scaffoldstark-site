@@ -38,7 +38,7 @@ export const ConnectedAddressBalance = () => {
 
 ## Implementation guide
 
-### Step 1: Create a new Component
+### 1. Create a new Component
 
 Begin by creating a new component in the "components" folder of your application.
 
@@ -52,7 +52,7 @@ export const ConnectedAddressBalance = () => {
 };
 ```
 
-### Step 2: Retrieve the Connected Account
+### 2. Retrieve the Connected Account
 
 Fetch the Starknet address of the currently connected account using the [useAccount starknet-react hook](https://starknet-react.com/hooks/account/useaccount) and easily display them using Scaffold Stark [Address](/components/Address) and [Balance](/components/Balance) components.
 

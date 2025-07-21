@@ -10,7 +10,7 @@ This is the hook that wraps the `useScaffoldEventHistory` hook from Scaffold-Sta
 const { data, isLoading, error } = useEthStarkEventHistory({
   strk: {
     contractName: "YourContract",
-    eventName: "contracts::YourContract::YourContract::GreetingChanged",
+    eventName: "GreetingChanged",
     fromBlock: 1n,
     enabled: true,
     watch: true,

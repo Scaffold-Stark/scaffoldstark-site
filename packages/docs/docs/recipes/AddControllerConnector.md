@@ -19,7 +19,7 @@ This guide provides a complete implementation for integrating the [Cartridge Con
 
 ## Implementation Guide
 
-### Step 1: Add Controller Dependency
+### 1. Add Controller Dependency
 
 Update your `packages/nextjs/package.json` to include the Cartridge dependency:
 
@@ -31,7 +31,7 @@ Update your `packages/nextjs/package.json` to include the Cartridge dependency:
 }
 ```
 
-### Step 2: Create Controller Configuration
+### 2. Create Controller Configuration
 
 Create a new file `index.tsx` in `nextjs/services/web3/controller/index.tsx`. You can also review different configurations in the [Cartridge Controller documentation](https://docs.cartridge.gg/controller/overview) to understand how to integrate [policies or sessions](https://docs.cartridge.gg/controller/sessions) and other powerful features, especially for gaming or UX improvements.
 
@@ -115,7 +115,7 @@ export const controllerInstance = new ControllerConnector({
 
 </details>
 
-### Step 3: Modify Connectors Configuration
+### 3. Modify Connectors Configuration
 
 Update `services/web/connectors.tsx` to include the Cartridge Controller instance.
 
@@ -133,7 +133,7 @@ if (!targetNetworks.some(network => (network.network as string) === "devnet")) {
 
 </details>
 
-### Step 4: Configure Deployment Settings
+### 4. Configure Deployment Settings
 
 #### Update Network Configuration
 

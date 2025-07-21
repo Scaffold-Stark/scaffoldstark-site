@@ -39,7 +39,7 @@ export const UserProfile = () => {
 
 This guide will walk you through creating a component that displays a user's Starknet profile information via the StarknetID API through our helper hook `useScaffoldStarkProfile`. We will be creating a new component called `UserProfile` for our example.
 
-### Step 1: Create a new Component
+### 1. Create a new Component
 
 First, let's create a basic structure for our `UserProfile` component.
 
@@ -49,7 +49,7 @@ export const UserProfile = () => {
 };
 ```
 
-### Step 2: Get the User's Address
+### 2. Get the User's Address
 
 To fetch the profile associated with the currently connected wallet, we need the user's address. We can get this using the `useAccount` hook provided by Scaffold-Stark 2 or starknet-react.
 
@@ -65,7 +65,7 @@ export const UserProfile = () => {
 
 Here, we import `useAccount` and call it within our component. The hook returns an object containing the `address` of the connected account.
 
-### Step 3: Fetch the User Profile
+### 3. Fetch the User Profile
 
 Now, we'll use the `useScaffoldStarkProfile` hook to fetch the user's profile data based on their address.
 
@@ -87,7 +87,7 @@ export const UserProfile = () => {
 
 We import `useScaffoldStarkProfile` and call it, passing the `address` we obtained in the previous step. We use [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to extract the `data` field and rename it to `profile`.
 
-### Step 4: Handle Loading/Empty State
+### 4. Handle Loading/Empty State
 
 The profile data might not be available immediately (e.g., while fetching) or the user might not have a profile. We should handle this case gracefully by rendering nothing if the `profile` data is not yet available.
 
@@ -106,7 +106,7 @@ export const UserProfile = () => {
 };
 ```
 
-### Step 5: Display Profile Picture and Name
+### 5. Display Profile Picture and Name
 
 Finally, let's display the user's profile picture and name. We'll use the `Image` component from `next/image` for the picture and display the profile name.
 
