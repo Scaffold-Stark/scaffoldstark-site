@@ -30,7 +30,7 @@ export const TransactionHistory = () => {
 
   const { data: transactions } = useScaffoldEventHistory({
     contractName: "Strk",
-    eventName: "openzeppelin::token::erc20_v070::erc20::ERC20::Transfer",
+    eventName: "Transfer",
     watch: true,
     fromBlock: 0n,
   });
@@ -175,7 +175,7 @@ export const TransactionHistory = () => {
 
   const { data: transactions } = useScaffoldEventHistory({
     contractName: "Strk",
-    eventName: "openzeppelin::token::erc20_v070::erc20::ERC20::Transfer",
+    eventName: "Transfer",
     watch: true, // Keep listening for new events
     fromBlock: 0n, // Start from the genesis block
   });
@@ -218,7 +218,7 @@ export const TransactionHistory = () => {
 
   const { data: transactions } = useScaffoldEventHistory({
     contractName: "Strk",
-    eventName: "openzeppelin::token::erc20_v070::erc20::ERC20::Transfer",
+    eventName: "Transfer",
     watch: true,
     fromBlock: 0n,
   });
@@ -359,7 +359,7 @@ export const TransactionHistory = () => {
 
   const { data: transactions } = useScaffoldEventHistory({
     contractName: "Strk",
-    eventName: "openzeppelin::token::erc20_v070::erc20::ERC20::Transfer",
+    eventName: "Transfer",
     watch: true,
     fromBlock: 0n,
   });
