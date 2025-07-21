@@ -9,7 +9,7 @@ The `useScaffoldWatchContractEvent` hook is a custom React hook designed to list
 ## Usage Example
 
 ```ts
-import useScaffoldWatchContractEvent from '~~/hooks/scaffold-stark/useScaffoldWatchContractEvent'
+import useScaffoldWatchContractEvent from "~~/hooks/scaffold-stark/useScaffoldWatchContractEvent";
 
 useScaffoldWatchContractEvent({
   contractName: "YourContract",
@@ -28,14 +28,12 @@ useScaffoldWatchContractEvent({
 
 This example subscribes to the `GreetingChange` event emitted by the `YourContract` smart contract and logs the parameters from the event to the console when it's emitted.
 
-This hook is a wrapper around wagmi's [useWatchContractEvent](https://wagmi.sh/react/api/hooks/useWatchContractEvent).
-
 ## Configuration
 
-| Parameter        | Type       | Description                                                                                                                                                                                                                                                                                                                                                                           |
-| :--------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **contractName** | `string`   | Name of the contract to read from.                                                                                                                                                                                                                                                                                                                                                    |
-| **eventName**    | `string`   | Name of the event to listen for.                                                                                                                                                                                                                                                                                                                                                            |
+| Parameter        | Type       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :--------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **contractName** | `string`   | Name of the contract to read from.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **eventName**    | `string`   | Name of the event to listen for.                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | **onLogs**       | `function` | Callback function to execute when the event is emitted. Accepts an array of `logs` (events) that occurred during the [`pollingInterval`](/deploying/deploy-nextjs-app#--pollinginterval) set at `scaffold.config.ts`. Each array item contains an `args` property, which can be destructured to get the parameters emitted by the event. This function can customized according to your needs. The `onLogs` function is fired for every log within the array |
 
 :::note
@@ -56,7 +54,7 @@ It is recommended to `setState` using [updater function](https://react.dev/refer
 
 :::note
 
-The onLogs function gives you access to the same data returned in the ```useScaffoldEventHistory``` hook.
-The ```args```, ```block```, and other data can be used as valuable data to fire functions based off.
+The onLogs function gives you access to the same data returned in the `useScaffoldEventHistory` hook.
+The `args`, `block`, and other data can be used as valuable data to fire functions based off.
 
 :::

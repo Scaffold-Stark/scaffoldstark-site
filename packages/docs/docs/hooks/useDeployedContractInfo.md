@@ -12,7 +12,7 @@ const { data: deployedContractData } = useDeployedContractInfo(contractName);
 
 This example retrieves the details of the deployed contract with the specified name and stores the details in the `deployedContractData` object.
 
-## Parameters
+## Configuration
 
 | Parameter        | Type     | Description           |
 | :--------------- | :------- | :-------------------- |
