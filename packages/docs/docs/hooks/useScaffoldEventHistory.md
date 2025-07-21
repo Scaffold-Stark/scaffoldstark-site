@@ -78,7 +78,7 @@ Here is an example of how to use `filters`, where the key corresponds to the eve
 ```javascript
 useScaffoldEventHistory({
   contractName: "YourContract",
-  eventName: "GreetingChanged",
+  eventName: "contracts::YourContract::YourContract::GreetingChanged",
   fromBlock: 0n,
   filters: {
     setter: "0x00daC9BCF0bC21a9f3483D47A8Ade4764EE5c0377B3bCDDf2df477E3C1e55810",
@@ -166,7 +166,7 @@ If we want to add all the filters, the hook definition will be:
 ```javascript
 useScaffoldEventHistory({
   contractName: "YourContract",
-  eventName: "GreetingChanged",
+  eventName: "contracts::YourContract::YourContract::GreetingChanged",
   fromBlock: 0n,
   filters: {
     greeting_setter: "0x00daC9BCF0bC21a9f3483D47A8Ade4764EE5c0377B3bCDDf2df477E3C1e55810",
