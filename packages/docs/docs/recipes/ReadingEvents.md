@@ -77,7 +77,7 @@ export const TransactionHistory = () => {
 
 ## Implementation guide
 
-### Step 1: Create the Component and Add Imports
+### 1. Create the Component and Add Imports
 
 First, create a new file `components/TransactionHistory.tsx` and define the basic structure of your component. We also need to import the necessary hooks and components.
 
@@ -97,7 +97,7 @@ export const TransactionHistory = () => {
 We add `"use client"` at the top because this component uses hooks (`useScaffoldEventHistory`, `useAccount`) which manage state and interact with browser APIs, making it a Client Component in Next.js.
 :::
 
-### Step 2: Define the Event Type
+### 2. Define the Event Type
 
 Since the events retrieved by `useScaffoldEventHistory` are currently typed as `any`, we need to define an interface that matches the structure of the specific event we are interested in (in this case, the `Transfer` event from an ERC20 contract).
 
@@ -125,7 +125,7 @@ export const TransactionHistory = () => {
 You need to know the structure (`args`) of the event emitted by your target contract beforehand to define the correct interface. You can usually find this in the contract's source code or ABI.
 :::
 
-### Step 3: Get User Account
+### 3. Get User Account
 
 We use the `useAccount` hook to get the connected user's Starknet address. Although not directly used for filtering in this specific hook example, it's often needed when interacting with user-specific data.
 
@@ -151,7 +151,7 @@ export const TransactionHistory = () => {
 };
 ```
 
-### Step 4: Fetch Event History
+### 4. Fetch Event History
 
 Use the [`useScaffoldEventHistory`](/hooks/useScaffoldEventHistory) hook to fetch the events. Configure it with the `contractName`, `eventName`, whether to `watch` for new events, and the starting block (`fromBlock`).
 
@@ -194,7 +194,7 @@ The `useScaffoldStarkEventHistory` would have the event name available on the au
 Currently, event names can be quite long, including the full path to the event definition within the contract modules (e.g., `openzeppelin::token::erc20_v070::erc20::ERC20::Transfer`). Efforts are underway in the Scaffold Stark team to simplify this.
 :::
 
-### Step 5: Set Up the Table Structure
+### 5. Set Up the Table Structure
 
 Create the basic HTML table structure to display the transaction history.
 
@@ -241,7 +241,7 @@ export const TransactionHistory = () => {
 };
 ```
 
-### Step 6: Render Transaction Rows
+### 6. Render Transaction Rows
 
 Map over the `transactions` data returned by the hook. Since `transactions` is typed as `any[]`, we assert its type to `TransferEvent[]` to access the structured `args`.
 
@@ -285,7 +285,7 @@ export const TransactionHistory = () => {
 The `(transactions as TransferEvent[])` part is a type assertion. It tells TypeScript to treat the `transactions` array as an array of our defined `TransferEvent` objects, allowing us to access `tx.args.from`, `tx.args.to`, and `tx.args.value` safely (assuming the fetched data matches the interface).
 :::
 
-### Step 7: Format and Display Addresses
+### 7. Format and Display Addresses
 
 Event arguments like addresses often come as raw `BigInt` values. We need to convert them to the standard hexadecimal `0x...` format string before passing them to the [`Address`](/components/Address) component for display.
 

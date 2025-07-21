@@ -63,7 +63,7 @@ export default Greetings;
 
 ## Implementation guide
 
-### Step 1: Create a new Component
+### 1. Create a new Component
 
 Begin by creating a new component in the `components` folder of your application.
 
@@ -79,7 +79,7 @@ const Greetings = () => {
 export default Greetings;
 ```
 
-### Step 2: Retrieve New Greetings
+### 2. Retrieve New Greetings
 
 Initialize the [`useScaffoldReadContract`](/hooks/useScaffoldReadContract) hook to read from the contract. This hook provides the `data` which contains the return value of the function.
 
@@ -105,7 +105,7 @@ In the line `const {data: currentGreeting} = useScaffoldReadContract({...})`, we
 
 The contract function returns a `uint`, which is represented as a [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) in JavaScript. You can convert it to a readable string using `.toString()`.
 
-### Step 3: Retrieve STRK Balance in YourContract
+### 3. Retrieve STRK Balance in YourContract
 
 We can retrieve the STRK balance of the contract by first getting its address using `useScaffoldContract`. Then, we pass this address as an argument (`args`) to `useScaffoldReadContract`, which will call the contract function.
 
@@ -131,7 +131,7 @@ const Greetings = () => {
 };
 ```
 
-### Step 4: Handling Loading State
+### 4. Handling Loading State
 
 We can use the `isLoading` flag returned from `useScaffoldReadContract` to show a loading spinner while fetching data from the contract.
 
