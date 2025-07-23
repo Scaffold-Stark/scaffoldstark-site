@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import type { NextPage } from "next";
 import { ChevronLeftIcon, MagnifyingGlassIcon, PuzzlePieceIcon } from "@heroicons/react/24/solid";
 import { ExtensionCardDetail } from "~~/components/Extensions/ExtensionCardDetail";
+import { Footer } from "~~/components/Landingpage/Footer";
+import { Header } from "~~/components/Landingpage/Header";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { EXTENSIONS } from "~~/constants/extensions";
 
@@ -25,7 +27,10 @@ const Extensions: NextPage = () => {
         title="Extensions | Scaffold-Stark"
         description="Explore all available extensions for Scaffold-Stark. Build your dApp faster with pre-integrated extensions."
       />
-      <div className="min-h-screen bg-[#0F0F0F] font-grotesk py-8">
+      <div className="bg-[#0F0F0F]">
+        <Header />
+      </div>
+      <div className="min-h-screen bg-[#0F0F0F] font-grotesk py-10">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           {/* Back Button */}
           <button
@@ -133,6 +138,9 @@ const Extensions: NextPage = () => {
             <p className="text-xl sm:text-2xl font-medium text-[#B386FF]">and More Coming Soon</p>
           </div>
         </div>
+      </div>
+      <div className="bg-[#0F0F0F] py-10">
+        <Footer />
       </div>
     </>
   );
