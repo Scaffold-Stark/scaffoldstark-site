@@ -57,7 +57,7 @@ export const ContractInteraction = () => {
 
 ## Implementation
 
-### Step 1: Set Up Your Component
+### 1. Set Up Your Component
 
 Create a new component in the "components" folder. The component will show a button that will allow users to interact with your smart contract.
 
@@ -69,7 +69,7 @@ export const ContractInteraction = () => {
 };
 ```
 
-### Step 2: Configure starknet-react `useContractWrite` hook
+### 2. Configure starknet-react `useContractWrite` hook
 
 Add the `useContractWrite` hook and configure it with the required parameters.
 
@@ -104,7 +104,7 @@ export const ContractInteraction = () => {
 };
 ```
 
-### Step 3: Initialize `useTransactor` hook and send transaction
+### 3. Initialize `useTransactor` hook and send transaction
 
 Initialize the `useTransactor` hook and use it to wrap the `sendAsync` function obtained from `useContractWrite` to provide feedback on the transaction status to the user.
 
@@ -142,7 +142,7 @@ export const ContractInteraction = () => {
 };
 ```
 
-### Step 4: Wrap `useTransactor` in a handler async function
+### 4. Wrap `useTransactor` in a handler async function
 
 Wrap the `writeTx` function in a handler function to start the transaction when the user clicks the button.
 
@@ -191,7 +191,7 @@ export const ContractInteraction = () => {
 };
 ```
 
-### Step 5: Bonus adding loading state
+### 5. Bonus adding loading state
 
 We can use `isPending` returned from `useContractWrite` while the transaction is being mined and also `disable` the button.
 

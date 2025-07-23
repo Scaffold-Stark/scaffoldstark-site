@@ -27,7 +27,7 @@ Forking from block: number=1047693
 ```typescript
 const { data: events } = useScaffoldEventHistory({
   contractName: "YourContract",
-  eventName: "contracts::YourContract::YourContract::GreetingChanged",
+  eventName: "GreetingChanged",
   fromBlock: 1028886n, // NOTE : Use the latest block on the fork + 1 ( see the logs in the console)
   watch: true,
 });

@@ -54,7 +54,7 @@ export default SetGreeting;
 
 ## Implementation
 
-### Step 1: Set Up Your Component
+### 1. Set Up Your Component
 
 Create a new component in the `components` folder. This component will display an input field and a button to interact with your smart contract.
 
@@ -73,7 +73,7 @@ const SetGreeting = () => {
 export default SetGreeting;
 ```
 
-### Step 2: Initialize `useScaffoldWriteContract` Hook
+### 2. Initialize `useScaffoldWriteContract` Hook
 
 Now we'll add state management and initialize the hook for contract interaction:
 
@@ -109,7 +109,7 @@ const SetGreeting = () => {
 export default SetGreeting;
 ```
 
-### Step 3: Add Input Change Logic and Connect Button
+### 3. Add Input Change Logic and Connect Button
 
 Now we'll connect the input to our state and wire up the button click handler:
 
@@ -152,7 +152,7 @@ const SetGreeting = () => {
 export default SetGreeting;
 ```
 
-### Step 4: Add Loading State
+### 4. Add Loading State
 
 Finally, we'll add loading state handling to improve the user experience:
 
