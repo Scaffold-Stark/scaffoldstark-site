@@ -40,6 +40,11 @@ export const ExtensionCardDetail = ({ title, description, command, github, isAct
               className={`flex-shrink-0 w-10 h-10 rounded-full  flex items-center justify-center text-black ${
                 isActive ? "opacity-100 cursor-pointer" : "opacity-50 cursor-not-allowed"
               }`}
+              onClick={() => {
+                if (isActive) {
+                  window.open(github, "_blank");
+                }
+              }}
             >
               <Image src="/github.png" alt="GitHub" width={32} height={32} style={{ width: "100%", height: "100%" }} />
             </div>
