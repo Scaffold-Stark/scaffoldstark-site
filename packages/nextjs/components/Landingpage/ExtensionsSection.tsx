@@ -23,7 +23,7 @@ export const ExtensionsSection = () => {
                 <ExtensionCardPreview
                   key={index}
                   title={extension.title}
-                  description={extension.description}
+                  description={extension.shortDesc}
                   command={extension.command}
                 />
               ))}
