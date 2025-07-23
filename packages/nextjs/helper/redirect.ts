@@ -8,4 +8,5 @@ export const REDIRECT_LINK = {
   telegram: "https://t.me/+wO3PtlRAreo4MDI9",
   onlydust: "https://app.onlydust.com/p/speedrun-scaffold-stark",
   twitter: "https://x.com/scaffoldstark",
+  extensions: "/extensions",
 };

@@ -29,7 +29,7 @@ const Extensions: NextPage = () => {
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           {/* Back Button */}
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/")}
             className="relative flex items-center gap-3 text-white mb-8 p-[2px] rounded-[18px] bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#8B5CF6]  hover:from-[#9333EA] hover:via-[#C084FC] hover:to-[#9333EA] transition-all duration-300"
           >
             <div className="flex items-center gap-3 w-full px-5 py-2 bg-[#1A1A2E] rounded-[16px] hover:bg-[#2A2A3E] transition-colors">
