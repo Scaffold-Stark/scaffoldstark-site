@@ -2,6 +2,12 @@
 sidebar_position: 6
 ---
 
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
+
 # useEthStarkAccount
 
 This is the hook that wraps the `useAccount` hook from starknet-react and wagmi. Use this hook to get your account details.

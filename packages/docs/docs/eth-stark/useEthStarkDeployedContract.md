@@ -2,6 +2,12 @@
 sidebar_position: 4
 ---
 
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
+
 # useEthStarkDeployedContract
 
 This is the hook that wraps the `useDeployedContractInfo` hook from Scaffold-Stark and Scaffold-ETH for both Starknet and Ethereum. Use this hook to fetch details about a deployed smart contract, including the ABI and address.

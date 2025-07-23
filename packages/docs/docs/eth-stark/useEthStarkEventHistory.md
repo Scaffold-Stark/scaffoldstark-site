@@ -2,6 +2,12 @@
 sidebar_position: 3
 ---
 
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
+
 # useEthStarkEventHistory
 
 This is the hook that wraps the `useScaffoldEventHistory` hook from Scaffold-Stark and Scaffold-ETH for both Starknet and Ethereum. This hook allows you to read events from a deployed smart contract.

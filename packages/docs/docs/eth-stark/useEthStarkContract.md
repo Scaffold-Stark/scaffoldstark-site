@@ -2,6 +2,12 @@
 sidebar_position: 5
 ---
 
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
+
 # useEthStarkContract
 
 This is the hook that wraps the `useScaffoldContract` hook from Scaffold-Stark and Scaffold-ETH for both Starknet and Ethereum. Use this hook to get your contract instance by providing the contract name. It enables you to interact with your contract methods.

@@ -2,6 +2,12 @@
 sidebar_position: 1
 ---
 
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
+
 # useEthStarkReadContract
 
 This is the hook that wraps the `useScaffoldReadContract` hook from Scaffold-Stark and Scaffold-ETH for both Starknet and Ethereum. Use this hook to read public variables and get data from read-only functions of your Starknet and Ethereum smart contracts.
