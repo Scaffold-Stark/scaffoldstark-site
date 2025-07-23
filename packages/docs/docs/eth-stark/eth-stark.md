@@ -2,7 +2,13 @@
 sidebar_position: 6
 ---
 
-# 🚩 Using Scaffold Stark with Ethereum Contracts
+# 🚩 (DEPRECATED) Using Scaffold Stark with Ethereum Contracts
+
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
 
 [Scaffold-ETH-Stark](https://github.com/Scaffold-Stark/scaffold-eth-stark) is an innovative toolkit that combines the capabilities of Scaffold-Stark and Scaffold-ETH, providing a unified solution for building decentralized applications (dapps) on both Starknet and EVM-compatible blockchains.
 

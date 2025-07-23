@@ -2,6 +2,12 @@
 sidebar_position: 2
 ---
 
+:::danger
+
+**Important Note**: Scaffold-ETH-Stark is currently deprecated and we will no longer maintain it for the forseeable future.
+
+:::
+
 # useEthStarkWriteContract
 
 This is the hook that wraps the `useScaffoldWriteContract` hook from Scaffold-Stark and Scaffold-ETH for both Starknet and Ethereum. Use this hook to write to your smart contract by calling state-mutating functions.
