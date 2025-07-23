@@ -72,17 +72,19 @@ const Extensions: NextPage = () => {
             </div>
 
             {/* Search Bar */}
-            <div className="flex flex-row max-w-2xl mx-auto mb-8 px-4 sm:px-0 bg-gradient-to-r from-[#4A4A5F] via-[#2a2a3a] to-[#1a1a2e] rounded-2xl">
-              <div className=" bg-white px-2 m-2 sm:left-2 flex items-center pointer-events-none rounded-[12px]">
-                <MagnifyingGlassIcon className="h-6 w-6 text-black" />
+            <div className="max-w-2xl mx-auto mb-8 px-4 sm:px-0">
+              <div className="flex flex-row bg-gradient-to-r from-[#4A4A5F] via-[#2a2a3a] to-[#1a1a2e] rounded-2xl p-2">
+                <div className="bg-white p-2 flex items-center justify-center pointer-events-none rounded-xl min-w-[44px] min-h-[44px] sm:min-w-[48px] sm:min-h-[48px]">
+                  <MagnifyingGlassIcon className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search extension"
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className="flex-1 ml-3 py-2 sm:py-3 text-base sm:text-lg text-white bg-transparent placeholder-gray-400 focus:outline-none"
+                />
               </div>
-              <input
-                type="text"
-                placeholder="Search extension"
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                className="w-full pl-2 pr-4 py-3 sm:py-4 text-base sm:text-lg text-white bg-transparent text-left  rounded-2xl  placeholder-gray-400"
-              />
             </div>
 
             {/* Description */}
