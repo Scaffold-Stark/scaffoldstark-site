@@ -57,15 +57,45 @@ const containsDevnet = (networks: readonly Chain[]) => {
   return networks.some(it => it.network === "devnet");
 };
 
+// Function to get rpcProviderUrl, using your environment variables
+const getRpcUrl = (networkName: string): string => {
+  const devnetRpcUrl = process.env.NEXT_PUBLIC_DEVNET_PROVIDER_URL;
+  const sepoliaRpcUrl = process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL;
+  const mainnetRpcUrl = process.env.NEXT_PUBLIC_MAINNET_PROVIDER_URL;
+  const fallBack = process.env.NEXT_PUBLIC_PROVIDER_URL;
+
+  let rpcUrl = "";
+
+  switch (networkName) {
+    case "devnet":
+      rpcUrl = devnetRpcUrl || fallBack || "";
+      break;
+    case "sepolia":
+      rpcUrl = sepoliaRpcUrl || fallBack || "";
+      break;
+    case "mainnet":
+      rpcUrl = mainnetRpcUrl || fallBack || "";
+      break;
+    default:
+      rpcUrl = "";
+      break;
+  }
+
+  return rpcUrl;
+};
+
+const currentNetwork = scaffoldConfig.targetNetworks[0];
+const currentNetworkName = currentNetwork.network;
+
 // Provider configuration based on Scaffold settings
 export const getProvider = () => {
-  if (scaffoldConfig.rpcProviderUrl === "" || containsDevnet(scaffoldConfig.targetNetworks)) {
+  if (getRpcUrl(currentNetworkName) === "" || containsDevnet(scaffoldConfig.targetNetworks)) {
     return publicProvider();
   }
 
   return jsonRpcProvider({
     rpc: () => ({
-      nodeUrl: scaffoldConfig.rpcProviderUrl,
+      nodeUrl: getRpcUrl(currentNetworkName),
       chainId: starknetChainId(scaffoldConfig.targetNetworks[0].id),
     }),
   });
