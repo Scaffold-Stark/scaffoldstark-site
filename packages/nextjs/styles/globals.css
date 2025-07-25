@@ -50,7 +50,6 @@ li::marker {
 
 .header-item-btn {
   font-family: var(--font-grotesk);
-  width: 100px;
   text-align: center;
   padding: 8px 23px;
   cursor: pointer;
