@@ -9,7 +9,6 @@ import "~~/styles/globals.css";
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : `http://localhost:${process.env.PORT || 3000}`;
-
 const title = "Scaffold-Stark";
 const titleTemplate = "%s | Scaffold-Stark ";
 const description = "Open-source toolkit for building dApps on Starknet";
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@scaffoldstark",
+    site: baseUrl,
     creator: "@scaffoldstark",
     images: [`${baseUrl}/scaffold-twitter.jpg`],
     title: {
