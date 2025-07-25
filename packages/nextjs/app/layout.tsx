@@ -9,11 +9,10 @@ import "~~/styles/globals.css";
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : `http://localhost:${process.env.PORT || 3000}`;
-const imageUrl = `${baseUrl}/thumbnail.jpg`;
 
 const title = "Scaffold-Stark";
 const titleTemplate = "%s | Scaffold-Stark ";
-const description = "Built with 🏗 Scaffold-Stark ";
+const description = "Open-source toolkit for building dApps on Starknet";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -39,15 +38,13 @@ export const metadata: Metadata = {
       template: titleTemplate,
     },
     description,
-    images: [
-      {
-        url: imageUrl,
-      },
-    ],
+    images: [`${baseUrl}/scaffold-twitter.jpg`],
   },
   twitter: {
     card: "summary_large_image",
-    images: [imageUrl],
+    site: "@scaffoldstark",
+    creator: "@scaffoldstark",
+    images: [`${baseUrl}/scaffold-twitter.jpg`],
     title: {
       default: title,
       template: titleTemplate,
