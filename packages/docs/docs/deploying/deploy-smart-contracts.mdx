@@ -58,7 +58,7 @@ If you decide to rename the default `YourContract` Cairo contract to something e
 
 - **Update the `deploy.ts` Script**:
 
-  After renaming the Cairo contract file, open the `deploy.ts` script and change the contract name from `YourContract` to the new contract name you’ve chosen. The relevant section in the `deploy.ts` file will look like this:
+  After renaming the Cairo contract file, open the `deploy.ts` script and change the contract name from `YourContract` to the new contract name you've chosen. The relevant section in the `deploy.ts` file will look like this:
 
   ```typescript
   const deployScript = async (): Promise<void> => {
@@ -113,3 +113,399 @@ For production-grade applications, it's recommended to obtain your own API keys 
 :::tip Hint
 It's recommended to store environment variables for Next.js in Vercel/system environment variable configuration for live apps and use `.env.local` for local testing.
 :::
+
+## Advanced Deployment Patterns
+
+This section provides comprehensive instructions for deploying smart contracts using the deployment scripts with more advanced scenarios.
+
+### Deployment System Overview
+
+The deployment system uses a `deployContract` function that handles contract deployment with configurable parameters including constructor arguments, deployment options, and gas settings.
+
+### Single Contract Deployment
+
+#### With Constructor Arguments
+
+```typescript
+const deployScript = async (): Promise<void> => {
+  await deployContract({
+    contract: "YourContract",
+    contractName: "YourContractExportName", 
+    constructorArgs: {
+      owner: deployer.address,
+      initialSupply: BigInt(1000000),
+      name: "MyToken"
+    },
+    options: {
+      maxFee: BigInt(1000000000000)
+    }
+  });
+};
+```
+
+#### Without Constructor Arguments
+
+```typescript
+const deployScript = async (): Promise<void> => {
+  await deployContract({
+    contract: "SimpleContract",
+    contractName: "SimpleContractExportName",
+    options: {
+      maxFee: BigInt(1000000000000)
+    }
+  });
+};
+```
+
+## Multiple Contract Deployment
+
+### Sequential Deployment
+
+Deploy multiple contracts one after another:
+
+```typescript
+const deployMultipleContracts = async (): Promise<void> => {
+  // Deploy first contract
+  const tokenContract = await deployContract({
+    contract: "ERC20Token",
+    contractName: "MyToken",
+    constructorArgs: {
+      name: "MyToken",
+      symbol: "MTK",
+      totalSupply: BigInt(1000000000000000000000000) // 1M tokens with 18 decimals
+    },
+    options: {
+      maxFee: BigInt(2000000000000)
+    }
+  });
+
+  // Deploy second contract using first contract's address
+  const stakingContract = await deployContract({
+    contract: "TokenStaking",
+    contractName: "StakingPool",
+    constructorArgs: {
+      stakingToken: tokenContract.address,
+      rewardRate: BigInt(100),
+      stakingDuration: 86400 // 1 day in seconds
+    },
+    options: {
+      maxFee: BigInt(3000000000000)
+    }
+  });
+
+  // Deploy third contract
+  await deployContract({
+    contract: "Governance",
+    contractName: "TokenGovernance",
+    constructorArgs: {
+      token: tokenContract.address,
+      votingDelay: 1,
+      votingPeriod: 5760, // ~1 day in blocks
+      proposalThreshold: BigInt(100000000000000000000) // 100 tokens
+    },
+    options: {
+      maxFee: BigInt(2500000000000)
+    }
+  });
+
+  console.log("All contracts deployed successfully!");
+};
+```
+
+### Parallel Deployment (Independent Contracts)
+
+For contracts that don't depend on each other:
+
+```typescript
+const deployIndependentContracts = async (): Promise<void> => {
+  const deploymentPromises = [
+    deployContract({
+      contract: "UtilityContract",
+      contractName: "Utils",
+      options: {
+        maxFee: BigInt(1000000000000)
+      }
+    }),
+    
+    deployContract({
+      contract: "StorageContract", 
+      contractName: "DataStorage",
+      constructorArgs: {
+        admin: deployer.address
+      },
+      options: {
+        maxFee: BigInt(1500000000000)
+      }
+    }),
+    
+    deployContract({
+      contract: "OracleContract",
+      contractName: "PriceOracle",
+      constructorArgs: {
+        updateInterval: 3600 // 1 hour
+      },
+      options: {
+        maxFee: BigInt(2000000000000)
+      }
+    })
+  ];
+
+  await Promise.all(deploymentPromises);
+  console.log("All independent contracts deployed!");
+};
+```
+
+## Configuration Parameters
+
+### Required Parameters
+
+- **`contract`**: The contract artifact name (must match your contract file name)
+- **`contractName`**: The export name of your contract
+
+### Optional Parameters
+
+- **`constructorArgs`**: Object containing constructor parameters
+- **`options`**: Deployment configuration object
+
+### Options Object
+
+The `options` object supports the following parameters:
+
+```typescript
+interface DeploymentOptions {
+  maxFee?: bigint;           // Maximum fee willing to pay
+  gasLimit?: bigint;         // Gas limit for deployment
+  gasPrice?: bigint;         // Gas price
+  nonce?: number;           // Transaction nonce
+  // Add other options as supported by your deployment system
+}
+```
+
+## Advanced Deployment Patterns
+
+### Factory Pattern Deployment
+
+```typescript
+const deployFactorySystem = async (): Promise<void> => {
+  // Deploy the factory contract first
+  const factory = await deployContract({
+    contract: "ContractFactory",
+    contractName: "TokenFactory",
+    constructorArgs: {
+      feeRecipient: deployer.address,
+      creationFee: BigInt(1000000000000000000) // 1 ETH
+    },
+    options: {
+      maxFee: BigInt(3000000000000)
+    }
+  });
+
+  // Deploy implementation contract
+  const implementation = await deployContract({
+    contract: "TokenImplementation", 
+    contractName: "StandardToken",
+    options: {
+      maxFee: BigInt(2000000000000)
+    }
+  });
+
+  console.log(`Factory deployed at: ${factory.address}`);
+  console.log(`Implementation deployed at: ${implementation.address}`);
+};
+```
+
+### Upgradeable Contract Deployment
+
+```typescript
+const deployUpgradeableContract = async (): Promise<void> => {
+  // Deploy implementation
+  const implementation = await deployContract({
+    contract: "MyContractV1",
+    contractName: "MyContract",
+    options: {
+      maxFee: BigInt(2000000000000)
+    }
+  });
+
+  // Deploy proxy
+  const proxy = await deployContract({
+    contract: "ERC1967Proxy",
+    contractName: "TransparentUpgradeableProxy",
+    constructorArgs: {
+      implementation: implementation.address,
+      admin: deployer.address,
+      data: "0x" // initialization data
+    },
+    options: {
+      maxFee: BigInt(1500000000000)
+    }
+  });
+
+  console.log(`Implementation: ${implementation.address}`);
+  console.log(`Proxy: ${proxy.address}`);
+};
+```
+
+## Best Practices
+
+### 1. Gas Management
+
+Always set appropriate gas limits and fees:
+
+```typescript
+const deployWithGasManagement = async (): Promise<void> => {
+  await deployContract({
+    contract: "ComplexContract",
+    contractName: "MyComplexContract",
+    constructorArgs: {
+      // constructor args
+    },
+    options: {
+      maxFee: BigInt(5000000000000), // Higher fee for complex contracts
+      gasLimit: BigInt(8000000)      // Adequate gas limit
+    }
+  });
+};
+```
+
+### 2. Error Handling
+
+Implement proper error handling for production deployments:
+
+```typescript
+const deployWithErrorHandling = async (): Promise<void> => {
+  try {
+    const contract = await deployContract({
+      contract: "RiskyContract",
+      contractName: "MyContract",
+      constructorArgs: {
+        param1: "value1"
+      },
+      options: {
+        maxFee: BigInt(2000000000000)
+      }
+    });
+    
+    console.log(`Contract deployed successfully at: ${contract.address}`);
+    
+    // Verify deployment
+    if (!contract.address) {
+      throw new Error("Deployment failed: No contract address returned");
+    }
+    
+  } catch (error) {
+    console.error("Deployment failed:", error);
+    throw error; // Re-throw to handle at higher level
+  }
+};
+```
+
+### 3. Environment-Specific Deployments
+
+```typescript
+const deployForEnvironment = async (network: string): Promise<void> => {
+  let maxFee: bigint;
+  let constructorArgs: any;
+
+  switch (network) {
+    case 'mainnet':
+      maxFee = BigInt(5000000000000);
+      constructorArgs = {
+        owner: "0x742d35Cc6694C0532925a3b8e5c5E9442c4888d5", // Mainnet owner
+      };
+      break;
+    case 'testnet':
+      maxFee = BigInt(1000000000000);
+      constructorArgs = {
+        owner: deployer.address, // Test deployer
+      };
+      break;
+    default:
+      throw new Error(`Unsupported network: ${network}`);
+  }
+
+  await deployContract({
+    contract: "ProductionContract",
+    contractName: "MyContract",
+    constructorArgs,
+    options: { maxFee }
+  });
+};
+```
+
+## Deployment Verification
+
+After deployment, always verify your contracts:
+
+```typescript
+const deployAndVerify = async (): Promise<void> => {
+  const contract = await deployContract({
+    contract: "MyContract",
+    contractName: "VerifiableContract",
+    constructorArgs: {
+      initialValue: 42
+    },
+    options: {
+      maxFee: BigInt(2000000000000)
+    }
+  });
+
+  // Basic verification
+  console.log(`Contract deployed at: ${contract.address}`);
+  console.log(`Transaction hash: ${contract.deployTransaction?.hash}`);
+  
+  // Wait for confirmations
+  if (contract.deployTransaction) {
+    const receipt = await contract.deployTransaction.wait(3); // Wait for 3 confirmations
+    console.log(`Deployment confirmed in block: ${receipt.blockNumber}`);
+  }
+};
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Gas Estimation Failures**: Increase `gasLimit` in options
+2. **Constructor Argument Mismatches**: Ensure argument types match contract constructor
+3. **Insufficient Funds**: Check deployer account balance
+4. **Network Connection Issues**: Verify RPC endpoint connectivity
+
+### Debug Mode
+
+Enable verbose logging for deployment debugging:
+
+```typescript
+const deployWithDebug = async (): Promise<void> => {
+  console.log("Starting deployment...");
+  
+  const startTime = Date.now();
+  
+  const contract = await deployContract({
+    contract: "DebugContract",
+    contractName: "MyContract",
+    constructorArgs: {
+      debugMode: true
+    },
+    options: {
+      maxFee: BigInt(2000000000000)
+    }
+  });
+  
+  const endTime = Date.now();
+  console.log(`Deployment completed in ${endTime - startTime}ms`);
+  console.log(`Gas used: ${contract.deployTransaction?.gasLimit}`);
+};
+```
+
+## Next Steps
+
+After successful deployment:
+
+1. **Verify contracts** on block explorers if on public networks
+2. **Update configuration files** with new contract addresses  
+3. **Run integration tests** to ensure contracts work as expected
+4. **Document contract addresses** for frontend integration
+5. **Set up monitoring** for contract events and transactions
+
+For more advanced deployment scenarios or troubleshooting, refer to the project's GitHub issues or contact the development team.
