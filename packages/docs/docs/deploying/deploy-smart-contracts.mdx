@@ -157,7 +157,7 @@ const deployScript = async (): Promise<void> => {
 
 ### Sequential Deployment
 
-This deployement is used when contracts have inter-dependency, then you can deploy multiple contracts one after another:
+This deployment is used when contracts have inter-dependency, then you can deploy multiple contracts one after another:
 
 ```typescript
 const deployMultipleContracts = async (): Promise<void> => {
@@ -285,69 +285,59 @@ interface DeploymentOptions {
 ### Factory Pattern Deployment
 
 ```typescript
-const deployFactorySystem = async (): Promise<void> => {
-  // Deploy the factory contract first
-  const factory = await deployContract({
-    contract: "ContractFactory",
-    contractName: "TokenFactory",
-    constructorArgs: {
-      feeRecipient: deployer.address,
-      creationFee: BigInt(1000000000000000000) // 1 ETH
-    },
-    options: {
-      maxFee: BigInt(3000000000000)
-    }
-  });
 
-  // Deploy implementation contract
-  const implementation = await deployContract({
-    contract: "TokenImplementation", 
-    contractName: "StandardToken",
-    options: {
-      maxFee: BigInt(2000000000000)
-    }
-  });
+    #[contract]
+    mod SimpleCounterFactory {
+        use starknet::ContractAddress;
+        use starknet::syscalls::deploy_syscall;
 
-  console.log(`Factory deployed at: ${factory.address}`);
-  console.log(`Implementation deployed at: ${implementation.address}`);
-};
+        struct Storage {
+            deployed_counters: LegacyMap<u128, ContractAddress>,
+            next_id: u128,
+        }
+
+        #[constructor]
+        fn constructor(ref self: ContractState) {
+            self.next_id.write(0);
+        }
+
+        #[external(v0)]
+        fn deploy_new_counter(ref self: ContractState, initial_value: u128) -> ContractAddress {
+            let class_hash = <YourSimpleCounterClassHash>; // Replace with actual class hash
+            let salt = self.next_id.read();
+            let calldata = array![initial_value]; // Constructor arguments for SimpleCounter
+
+            let (contract_address, _) = deploy_syscall(class_hash, salt, calldata.span(), false).unwrap();
+
+            self.deployed_counters.write(salt, contract_address);
+            self.next_id.write(salt + 1);
+
+            contract_address
+        }
+    }
 ```
+More examples can be seen in[Starknet documentation](https://docs.starknet.io/archive/starknet-by-example/factory-pattern/)
+ 
 
 ### Upgradeable Contract Deployment
 
 ```typescript
-const deployUpgradeableContract = async (): Promise<void> => {
-  // Deploy implementation
-  const implementation = await deployContract({
-    contract: "MyContractV1",
-    contractName: "MyContract",
-    options: {
-      maxFee: BigInt(2000000000000)
-    }
-  });
+async def upgrade_proxy(admin_client, proxy_contract, new_contract_src):
+    # Declare implementation contract
+    declaration_result = await declare_contract(admin_client, new_contract_src)
 
-  // Deploy proxy
-  const proxy = await deployContract({
-    contract: "ERC1967Proxy",
-    contractName: "TransparentUpgradeableProxy",
-    constructorArgs: {
-      implementation: implementation.address,
-      admin: deployer.address,
-      data: "0x" // initialization data
-    },
-    options: {
-      maxFee: BigInt(1500000000000)
-    }
-  });
-
-  console.log(`Implementation: ${implementation.address}`);
-  console.log(`Proxy: ${proxy.address}`);
-};
+    # Upgrade contract
+    call = proxy_contract.functions["upgrade"].prepare(
+        new_implementation=declaration_result.class_hash
+    )
+    await admin_client.execute(calls=call, max_fee=0)
+    # If you change the ABI, update the `proxy_contract` here.
 ```
+More examples of upgradeable contracts can be found in the [Cairo documentation](https://www.starknet.io/cairo-book/ch103-03-upgradeability.html)
+and [Medium documentation](https://medium.com/@EmpiricNetwork/starknet-guide-writing-upgradable-contracts-using-a-proxy-af3f107f238b)
+## Best Practice
 
-## Best Practices
-
-### 1. Gas Management
+###  Gas Management
 
 Always set appropriate gas limits and fees:
 
@@ -364,38 +354,6 @@ const deployWithGasManagement = async (): Promise<void> => {
       gasLimit: BigInt(8000000)      // Adequate gas limit
     }
   });
-};
-```
-
-### 2. Error Handling
-
-Implement proper error handling for production deployments:
-
-```typescript
-const deployWithErrorHandling = async (): Promise<void> => {
-  try {
-    const contract = await deployContract({
-      contract: "RiskyContract",
-      contractName: "MyContract",
-      constructorArgs: {
-        param1: "value1"
-      },
-      options: {
-        maxFee: BigInt(2000000000000)
-      }
-    });
-    
-    console.log(`Contract deployed successfully at: ${contract.address}`);
-    
-    // Verify deployment
-    if (!contract.address) {
-      throw new Error("Deployment failed: No contract address returned");
-    }
-    
-  } catch (error) {
-    console.error("Deployment failed:", error);
-    throw error; // Re-throw to handle at higher level
-  }
 };
 ```
 
