@@ -58,6 +58,7 @@ const containsDevnet = (networks: readonly Chain[]) => {
 };
 
 // Function to get rpcProviderUrl, using your environment variables
+// environment variables here need to be uncommented, depending on the network the user wants activated
 const getRpcUrl = (networkName: string): string => {
   const devnetRpcUrl = process.env.NEXT_PUBLIC_DEVNET_PROVIDER_URL;
   const sepoliaRpcUrl = process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL;
