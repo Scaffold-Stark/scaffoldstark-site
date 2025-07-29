@@ -9,8 +9,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/docs/:path*',
-        destination: 'http://localhost:3001/:path*',
+        source: "/docs/:path*",
+        destination: "http://localhost:3001/:path*",
       },
     ];
   },
