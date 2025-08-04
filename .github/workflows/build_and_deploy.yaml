@@ -22,6 +22,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
       - name: Determine Environment & Check Commit Message
         id: check_commit
@@ -52,7 +55,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3

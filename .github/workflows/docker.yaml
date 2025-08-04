@@ -17,7 +17,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
       - name: Determine Environment
         id: determine_env
