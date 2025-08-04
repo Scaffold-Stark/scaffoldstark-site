@@ -51,6 +51,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
