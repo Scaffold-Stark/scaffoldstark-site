@@ -1,0 +1,3 @@
+[submodule "packages/auco-docs"]
+	path = packages/auco-docs
+	url = https://github.com/Scaffold-Stark/auco-docs
