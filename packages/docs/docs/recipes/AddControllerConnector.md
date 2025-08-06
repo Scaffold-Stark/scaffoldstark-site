@@ -63,19 +63,18 @@ const getRpcUrl = (networkName: string): string => {
   const devnetRpcUrl = process.env.NEXT_PUBLIC_DEVNET_PROVIDER_URL;
   const sepoliaRpcUrl = process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL;
   const mainnetRpcUrl = process.env.NEXT_PUBLIC_MAINNET_PROVIDER_URL;
-  const fallBack = process.env.NEXT_PUBLIC_PROVIDER_URL;
 
   let rpcUrl = "";
 
   switch (networkName) {
     case "devnet":
-      rpcUrl = devnetRpcUrl || fallBack || "";
+      rpcUrl = devnetRpcUrl || "";
       break;
     case "sepolia":
-      rpcUrl = sepoliaRpcUrl || fallBack || "";
+      rpcUrl = sepoliaRpcUrl || "";
       break;
     case "mainnet":
-      rpcUrl = mainnetRpcUrl || fallBack || "";
+      rpcUrl = mainnetRpcUrl || "";
       break;
     default:
       rpcUrl = "";
