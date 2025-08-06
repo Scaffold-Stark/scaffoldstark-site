@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { DecoreLayout } from "../DecoreLayout";
 import TypeAnimation from "../TypeAnimation";
+import { ExtensionsSection } from "./ExtensionsSection";
 import { Header } from "./Header";
 import { copyToClipBoard } from "~~/utils";
 
@@ -86,6 +87,7 @@ export const OpenSource = () => {
             />
           </div>
         </div>
+        <ExtensionsSection />
       </div>
       {/* <Image
         src={"/assets/decore-top.png"}

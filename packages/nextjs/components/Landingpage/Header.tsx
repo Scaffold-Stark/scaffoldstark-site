@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { REDIRECT_LINK } from "~~/helper/redirect";
 
 const MENU_ITEMS = [
+  { text: "Extensions", link: REDIRECT_LINK.extensions },
   { text: "Learn", link: REDIRECT_LINK.speedrun },
   { text: "Docs", link: REDIRECT_LINK.scaffoldDoc },
   { text: "Demo", link: REDIRECT_LINK.scaffoldDemo },
@@ -18,7 +19,7 @@ const HeaderPC = () => {
         <p className="text-[25px] font-medium font-grotesk text-[#A38CFF]">Scaffold-Stark</p>
       </div>
       <div className="flex gap-2">
-        {MENU_ITEMS.slice(0, 3).map(item => (
+        {MENU_ITEMS.slice(0, 4).map(item => (
           <p key={item.text} className="header-item-btn font-grotesk" onClick={() => window.open(item.link, "_blank")}>
             {item.text}
           </p>
