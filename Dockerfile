@@ -79,8 +79,8 @@ COPY --from=auco-docs-builder /app/packages/auco-docs/node_modules ./packages/au
 # Create a simple start script
 RUN printf '#!/bin/sh\n\
 	cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
-	cd /app/packages/nextjs && node server.js &\n\
-	cd /app/packages/auco-docs && npx serve -s build -l 3002 --single &\n' > /app/start.sh
+	cd /app/packages/auco-docs && npx serve -s build -l 3002 --single &\n\
+    cd /app/packages/nextjs && node server.js\n' > /app/start.sh
 RUN chmod +x /app/start.sh
 
 ARG PORT=3000
