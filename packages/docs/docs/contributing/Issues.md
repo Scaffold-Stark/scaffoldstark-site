@@ -16,8 +16,9 @@ If a contributor is working on the issue, they will be assigned to that individu
 
 If a related issue doesn't exist, you can open a new issue.
 
-Some tips to follow when you are creating an issue:
+Please refer to the following when you are creating an issue:
 
 - Provide as much context as possible. Over-communicate to give the most detail to the reader.
 - Include the steps to reproduce the issue or the reason for adding the feature.
 - Screenshots, videos, etc., are highly appreciated.
+- Assign appropriate tags.

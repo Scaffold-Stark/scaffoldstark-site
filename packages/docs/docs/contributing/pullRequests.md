@@ -22,7 +22,9 @@ We follow the ["fork-and-pull" Git workflow](https://github.com/Scaffold-Stark/s
 ```
 fix: useScaffoldReadContract unable to read error
 feat: switch buttons within debug page
+chore: bump version of starknetjs
 docs: update README.md for new dependencies
+build: update CI for branch sync
 ```
 
 - Structure the description neatly to make it easy to consume by the readers. For example, you can include bullet points and screenshots instead of having one large paragraph.
