@@ -15,7 +15,7 @@
     "format": "npx prettier --write '**/*.{js,jsx,md,mdx,json,css}'",
     "format-check": "npx prettier --check '**/*.{js,jsx,md,mdx,json,css}'"
   },
-    "overrides": {
+  "overrides": {
     "chalk": "5.3.0",
     "strip-ansi": "7.1.0",
     "color-convert": "2.0.1",
