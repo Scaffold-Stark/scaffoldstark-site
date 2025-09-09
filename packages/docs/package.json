@@ -15,6 +15,15 @@
     "format": "npx prettier --write '**/*.{js,jsx,md,mdx,json,css}'",
     "format-check": "npx prettier --check '**/*.{js,jsx,md,mdx,json,css}'"
   },
+    "overrides": {
+    "chalk": "5.3.0",
+    "strip-ansi": "7.1.0",
+    "color-convert": "2.0.1",
+    "color-name": "1.1.4",
+    "is-core-module": "2.13.1",
+    "error-ex": "1.3.2",
+    "has-ansi": "5.0.1"
+  },
   "dependencies": {
     "@docusaurus/core": "2.4.0",
     "@docusaurus/preset-classic": "2.4.0",
