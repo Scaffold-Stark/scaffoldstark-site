@@ -2,6 +2,10 @@
 sidebar_position: 7
 ---
 
+---
+sidebar_position: 7
+---
+
 # 🙏 Contributing to Scaffold-Stark
 
 We welcome contributions to Scaffold-Stark!
@@ -64,7 +68,7 @@ We follow the ["fork-and-pull" Git workflow](https://github.com/Scaffold-Stark/s
 7. Make sure all CI is green before you tag the reviewers, we will not merge PRs that don't pass the CI, overcommunicate always!
 8. Tag the reviewers.
 
-### Tips for Pull Requests
+### Pull Requests Requirements
 
 - Create a title for the PR that accurately defines the work done with conventional commits with proper prefix. Make sure we can tell what you have done in the title.
 
@@ -80,6 +84,7 @@ build: update CI for branch sync
 - If the PR is an attempt that solves an issue, include `Fixes #XXX` or `Closes #XXX`in your description so that GitHub can link the issue and close it.
 - Have a good commit message that summarises the work done, use conventional commits like the above example as well.
 - Make sure to tag maintainers for review, reach out in the Telegram group if not sure!
+- Do not forget to add UNIT TESTS for new features that you are doing.
 
 Once you submit your PR:
 
@@ -87,3 +92,4 @@ Once you submit your PR:
 - As you update your PR and apply changes, mark each conversation resolved.
 
 Once the PR is approved, we'll "squash-and-merge" to keep the git commit history clean.
+
