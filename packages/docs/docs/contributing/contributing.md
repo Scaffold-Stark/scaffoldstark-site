@@ -2,10 +2,6 @@
 sidebar_position: 7
 ---
 
----
-sidebar_position: 7
----
-
 # 🙏 Contributing to Scaffold-Stark
 
 We welcome contributions to Scaffold-Stark!
@@ -92,4 +88,3 @@ Once you submit your PR:
 - As you update your PR and apply changes, mark each conversation resolved.
 
 Once the PR is approved, we'll "squash-and-merge" to keep the git commit history clean.
-
