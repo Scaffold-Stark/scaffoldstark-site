@@ -50,7 +50,29 @@ If you want to keep the debug features for development while removing them from 
 
 :::tip Hint
 
-## 3. Asset optimization
+## 3. Remove the block explorer pages
+
+Typically this feature is not needed in production since it is just a local devnet explorer. If you want to keep it for development, you can use environment-based conditional rendering:
+
+Delete the block explorer pages and their constituent files:
+
+```bash
+rm -rf packages/nextjs/app/blockexplorer        # the page
+rm -rf packages/nextjs/hooks/blockexplorer      # the hooks
+rm -rf packages/nextjs/utils/blockExplorer      # the utils
+```
+
+:::tip Hint
+If you want to keep the block explorer pages for development while removing them from production, you can use environment-based conditional rendering:
+
+```typescript
+{process.env.NODE_ENV === 'development' && (
+  <Link href="/blockexplorer">Block Explorer</Link>
+)}
+```
+:::tip Hint
+
+## 4. Asset optimization
 
 ### Image Optimization
 Scaffold-Stark 2 comes with pre-configured image optimization in [`next.config.mjs`](https://github.com/Scaffold-Stark/scaffold-stark-2/blob/main/packages/nextjs/next.config.mjs). The configuration includes secure handling of SVGs and specific remote patterns for Starknet-related images.
@@ -184,7 +206,7 @@ NEXT_PUBLIC_IGNORE_BUILD_ERROR=false
 - Test the build locally with production settings
   :::tip Best Practices
 
-## 4. Production Environment Setup
+## 5. Production Environment Setup
 
 #### Production Environment Variables
 
@@ -210,7 +232,7 @@ curl -X POST -H "Content-Type: application/json" --data '{
 Never commit production environment variables to your repository. Use .env.local for local development and configure environment variables directly in your deployment platform for production.
 :::tip Hint
 
-## 5. Build Optimization
+## 6. Build Optimization
 
 #### Next.js Build Configuration
 
@@ -229,11 +251,12 @@ const nextConfig = {
 };
 ```
 
-## 6. Production Deployment Checklist
+## 7. Production Deployment Checklist
 
 Before deploying to production, you can follow the following checklist to make sure you have the most optimum build:
 
 - [ ] Removed or conditionally rendered debug packages
+- [ ] Removed or conditionally rendered block explorer pages
 - [ ] Configured production environment variables
 - [ ] Optimized all images and assets
 - [ ] Run and tested production build locally
