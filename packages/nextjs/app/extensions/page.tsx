@@ -98,18 +98,51 @@ const Extensions: NextPage = () => {
 
           {/* Extensions Grid */}
           {filteredExtensions.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-3 mb-16">
-              {filteredExtensions.map((extension, index) => (
-                <ExtensionCardDetail
-                  key={index}
-                  title={extension.title}
-                  description={extension.longDesc}
-                  command={extension.command}
-                  github={extension.github}
-                  isActive={extension.isActive}
-                />
-              ))}
-            </div>
+            <>
+              {/* Scaffold Extensions Section */}
+              {filteredExtensions.filter(ext => ext.category === "scaffold").length > 0 && (
+                <>
+                  <h2 className="text-3xl font-bold text-purple-400 mb-4 text-center">Scaffold Extensions</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-3 mb-12">
+                    {filteredExtensions
+                      .filter(ext => ext.category === "scaffold")
+                      .map((extension, index) => (
+                        <ExtensionCardDetail
+                          key={`scaffold-${index}`}
+                          title={extension.title}
+                          description={extension.longDesc}
+                          command={extension.command}
+                          github={extension.github}
+                          isActive={extension.isActive}
+                        />
+                      ))}
+                  </div>
+                </>
+              )}
+
+              <hr className="my-12 border-t border-gray-700" />
+
+              {/* Speedrun Challenges Section */}
+              {filteredExtensions.filter(ext => ext.category === "speedrun").length > 0 && (
+                <>
+                  <h2 className="text-3xl font-bold text-purple-400 mb-4 text-center">Speedrun Challenges</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-3 mb-16">
+                    {filteredExtensions
+                      .filter(ext => ext.category === "speedrun")
+                      .map((extension, index) => (
+                        <ExtensionCardDetail
+                          key={`speedrun-${index}`}
+                          title={extension.title}
+                          description={extension.longDesc}
+                          command={extension.command}
+                          github={extension.github}
+                          isActive={extension.isActive}
+                        />
+                      ))}
+                  </div>
+                </>
+              )}
+            </>
           ) : (
             /* Empty State */
             <div className="flex flex-col items-center justify-center py-16 mb-16">
