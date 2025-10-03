@@ -24,7 +24,7 @@ export const EXTENSIONS: {
       "This extension introduces an ERC-20 token contract and demonstrates how to interact with it, including getting a holder balance and transferring tokens.",
     github: "https://github.com/Scaffold-Stark/create-starknet-extensions",
     isActive: true,
-    command: "npx create-stark@latest -e erc20",
+    command: "npx create-stark@latest -e erc-20",
     category: "scaffold",
   },
   {
@@ -34,7 +34,7 @@ export const EXTENSIONS: {
       "This extension introduces an ERC-721 token contract and demonstrates how to use it, including getting the total supply and holder balance and listing all NFTs from the collection.",
     github: "https://github.com/Scaffold-Stark/create-starknet-extensions/tree/erc721",
     isActive: true,
-    command: "npx create-stark@latest -e erc721",
+    command: "npx create-stark@latest -e erc-721",
     category: "scaffold",
   },
   {
