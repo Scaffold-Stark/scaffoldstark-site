@@ -30,14 +30,6 @@ To install an extension when creating a new Scaffold-Stark 2 project, run:
 npx create-stark@latest -e <extension-name>
 ```
 
-<!-- ```bash
-npx create-stark@latest -e {github-username}/{extension-repo-name}:{branch-name}
-```
-
-The `{branch-name}` is optional. If not specified, it uses the default branch.
-
-E.g.: `npx create-stark@latest -e ChangoMan/charts-extension` -->
-
 ## Available Extensions
 
 You can find a complete list of available extensions, including both curated (by Scaffold-Stark) and community extensions, on [Scaffold-Stark website](https://scaffoldstark.com/extensions).

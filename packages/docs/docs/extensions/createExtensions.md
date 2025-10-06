@@ -34,14 +34,9 @@ For simple extensions, such as adding a new page or component, you can directly 
 1. Create the directory structure as shown above.
 2. Add your new page or component in the appropriate directory.
 3. If needed, create a `package.json` with any additional dependencies.
-4. Push your extension to our [create-stark-extension](https://github.com/Scaffold-Stark/create-starknet-extensions) github and create a PR.
-5. That's it! Your simple extension is ready to be reviewed and merge by us.
-
-<!-- That's it! Your simple extension is ready to be used by others via:
-
-```shell
-npx create-stark@latest -e {github-username}/{extension-repo-name}:{branch-name} # branch-name is optional
-``` -->
+4. Push your extension to our [create-stark-extension](https://github.com/Scaffold-Stark/create-starknet-extensions) github.
+5. Create a PR to [create-stark](https://github.com/Scaffold-Stark/create-stark) and add your extensions to `src/extensions.json`.
+6. That's it! Your simple extension is ready to be reviewed and merge by us.
 
 ## Developing an Advanced Extension
 
@@ -106,38 +101,3 @@ In `src/extensions.js`, add path to your extensions:
 
    - cd into the instance directory.
    - Install dependencies and test your extension.
-
-<!-- ### Local Testing:
-
-This phase allows you to test your extension locally and see how it works when used by other developers.
-
-> NOTE: If you've already published your extension to GitHub using the "Developing a Simple Extension" approach, make sure to clone that extension repository into the `create-stark/externalExtensions/` directory before proceeding with local testing.
-
-1. **Run the CLI in dev mode:**
-
-   ```bash
-   yarn cli -e {extensionName} --dev
-   ```
-
-   Example: `yarn cli -e eip --dev`
-
-   The `extensionName` should be present in `create-stark/externalExtensions/${extensionName}`.
-
-   Let's suppose you named your project "../my-dev-instance". Then this `../my-dev-instance` should contain all your extension changes. `--dev` will symlink the extension to the instance project.
-
-2. **Test and Tweak the Extension:**
-   Since the instance is symlinked with the extension, make necessary changes directly in the symlinked files within `../my-dev-instance`, and the changes should be automatically reflected in the `create-stark/externalExtensions/${extensionName}` directory.
-
-3. **Push the tweaked changes**
-
-   - Go inside the extension directory.
-   - Push the changes to GitHub.
-
-   ```bash
-   cd create-stark/externalExtensions/${extensionName}
-   git add .
-   git commit -m "some changes"
-   git push
-   ```
-
-   Next time users call your extension via `npx create-stark@latest -e`, they will get the updated version. -->
