@@ -38,6 +38,16 @@ export const EXTENSIONS: {
     category: "scaffold",
   },
   {
+    title: "ERC-1155",
+    shortDesc: "Start with a simple ERC-1155 token implementation",
+    longDesc:
+      "This extension introduces an ERC-1155 token contract and demonstrates how to use it, including multi-token contract with game items including Gold, Silver, Thor's Hammer, Sword, and Shield. Each item has different properties and can be minted and transferred.",
+    github: "https://github.com/Scaffold-Stark/create-starknet-extensions/tree/erc1155",
+    isActive: true,
+    command: "npx create-stark@latest -e erc-1155",
+    category: "scaffold",
+  },
+  {
     title: "Challenge 0: Simple NFT",
     shortDesc: "Build and deploy your first NFT smart contract with a React app",
     longDesc:
