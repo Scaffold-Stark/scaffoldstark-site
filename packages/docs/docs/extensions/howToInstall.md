@@ -34,3 +34,5 @@ npx create-stark@latest -e <extension-name>
 
 You can find a complete list of available extensions, including both curated (by Scaffold-Stark) and community extensions, on [Scaffold-Stark website](https://scaffoldstark.com/extensions).
 `
+
+For more information about available extensions and how to use them, check out the [Extensions section](/extensions)

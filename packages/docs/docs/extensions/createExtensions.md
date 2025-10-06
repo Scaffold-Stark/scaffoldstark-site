@@ -66,7 +66,7 @@ When creating complex extensions, Scaffold-Stark 2 provides a set of tools to ma
 
 2. **Add your extension:**
 
-In `src/extensions.js`, add path to your extensions:
+In `src/extensions.json`, add path to your extensions:
 
 ```
 ...,
