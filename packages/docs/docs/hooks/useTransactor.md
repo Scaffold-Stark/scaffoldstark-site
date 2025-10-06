@@ -38,16 +38,16 @@ You can pass in a list of valid `Call` - Type is from `starknet`. It also possib
 
 ### useTransactor
 
-| Parameter                     | Type                                                                        | Description                                                                                                                                            |
-| :---------------------------- | :-------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                     | Type                                                       | Description                                                                                                                                                                       |
+| :---------------------------- | :--------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **\_walletClient** (optional) | [`WalletClient`](https://starknetjs.com/docs/API/classes/AccountInterface/) | The wallet client that should sign the transaction. Defaults to the connected wallet client, and is only needed if the transaction is not already sent |
 
 ### callback function
 
-| Parameter                          | Type      | Description                                                                                                  |
-| :--------------------------------- | :-------- | :----------------------------------------------------------------------------------------------------------- |
-| **tx**                             | `Call[]`  | A list of valid `Call` - Type is from `starknet`.                                                            |
-| **withSendTransaction** (optional) | `boolean` | Default to `true`, set to `false` if you want to use manual fee estimate and fallback when estimation fails. |
+| Parameter                                    | Type                                                                                                              | Description                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **tx**                                       | `Call[]` | A list of valid `Call` - Type is from `starknet`. |
+| **withSendTransaction** (optional)                       | `boolean` | Default to `true`, set to `false` if you want to use manual fee estimate and fallback when estimation fails.|
 
 ## Return Values
 
@@ -60,5 +60,4 @@ You can pass in a list of valid `Call` - Type is from `starknet`. It also possib
 - An instance of [useTransactionReceipt](https://www.starknet-react.com/docs/hooks/use-transaction-receipt#usetransactionreceipt) for tracking receipt details.
 
 ### sendTransactionInstance
-
 - An instance of [useSendTransaction](https://www.starknet-react.com/docs/hooks/use-send-transaction#usesendtransaction) for tracking transaction status.
