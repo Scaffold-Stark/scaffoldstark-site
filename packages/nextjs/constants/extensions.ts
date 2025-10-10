@@ -24,7 +24,7 @@ export const EXTENSIONS: {
       "This extension introduces an ERC-20 token contract and demonstrates how to interact with it, including getting a holder balance and transferring tokens.",
     github: "https://github.com/Scaffold-Stark/create-starknet-extensions",
     isActive: true,
-    command: "npx create-stark@latest -e erc20",
+    command: "npx create-stark@latest -e erc-20",
     category: "scaffold",
   },
   {
@@ -34,7 +34,17 @@ export const EXTENSIONS: {
       "This extension introduces an ERC-721 token contract and demonstrates how to use it, including getting the total supply and holder balance and listing all NFTs from the collection.",
     github: "https://github.com/Scaffold-Stark/create-starknet-extensions/tree/erc721",
     isActive: true,
-    command: "npx create-stark@latest -e erc721",
+    command: "npx create-stark@latest -e erc-721",
+    category: "scaffold",
+  },
+  {
+    title: "ERC-1155",
+    shortDesc: "Start with a simple ERC-1155 token implementation",
+    longDesc:
+      "This extension introduces an ERC-1155 token contract and demonstrates how to use it, including multi-token contract with game items including Gold, Silver, Thor's Hammer, Sword, and Shield. Each item has different properties and can be minted and transferred.",
+    github: "https://github.com/Scaffold-Stark/create-starknet-extensions/tree/erc1155",
+    isActive: true,
+    command: "npx create-stark@latest -e erc-1155",
     category: "scaffold",
   },
   {
