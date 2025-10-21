@@ -35,7 +35,11 @@ const config = {
   ],
 
   onBrokenLinks: "ignore",
-  onBrokenMarkdownLinks: "warn",
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
+  },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -144,6 +148,7 @@ const config = {
               appId: process.env.ALGOLIA_APP_ID,
               apiKey: process.env.ALGOLIA_API_KEY,
               indexName: process.env.ALGOLIA_INDEX_NAME,
+              askAi: process.env.ALGOLIA_ASK_AI,
             },
           }
         : {}),
