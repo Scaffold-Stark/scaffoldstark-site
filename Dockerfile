@@ -1,5 +1,5 @@
 # Base stage
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 
@@ -22,7 +22,7 @@ RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
 
-RUN yarn install --immutable || (echo "Ignoring yarn install error" && true)
+RUN yarn install --immutable 
 
 
 # Dependencies stage for auco docs app
