@@ -11,7 +11,7 @@ COPY .yarn .yarn
 COPY packages/nextjs/package.json ./packages/nextjs/package.json
 # Copy environment file for the build process
 COPY .env ./
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 
 # Dependencies stage for docs app
 FROM base AS docs-deps
@@ -21,7 +21,7 @@ COPY packages/docs/package.json packages/docs/yarn.lock ./
 RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
-RUN yarn install --frozen-lockfile || (echo "Ignoring yarn install error" && true)
+RUN yarn install --immutable || (echo "Ignoring yarn install error" && true)
 
 # Dependencies stage for auco docs app
 FROM base AS auco-docs-deps
