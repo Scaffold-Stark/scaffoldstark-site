@@ -22,8 +22,6 @@ RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
 RUN yarn install --frozen-lockfile || (echo "Ignoring yarn install error" && true)
-# Ensure node_modules exists for downstream COPY even if install was skipped/failed
-RUN mkdir -p node_modules
 
 # Dependencies stage for auco docs app
 FROM base AS auco-docs-deps
@@ -32,8 +30,6 @@ COPY packages/auco-docs/package.json packages/auco-docs/package-lock.json ./
 # Create an empty .env.example to prevent the build error
 RUN touch .env.example
 RUN npm ci || (echo "Ignoring npm install error" && true)
-# Ensure node_modules exists for downstream COPY even if install was skipped/failed
-RUN mkdir -p node_modules
 
 # Builder stage for main app
 FROM base AS main-builder
