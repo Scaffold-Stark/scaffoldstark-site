@@ -21,7 +21,9 @@ COPY packages/docs/package.json packages/docs/yarn.lock ./
 RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
+
 RUN yarn install --immutable || (echo "Ignoring yarn install error" && true)
+
 
 # Dependencies stage for auco docs app
 FROM base AS auco-docs-deps
@@ -30,6 +32,7 @@ COPY packages/auco-docs/package.json packages/auco-docs/package-lock.json ./
 # Create an empty .env.example to prevent the build error
 RUN touch .env.example
 RUN npm ci || (echo "Ignoring npm install error" && true)
+
 
 # Builder stage for main app
 FROM base AS main-builder
