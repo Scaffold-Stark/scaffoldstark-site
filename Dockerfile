@@ -1,5 +1,5 @@
 # Base stage
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY .yarn .yarn
 COPY packages/nextjs/package.json ./packages/nextjs/package.json
 # Copy environment file for the build process
 COPY .env ./
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 
 # Dependencies stage for docs app
 FROM base AS docs-deps
@@ -21,9 +21,9 @@ COPY packages/docs/package.json packages/docs/yarn.lock ./
 RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
-RUN yarn install --frozen-lockfile || (echo "Ignoring yarn install error" && true)
-# Ensure node_modules exists for downstream COPY even if install was skipped/failed
-RUN mkdir -p node_modules
+
+RUN yarn install --immutable 
+
 
 # Dependencies stage for auco docs app
 FROM base AS auco-docs-deps
@@ -32,8 +32,7 @@ COPY packages/auco-docs/package.json packages/auco-docs/package-lock.json ./
 # Create an empty .env.example to prevent the build error
 RUN touch .env.example
 RUN npm ci || (echo "Ignoring npm install error" && true)
-# Ensure node_modules exists for downstream COPY even if install was skipped/failed
-RUN mkdir -p node_modules
+
 
 # Builder stage for main app
 FROM base AS main-builder
