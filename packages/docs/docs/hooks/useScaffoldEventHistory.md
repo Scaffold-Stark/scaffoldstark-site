@@ -24,17 +24,17 @@ This example configures the hook to read events from the `YourEvent` event of th
 
 ## Configuration
 
-| Parameter                      | Type                  | Description                                                                                                                                                    |
-| :----------------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **contractName**               | `string`              | Name of the deployed contract to read events from.                                                                                                             |
-| **eventName**                  | `string`              | Name of the event to listen for.                                                                                                                               |
-| **fromBlock**                  | `bigint`              | The block number to start reading events from.                                                                                                                 |
-| **filters** (optional)         | `Record<string, any>` | Filters to be applied to the event `{ [parameterName]: value }`.                                                                                               |
-| **blockData** (optional)       | `boolean`             | If true, returns the block data for each event (default: false).                                                                                               |
-| **transactionData** (optional) | `boolean`             | If true, returns the transaction data for each event (default: false).                                                                                         |
-| **receiptData** (optional)     | `boolean`             | If true, returns the receipt data for each event (default: false).                                                                                             |
-| **watch** (optional)           | `boolean`             | If true, the events will be refetched every [`pollingInterval`](/deploying/deploy-nextjs-app#--pollinginterval) set at `scaffold.config.ts`. (default: false). |
-| **enabled** (optional)         | `boolean`             | If false, disables the hook from running (default: true).                                                                                                      |
+| Parameter                      | Type                  | Description                                                                      |
+| :----------------------------- | :-------------------- | :------------------------------------------------------------------------------- |
+| **contractName**               | `string`              | Name of the deployed contract to read events from.                               |
+| **eventName**                  | `string`              | Name of the event to listen for.                                                 |
+| **fromBlock**                  | `bigint`              | The block number to start reading events from.                                   |
+| **filters** (optional)         | `Record<string, any>` | Filters to be applied to the event `{ [parameterName]: value }`.                 |
+| **blockData** (optional)       | `boolean`             | If true, returns the block data for each event (default: false).                 |
+| **transactionData** (optional) | `boolean`             | If true, returns the transaction data for each event (default: false).           |
+| **receiptData** (optional)     | `boolean`             | If true, returns the receipt data for each event (default: false).               |
+| **watch** (optional)           | `boolean`             | If true, the events will be refetched via WebSocket connection (default: false). |
+| **enabled** (optional)         | `boolean`             | If false, disables the hook from running (default: true).                        |
 
 ## Return Values
 
