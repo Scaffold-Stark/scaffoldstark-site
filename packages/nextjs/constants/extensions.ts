@@ -107,4 +107,14 @@ export const EXTENSIONS: {
     command: "npx create-stark@latest -e challenge-5-multisig-wallet",
     category: "speedrun",
   },
+  {
+    title: "Challenge 6: Stable Coin",
+    shortDesc: "Build a decentralized stablecoin backed by STRK collateral",
+    longDesc:
+      "This challenge guides you through building MyUSDEngine to interact with MyUSD, a crypto-backed stablecoin designed to maintain a peg to $1 USD. You'll implement core DeFi concepts including collateralization, minting, burning, interest rates, and liquidations to create a robust stablecoin system where users can deposit STRK collateral and mint stablecoins.",
+    github: "https://github.com/Scaffold-Stark/speedrunstark/tree/challenge-6-stable-coin",
+    isActive: true,
+    command: "npx create-stark@latest -e challenge-6-stable-coin",
+    category: "speedrun",
+  },
 ];
