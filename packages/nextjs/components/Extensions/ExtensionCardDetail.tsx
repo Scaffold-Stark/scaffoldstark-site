@@ -52,7 +52,12 @@ export const ExtensionCardDetail = ({ title, description, command, github, isAct
         </div>
 
         {/* Description */}
-        <p className="text-white text-base mb-8 leading-relaxed flex-grow">{description}</p>
+        <div
+          className="text-white text-base mb-8 leading-relaxed flex-grow [&_a]:text-[#B386FF] [&_a]:hover:underline"
+          dangerouslySetInnerHTML={{
+            __html: description,
+          }}
+        />
 
         {/* Command Section */}
         <div className="bg-gradient-to-r text-left from-[#4A4A5F] via-[#2a2a3a] to-[#1a1a2e] rounded-lg p-4 flex items-center justify-between">
