@@ -3,10 +3,11 @@
 import { useLayoutEffect, useState } from "react";
 import type { NextPage } from "next";
 import { useTheme } from "next-themes";
-import { ComingSoon } from "~~/components/Landingpage/ComingSoon";
+import { BlockExplorer } from "~~/components/Landingpage/BlockExplorer";
 import { DebugContract } from "~~/components/Landingpage/DebugContract";
 import { HookComponent } from "~~/components/Landingpage/HookComponent";
 import { OpenSource } from "~~/components/Landingpage/OpenSource";
+import { ScaffoldReactNative } from "~~/components/Landingpage/ScaffoldReactNative";
 import { WorldClass } from "~~/components/Landingpage/WorldClass";
 import { MetaHeader } from "~~/components/MetaHeader";
 
@@ -38,7 +39,8 @@ const Home: NextPage = () => {
         <OpenSource />
         <DebugContract />
         <HookComponent />
-        <ComingSoon />
+        <BlockExplorer />
+        <ScaffoldReactNative />
         <WorldClass />
       </div>
     </>

@@ -11,7 +11,7 @@ export const EXTENSIONS: {
     title: "AUCO INDEXER",
     shortDesc: "Uses Auco Indexer for powerful blockchain indexing",
     longDesc:
-      "This Scaffold-Stark 2 extension comes pre-configured with Auco Indexer, providing an example to help you get started quickly with integrated indexer in your project",
+      'This Scaffold-Stark 2 extension comes pre-configured with Auco Indexer, providing an example to help you get started quickly with integrated indexer in your project.<br><br><a href="https://scaffoldstark.com/auco" target="_blank" rel="noopener noreferrer">Read Auco Indexer Documentation</a>',
     github: "https://github.com/Scaffold-Stark/create-starknet-extensions/tree/auco",
     isActive: true,
     command: "npx create-stark@latest -e auco",
@@ -105,6 +105,16 @@ export const EXTENSIONS: {
     github: "https://github.com/Scaffold-Stark/speedrunstark/tree/challenge-5-multisig-wallet",
     isActive: true,
     command: "npx create-stark@latest -e challenge-5-multisig-wallet",
+    category: "speedrun",
+  },
+  {
+    title: "Challenge 6: Stable Coin",
+    shortDesc: "Build a decentralized stablecoin backed by STRK collateral",
+    longDesc:
+      "This challenge guides you through building MyUSDEngine to interact with MyUSD, a crypto-backed stablecoin designed to maintain a peg to $1 USD. You'll implement core DeFi concepts including collateralization, minting, burning, interest rates, and liquidations to create a robust stablecoin system where users can deposit STRK collateral and mint stablecoins.",
+    github: "https://github.com/Scaffold-Stark/speedrunstark/tree/challenge-6-stable-coin",
+    isActive: true,
+    command: "npx create-stark@latest -e challenge-6-stable-coin",
     category: "speedrun",
   },
 ];
