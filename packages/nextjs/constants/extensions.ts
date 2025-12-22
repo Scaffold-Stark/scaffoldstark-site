@@ -11,7 +11,7 @@ export const EXTENSIONS: {
     title: "AUCO INDEXER",
     shortDesc: "Uses Auco Indexer for powerful blockchain indexing",
     longDesc:
-      "This Scaffold-Stark 2 extension comes pre-configured with Auco Indexer, providing an example to help you get started quickly with integrated indexer in your project",
+      'This Scaffold-Stark 2 extension comes pre-configured with Auco Indexer, providing an example to help you get started quickly with integrated indexer in your project.<br><br><a href="https://scaffoldstark.com/auco" target="_blank" rel="noopener noreferrer">Read Auco Indexer Documentation</a>',
     github: "https://github.com/Scaffold-Stark/create-starknet-extensions/tree/auco",
     isActive: true,
     command: "npx create-stark@latest -e auco",
