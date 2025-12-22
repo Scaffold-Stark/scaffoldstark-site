@@ -7,6 +7,7 @@ import { BlockExplorer } from "~~/components/Landingpage/BlockExplorer";
 import { DebugContract } from "~~/components/Landingpage/DebugContract";
 import { HookComponent } from "~~/components/Landingpage/HookComponent";
 import { OpenSource } from "~~/components/Landingpage/OpenSource";
+import { ScaffoldReactNative } from "~~/components/Landingpage/ScaffoldReactNative";
 import { WorldClass } from "~~/components/Landingpage/WorldClass";
 import { MetaHeader } from "~~/components/MetaHeader";
 
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
         <DebugContract />
         <HookComponent />
         <BlockExplorer />
+        <ScaffoldReactNative />
         <WorldClass />
       </div>
     </>
