@@ -3,7 +3,7 @@
 import { useLayoutEffect, useState } from "react";
 import type { NextPage } from "next";
 import { useTheme } from "next-themes";
-import { ComingSoon } from "~~/components/Landingpage/ComingSoon";
+import { BlockExplorer } from "~~/components/Landingpage/BlockExplorer";
 import { DebugContract } from "~~/components/Landingpage/DebugContract";
 import { HookComponent } from "~~/components/Landingpage/HookComponent";
 import { OpenSource } from "~~/components/Landingpage/OpenSource";
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
         <OpenSource />
         <DebugContract />
         <HookComponent />
-        <ComingSoon />
+        <BlockExplorer />
         <WorldClass />
       </div>
     </>
