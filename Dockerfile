@@ -79,11 +79,42 @@ COPY --from=docs-builder /app/packages/docs/node_modules ./packages/docs/node_mo
 COPY --from=auco-docs-builder /app/packages/auco-docs/build ./packages/auco-docs/build
 COPY --from=auco-docs-builder /app/packages/auco-docs/node_modules ./packages/auco-docs/node_modules
 
-# Create a simple start script
+# Create a start script with health checks to ensure services are ready before starting the main app
 RUN printf '#!/bin/sh\n\
-	cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
-	cd /app/packages/auco-docs && npx serve -s build -l 3002 --single &\n\
-    cd /app/packages/nextjs && node server.js\n' > /app/start.sh
+\n\
+# Function to wait for a service to be ready\n\
+wait_for_service() {\n\
+    local host=$1\n\
+    local port=$2\n\
+    local max_attempts=30\n\
+    local attempt=1\n\
+    \n\
+    echo "Waiting for service on $host:$port..."\n\
+    while [ $attempt -le $max_attempts ]; do\n\
+        if wget -q --spider "http://$host:$port" 2>/dev/null; then\n\
+            echo "Service on port $port is ready!"\n\
+            return 0\n\
+        fi\n\
+        echo "Attempt $attempt/$max_attempts: Service on port $port not ready yet..."\n\
+        sleep 1\n\
+        attempt=$((attempt + 1))\n\
+    done\n\
+    echo "Warning: Service on port $port did not become ready in time, proceeding anyway..."\n\
+    return 1\n\
+}\n\
+\n\
+# Start docs service in background\n\
+cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
+\n\
+# Start auco-docs service in background\n\
+cd /app/packages/auco-docs && npx serve -s build -l 3002 --single &\n\
+\n\
+# Wait for both services to be ready before starting the main Next.js app\n\
+wait_for_service localhost 3001\n\
+wait_for_service localhost 3002\n\
+\n\
+# Start the main Next.js application\n\
+cd /app/packages/nextjs && node server.js\n' > /app/start.sh
 RUN chmod +x /app/start.sh
 
 ARG PORT=3000
