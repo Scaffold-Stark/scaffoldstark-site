@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
 title: Smart Contracts
 description: Working with Cairo smart contracts in Scaffold Stark React Native.
 ---
@@ -310,11 +310,11 @@ my-starknet-project/
 
 | Tool | Version |
 |------|---------|
-| Scarb | 2.12.2 |
-| Starknet Foundry | 0.49.0 |
-| Cairo | 2.12.x |
-| starknet.js | 8.5.3 |
-| Starknet Devnet | 0.5.1 |
+| Scarb | 2.14.0 |
+| Starknet Foundry | 0.54.0 |
+| Cairo | 2.14.x |
+| starknet.js | 9.2.1 |
+| Starknet Devnet | 0.7.1 |
 
 ## Troubleshooting
 
@@ -348,5 +348,5 @@ yarn deploy:clear
 ## Next Steps
 
 - [Hooks Reference](./hooks/hooks-overview) - Use contracts in your app
-- [Example Workflows](./examples) - Complete usage examples
+- [Recipes](./recipes) - Practical usage recipes
 - [Mobile Considerations](./mobile-considerations) - Mobile-specific tips

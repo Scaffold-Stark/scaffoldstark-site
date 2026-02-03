@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: Mobile Considerations
 description: Mobile-specific features, wallet integration, and best practices for Scaffold Stark React Native.
 ---
@@ -444,6 +444,6 @@ Key considerations:
 
 ## Related Documentation
 
-- [Example Workflows](./examples) - Complete usage examples
+- [Recipes](./recipes) - Practical usage recipes
 - [Hooks Reference](./hooks/hooks-overview) - Hook documentation
-- [Project Structure](./project-structure) - Understand the codebase
+- [Smart Contracts](./smart-contracts) - Contract development guide

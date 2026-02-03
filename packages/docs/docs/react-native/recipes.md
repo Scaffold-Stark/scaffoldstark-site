@@ -1,12 +1,12 @@
 ---
-sidebar_position: 7
-title: Example Workflows
-description: Practical examples for common mobile dApp patterns with Scaffold Stark React Native.
+sidebar_position: 6
+title: Recipes
+description: Practical recipes for common mobile dApp patterns with Scaffold Stark React Native.
 ---
 
-# Example Workflows
+# Recipes
 
-This guide provides practical examples of common mobile dApp patterns using Scaffold Stark React Native.
+This guide provides practical recipes for common mobile dApp patterns using Scaffold Stark React Native.
 
 ## 1. Reading Contract State
 

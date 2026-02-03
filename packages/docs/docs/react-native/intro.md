@@ -6,25 +6,22 @@ description: Overview of Scaffold Stark React Native for mobile dApp development
 
 # Scaffold Stark React Native
 
+:::info Documentation Notice
+This documentation is currently hosted within the Scaffold Stark docs. In the future, it may be moved to a dedicated documentation site for Scaffold Stark React Native. Bookmark the [GitHub repository](https://github.com/Scaffold-Stark/scaffold-stark-rn) for the latest updates and announcements.
+:::
+
 Scaffold Stark React Native (scaffold-stark-rn) is a mobile development framework built on top of [Scaffold Stark 2](https://scaffoldstark.com), designed to help developers rapidly build and deploy mobile dApps on the Starknet blockchain.
 
 ## Overview
 
 Scaffold Stark React Native combines the power of React Native with Expo to provide a seamless mobile development experience for Starknet. It shares the same smart contract infrastructure (`snfoundry` package) with the web version while providing mobile-optimized hooks and components.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                  Scaffold Stark RN                       │
-├─────────────────────────┬───────────────────────────────┤
-│    packages/rn          │     packages/snfoundry        │
-│   (React Native App)    │     (Smart Contracts)         │
-│                         │                               │
-│  • Expo 54              │  • Cairo Contracts            │
-│  • React Native 0.81    │  • Deployment Scripts         │
-│  • NativeWind           │  • Testing with snforge       │
-│  • Starknet-React       │  • Shared with SS2            │
-└─────────────────────────┴───────────────────────────────┘
-```
+| packages/rn (React Native App) | packages/snfoundry (Smart Contracts) |
+|--------------------------------|--------------------------------------|
+| Expo 54 | Cairo Contracts |
+| React Native 0.81 | Deployment Scripts |
+| NativeWind | Testing with snforge |
+| Starknet-React | Shared with SS2 |
 
 ## Key Differences from Scaffold Stark 2 (Web)
 
