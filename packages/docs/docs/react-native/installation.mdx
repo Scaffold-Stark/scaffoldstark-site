@@ -1,0 +1,257 @@
+---
+sidebar_position: 2
+title: Installation
+description: Setup and installation guide for Scaffold Stark React Native.
+---
+
+# Installation
+
+This guide will walk you through setting up Scaffold Stark React Native for mobile dApp development on Starknet.
+
+## Prerequisites
+
+Before you begin, ensure you have the following tools installed:
+
+### Core Requirements
+
+- [Node.js](https://nodejs.org/en/download/) (>= v24) - We recommend using [nvm](https://github.com/nvm-sh/nvm) for version management
+- [Yarn](https://yarnpkg.com/getting-started/install) (v1 or v2+)
+- [Git](https://git-scm.com/downloads)
+
+### Starknet Developer Tools
+
+Install the Starknet development toolchain using [Starkup](https://github.com/software-mansion/starkup):
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.sh | sh
+```
+
+This will install:
+- **Scarb 2.14.0** - Cairo package manager and build toolchain
+- **Starknet Foundry 0.54.0** - Testing framework for Starknet
+- **asdf** - Version manager for tool versions
+- **Cairo 1.0 VSCode Extension** - Syntax highlighting and language support
+- **Starknet Devnet 0.7.1** - Local development network
+
+### Mobile Development Setup
+
+#### iOS Development (macOS only)
+
+1. **Install Xcode** from the [Mac App Store](https://apps.apple.com/app/xcode/id497799835)
+
+2. **Configure Command Line Tools**:
+   - Open Xcode
+   - Go to **Settings > Locations**
+   - Select your Xcode version in the Command Line Tools dropdown
+
+3. **Add iOS Simulator**:
+   - Open Xcode
+   - Go to **Settings > Components**
+   - Download an iOS Simulator (iOS 17+ recommended)
+
+4. **Install Watchman** (recommended for file watching):
+   ```bash
+   brew install watchman
+   ```
+
+#### Android Development
+
+1. **Install Android Studio** from [developer.android.com](https://developer.android.com/studio)
+
+2. **Configure Android SDK**:
+   - Open Android Studio
+   - Go to **Settings > Languages & Frameworks > Android SDK**
+   - Install the latest Android SDK Platform (API 34+)
+   - Install Android SDK Build-Tools
+
+3. **Set Environment Variables** (add to `~/.bashrc` or `~/.zshrc`):
+   ```bash
+   export ANDROID_HOME=$HOME/Android/Sdk
+   export PATH=$PATH:$ANDROID_HOME/emulator
+   export PATH=$PATH:$ANDROID_HOME/platform-tools
+   ```
+
+4. **Create Virtual Device**:
+   - Open Android Studio
+   - Go to **Tools > Device Manager**
+   - Click **Create Virtual Device**
+   - Select a device definition and system image
+
+## Quick Start
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Scaffold-Stark/scaffold-stark-rn.git
+cd scaffold-stark-rn
+```
+
+### 2. Install Dependencies
+
+```bash
+yarn install
+```
+
+This will install dependencies for both the React Native app (`packages/rn`) and smart contracts (`packages/snfoundry`).
+
+### 3. Start the Local Devnet
+
+In a separate terminal, start the Starknet local development network:
+
+```bash
+yarn chain
+```
+
+This runs `starknet-devnet` with a seed of 0 for consistent account addresses during development.
+
+### 4. Deploy Contracts
+
+With the devnet running, deploy the example contracts:
+
+```bash
+yarn deploy
+```
+
+### 5. Start the Mobile App
+
+#### For iOS:
+
+```bash
+yarn ios
+```
+
+This will:
+- Start the Expo development server
+- Launch the iOS Simulator
+- Install and run the app
+
+#### For Android:
+
+```bash
+yarn android
+```
+
+This will:
+- Start the Expo development server
+- Launch the Android Emulator
+- Install and run the app
+
+#### For Development Server Only:
+
+```bash
+yarn start
+```
+
+Then press `i` for iOS or `a` for Android, or scan the QR code with the Expo Go app on your physical device.
+
+## Connecting to Networks
+
+### Local Devnet (Default)
+
+The app is pre-configured to connect to `http://localhost:5050` (or `http://10.0.2.2:5050` on Android emulator). No additional configuration needed.
+
+### Sepolia Testnet
+
+1. Update your environment variables in `packages/rn/.env`:
+
+```bash
+EXPO_PUBLIC_PROVIDER_URL=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
+```
+
+2. For wallet functionality on testnet/mainnet, configure Cavos Aegis:
+
+```bash
+EXPO_PUBLIC_AEGIS_APP_ID=your_aegis_app_id
+EXPO_PUBLIC_AVNU_API_KEY=your_avnu_api_key
+```
+
+:::tip Getting API Keys
+- **Cavos Aegis**: Sign up at [Cavos](https://cavos.xyz) to get your Wallet-as-a-Service App ID
+- **AVNU**: Register at [AVNU](https://avnu.fi) for transaction sponsorship API key
+:::
+
+## Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `yarn start` | Start Expo development server |
+| `yarn ios` | Start app on iOS Simulator |
+| `yarn android` | Start app on Android Emulator |
+| `yarn chain` | Start local Starknet devnet |
+| `yarn deploy` | Deploy contracts to active network |
+| `yarn deploy:clear` | Deploy contracts with reset |
+| `yarn compile` | Compile Cairo smart contracts |
+| `yarn test` | Run smart contract tests |
+| `yarn verify` | Verify contracts on block explorer |
+| `yarn format` | Format code with Prettier |
+| `yarn lint` | Run ESLint |
+
+## Compatible Versions
+
+| Dependency | Version |
+|------------|---------|
+| React | 19.1.0 |
+| React Native | 0.81.4 |
+| Expo | 54.x |
+| starknet.js | 9.2.1 |
+| @starknet-react/core | 5.0.1 |
+| Scarb | 2.14.0 |
+| Starknet Foundry | 0.54.0 |
+| Starknet Devnet | 0.7.1 |
+
+## Troubleshooting
+
+### iOS Simulator Issues
+
+**Problem**: Simulator not launching
+
+```bash
+# Reset Expo cache
+npx expo start --clear
+
+# Or rebuild the app
+npx expo run:ios
+```
+
+### Android Emulator Issues
+
+**Problem**: App not connecting to devnet
+
+The Android emulator uses `10.0.2.2` to reach the host machine's localhost. Ensure your network configuration handles this correctly.
+
+### Metro Bundler Issues
+
+**Problem**: Module resolution errors
+
+```bash
+# Clear Metro cache
+yarn start --reset-cache
+
+# Or clean and reinstall
+rm -rf node_modules
+yarn install
+```
+
+### Starknet Devnet Issues
+
+**Problem**: Devnet not starting
+
+Ensure you have the correct version installed:
+
+```bash
+starknet-devnet --version
+# Should be 0.7.1
+```
+
+If not, reinstall via asdf:
+
+```bash
+asdf install starknet-devnet 0.7.1
+asdf set starknet-devnet 0.7.1
+```
+
+## Next Steps
+
+- Explore the [Hooks Reference](./hooks/hooks-overview)
+- Check out [Recipes](./recipes)
+- Read about [Mobile Considerations](./mobile-considerations)
