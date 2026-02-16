@@ -91,6 +91,8 @@ jobs:
             -t $IMAGE \
             .
           docker push $IMAGE
+          docker tag $IMAGE ${IMAGE%:*}:latest
+          docker push ${IMAGE%:*}:latest
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
       - name: Notify Success
