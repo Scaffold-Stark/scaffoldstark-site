@@ -1,15 +1,6 @@
-name: Build and Push to AR (Staging)
+name: Build and Push to AR
 
 on:
-  workflow_dispatch:
-    inputs:
-      dockerfile:
-        description: "Path to Dockerfile"
-        required: true
-        default: "Dockerfile"
-      service_name:
-        description: "Cloud Run service name"
-        required: true
   workflow_call:
     inputs:
       dockerfile:
@@ -30,11 +21,9 @@ on:
 
 env:
   REGION: asia-southeast1
-  SA_NAME: gh-${{ inputs.service_name }}-sa
-  WIF_POOL: wif-staging-apps-pool
-  WIF_PROVIDER: wif-staging-apps-provider
-  GCP_PROJECT_ID: staging-apps-482206
-  GCP_PROJECT_NUMBER: "871482515924"
+  SA_NAME: gh-deploy-sa
+  WIF_POOL: wif-deploy-pool
+  WIF_PROVIDER: wif-deploy-provider
 
 jobs:
   build:
@@ -49,11 +38,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create env file
+        run: echo "${{ secrets.ENV_PROD }}" > .env
+
       - uses: google-github-actions/auth@v3
         with:
-          project_id: ${{ env.GCP_PROJECT_ID }}
-          workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIF_POOL }}/providers/${{ env.WIF_PROVIDER }}"
-          service_account: "${{ env.SA_NAME }}@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          workload_identity_provider: "projects/${{ vars.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIF_POOL }}/providers/${{ env.WIF_PROVIDER }}"
+          service_account: "${{ env.SA_NAME }}@${{ vars.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
 
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
@@ -69,7 +61,7 @@ jobs:
       - name: Build and push image
         id: build
         env:
-          IMAGE: "${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ steps.repo.outputs.name }}/${{ inputs.service_name }}:${{ steps.sha.outputs.short_sha }}"
+          IMAGE: "${{ env.REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ steps.repo.outputs.name }}/${{ inputs.service_name }}:${{ steps.sha.outputs.short_sha }}"
         run: |
           docker build \
             --platform linux/amd64 \
@@ -85,7 +77,7 @@ jobs:
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: |
-            :white_check_mark: *[STG] Build Successful*
+            :white_check_mark: *Build Successful*
             Service: `${{ inputs.service_name }}` | Image: `${{ steps.sha.outputs.short_sha }}`
             Repo: ${{ github.repository }} | Branch: ${{ github.ref_name }}
             By: ${{ github.actor }} | ${{ github.event.head_commit.url }}
@@ -98,7 +90,7 @@ jobs:
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: |
-            :x: *[STG] Build Failed*
+            :x: *Build Failed*
             Service: `${{ inputs.service_name }}` | Branch: ${{ github.ref_name }}
             Repo: ${{ github.repository }}
             By: ${{ github.actor }} | ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
