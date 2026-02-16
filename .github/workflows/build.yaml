@@ -1,6 +1,15 @@
 name: Build and Push to AR (Staging)
 
 on:
+  workflow_dispatch:
+    inputs:
+      dockerfile:
+        description: "Path to Dockerfile"
+        required: true
+        default: "Dockerfile"
+      service_name:
+        description: "Cloud Run service name"
+        required: true
   workflow_call:
     inputs:
       dockerfile:
@@ -21,7 +30,7 @@ on:
 
 env:
   REGION: asia-southeast1
-  SA_NAME: ${{ vars.GCP_SERVICE_ACCOUNT_NAME }}
+  SA_NAME: gh-${{ inputs.service_name }}-sa
   WIF_POOL: wif-staging-apps-pool
   WIF_PROVIDER: wif-staging-apps-provider
   GCP_PROJECT_ID: staging-apps-482206
