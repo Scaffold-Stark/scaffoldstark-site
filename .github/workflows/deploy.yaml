@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       image:
-        description: "Full image URI to deploy"
-        required: true
+        description: "Full image URI (leave empty for latest)"
+        required: false
       service_name:
         description: "Cloud Run service name (default: repo name)"
         required: false
@@ -44,6 +44,16 @@ jobs:
             echo "name=$(echo '${{ github.repository }}' | cut -d'/' -f2 | sed 's/_app$//' | sed 's/_/-/g')" >> $GITHUB_OUTPUT
           fi
 
+      - name: Resolve image URI
+        id: img
+        run: |
+          if [ -n "${{ inputs.image }}" ]; then
+            echo "uri=${{ inputs.image }}" >> $GITHUB_OUTPUT
+          else
+            REPO_NAME=$(echo '${{ github.repository }}' | cut -d'/' -f2 | sed 's/_app$//' | sed 's/_/-/g')
+            echo "uri=${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${REPO_NAME}/${{ steps.svc.outputs.name }}:latest" >> $GITHUB_OUTPUT
+          fi
+
       - uses: google-github-actions/auth@v3
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
@@ -53,7 +63,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ steps.svc.outputs.name }} \
-            --image ${{ inputs.image }} \
+            --image ${{ steps.img.outputs.uri }} \
             --region ${{ env.REGION }} \
             --platform managed
 
