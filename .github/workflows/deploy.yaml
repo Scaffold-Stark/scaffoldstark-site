@@ -1,0 +1,84 @@
+name: Deploy to Cloud Run (Staging)
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: "Full image URI to deploy"
+        required: true
+      service_name:
+        description: "Cloud Run service name (default: repo name)"
+        required: false
+  workflow_call:
+    inputs:
+      image:
+        description: "Full image URI to deploy"
+        required: true
+        type: string
+      service_name:
+        description: "Cloud Run service name"
+        required: true
+        type: string
+
+env:
+  REGION: asia-southeast1
+  WIF_POOL: wif-staging-apps-pool
+  WIF_PROVIDER: wif-staging-apps-provider
+  GCP_PROJECT_ID: staging-apps-482206
+  GCP_PROJECT_NUMBER: "871482515924"
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Resolve service name
+        id: svc
+        run: |
+          if [ -n "${{ inputs.service_name }}" ]; then
+            echo "name=${{ inputs.service_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "name=$(echo '${{ github.repository }}' | cut -d'/' -f2 | sed 's/_app$//' | sed 's/_/-/g')" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIF_POOL }}/providers/${{ env.WIF_PROVIDER }}"
+          service_account: "gh-${{ steps.svc.outputs.name }}-sa@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ steps.svc.outputs.name }} \
+            --image ${{ inputs.image }} \
+            --region ${{ env.REGION }} \
+            --platform managed
+
+      - name: Notify Success
+        if: success()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: |
+            :rocket: *[STG] Deployment Successful*
+            Service: `${{ steps.svc.outputs.name }}` | Branch: ${{ github.ref_name }}
+            Repo: ${{ github.repository }}
+            By: ${{ github.actor }} | ${{ github.event.head_commit.url }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+      - name: Notify Failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: |
+            :x: *[STG] Deployment Failed*
+            Service: `${{ steps.svc.outputs.name }}` | Branch: ${{ github.ref_name }}
+            Repo: ${{ github.repository }}
+            By: ${{ github.actor }} | ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
