@@ -47,6 +47,9 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
       - name: Resolve service name
         id: svc
