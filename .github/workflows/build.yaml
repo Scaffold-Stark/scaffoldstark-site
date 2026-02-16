@@ -1,6 +1,15 @@
-name: Build and Push to AR
+name: Build and Push to AR (Staging)
 
 on:
+  workflow_dispatch:
+    inputs:
+      dockerfile:
+        description: "Path to Dockerfile"
+        required: false
+        default: "Dockerfile"
+      service_name:
+        description: "Cloud Run service name (default: repo name)"
+        required: false
   workflow_call:
     inputs:
       dockerfile:
@@ -21,9 +30,10 @@ on:
 
 env:
   REGION: asia-southeast1
-  SA_NAME: gh-deploy-sa
-  WIF_POOL: wif-deploy-pool
-  WIF_PROVIDER: wif-deploy-provider
+  WIF_POOL: wif-staging-apps-pool
+  WIF_PROVIDER: wif-staging-apps-provider
+  GCP_PROJECT_ID: staging-apps-482206
+  GCP_PROJECT_NUMBER: "871482515924"
 
 jobs:
   build:
@@ -38,14 +48,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve service name
+        id: svc
+        run: |
+          if [ -n "${{ inputs.service_name }}" ]; then
+            echo "name=${{ inputs.service_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "name=$(echo '${{ github.repository }}' | cut -d'/' -f2 | sed 's/_app$//' | sed 's/_/-/g')" >> $GITHUB_OUTPUT
+          fi
+
       - name: Create env file
-        run: echo "${{ secrets.ENV_PROD }}" > .env
+        run: echo "${{ secrets.ENV_STG }}" > .env
 
       - uses: google-github-actions/auth@v3
         with:
-          project_id: ${{ vars.GCP_PROJECT_ID }}
-          workload_identity_provider: "projects/${{ vars.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIF_POOL }}/providers/${{ env.WIF_PROVIDER }}"
-          service_account: "${{ env.SA_NAME }}@${{ vars.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.WIF_POOL }}/providers/${{ env.WIF_PROVIDER }}"
+          service_account: "gh-${{ steps.svc.outputs.name }}-sa@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
 
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
@@ -54,14 +73,14 @@ jobs:
         id: sha
         run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
-      - name: Derive repo name
+      - name: Derive AR repo name
         id: repo
         run: echo "name=$(echo '${{ github.repository }}' | cut -d'/' -f2 | sed 's/_app$//' | sed 's/_/-/g')" >> $GITHUB_OUTPUT
 
       - name: Build and push image
         id: build
         env:
-          IMAGE: "${{ env.REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ steps.repo.outputs.name }}/${{ inputs.service_name }}:${{ steps.sha.outputs.short_sha }}"
+          IMAGE: "${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ steps.repo.outputs.name }}/${{ steps.svc.outputs.name }}:${{ steps.sha.outputs.short_sha }}"
         run: |
           docker build \
             --platform linux/amd64 \
@@ -77,8 +96,8 @@ jobs:
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: |
-            :white_check_mark: *Build Successful*
-            Service: `${{ inputs.service_name }}` | Image: `${{ steps.sha.outputs.short_sha }}`
+            :white_check_mark: *[STG] Build Successful*
+            Service: `${{ steps.svc.outputs.name }}` | Image: `${{ steps.sha.outputs.short_sha }}`
             Repo: ${{ github.repository }} | Branch: ${{ github.ref_name }}
             By: ${{ github.actor }} | ${{ github.event.head_commit.url }}
         env:
@@ -90,8 +109,8 @@ jobs:
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: |
-            :x: *Build Failed*
-            Service: `${{ inputs.service_name }}` | Branch: ${{ github.ref_name }}
+            :x: *[STG] Build Failed*
+            Service: `${{ steps.svc.outputs.name }}` | Branch: ${{ github.ref_name }}
             Repo: ${{ github.repository }}
             By: ${{ github.actor }} | ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         env:
