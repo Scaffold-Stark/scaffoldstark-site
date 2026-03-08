@@ -154,6 +154,7 @@ const burnerWallet = createBurnerWallet(chain);
 - Passed via `extraWallets` prop to `StarknetConfig`, not added to `connectors` array
 - Account switching: `connector.switchAccount(index)` instead of `connector.burnerAccount = ...`
 
+
 ## URL Changes for starknet-react Documentation
 
 If you reference starknet-react docs, the domain and URL format have changed:
@@ -195,6 +196,7 @@ If your v2 project explicitly installed those packages, you can remove them:
 ```bash
 npm uninstall @keplr-wallet/types @keplr-wallet/cosmos @keplr-wallet/crypto @keplr-wallet/common @keplr-wallet/unit
 ```
+
 
 ## Quick Migration Checklist
 

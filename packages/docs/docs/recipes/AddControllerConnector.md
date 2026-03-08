@@ -17,6 +17,10 @@ This guide provides a complete implementation for integrating the [Cartridge Con
 
 :::
 
+:::caution Migration Note
+This recipe was written for `@starknet-react/core`. With `@starknet-start/react`, wallets are auto-discovered via the wallet standard (get-starknet), and the connector setup has changed. The Cartridge Controller integration may require updates for the new wallet standard. Check the [Cartridge Controller documentation](https://docs.cartridge.gg/controller/overview) for the latest integration guidance.
+:::
+
 ## Implementation Guide
 
 ### 1. Add Controller Dependency
