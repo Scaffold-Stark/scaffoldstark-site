@@ -25,11 +25,11 @@ This example retrieves the data returned by the `userGreetingCounter` function o
 | **args** (optional)            | `unknown[]`   | Array of arguments to pass to the function (if any). Types are inferred from the contract's function parameters. |
 | **blockIdentifier** (optional) | `BlockNumber` | Block identifier to use (default: pending).                                                                      |
 | **watch** (optional)           | `boolean`     | Watches and refreshes data on new blocks. (default : `true`)                                                     |
-| Other arguments                | `various`     | You can pass other arguments accepted by the useContractRead hook from @starknet-react/core.                     |
+| Other arguments                | `various`     | You can pass other arguments accepted by the useContractRead hook from @starknet-start/react.                     |
 
-You can also pass other arguments accepted by [starknet-react useReadContract](https://www.starknet-react.com/docs/hooks/use-read-contract).
+You can also pass other arguments accepted by [starknet-start useReadContract](https://start.starknet-react.com/docs/hooks/useReadContract).
 
 ## Return Values
 
 - The retrieved data is stored in the `data` property of the returned object.
-- The extended object includes properties inherited from the `useReadContract` hook of starknet-react. You can check the [useReadContract return values](https://www.starknet-react.com/docs/hooks/use-read-contract) documentation for the types.
+- The extended object includes properties inherited from the `useReadContract` hook of starknet-start. You can check the [useReadContract return values](https://start.starknet-react.com/docs/hooks/useReadContract) documentation for the types.

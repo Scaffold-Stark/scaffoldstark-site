@@ -17,6 +17,10 @@ This guide provides a complete implementation for integrating the [Cartridge Con
 
 :::
 
+:::caution Migration Note
+This recipe was written for `@starknet-react/core`. With `@starknet-start/react`, wallets are auto-discovered via the wallet standard (get-starknet), and the connector setup has changed. The Cartridge Controller integration may require updates for the new wallet standard. Check the [Cartridge Controller documentation](https://docs.cartridge.gg/controller/overview) for the latest integration guidance.
+:::
+
 ## Implementation Guide
 
 ### 1. Add Controller Dependency
@@ -41,8 +45,8 @@ Create a new file `index.tsx` in `nextjs/services/web3/controller/index.tsx`. Yo
 ```tsx title="utils/scaffold-stark/controller.tsx"
 "use client";
 
-import { Chain } from "@starknet-react/chains";
-import { jsonRpcProvider, publicProvider, starknetChainId, InjectedConnector } from "@starknet-react/core";
+import { Chain } from "@starknet-start/chains";
+import { jsonRpcProvider } from "@starknet-start/providers";
 import ControllerConnector from "@cartridge/connector/controller";
 import { constants } from "starknet";
 import scaffoldConfig from "~~/scaffold.config";

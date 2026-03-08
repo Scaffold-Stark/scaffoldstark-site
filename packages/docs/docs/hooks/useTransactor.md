@@ -13,24 +13,20 @@ Any error will instead show a popup with nice error message.
 ![Error Example](/img/transactorFail.gif)
 
 ```ts
-const { contract: contractInstance } = useContract({
-    abi,
-    address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
-});
 const { writeTransaction, transactionReceiptInstance, sendTransactionInstance } = useTransactor();
-await writeTransaction(
-    [
-        contractInstance.populate(
-            abiFunction.name,
-            args[],
-        ),
-    ]
-);
+const calls = [
+  {
+    contractAddress: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+    entrypoint: "transfer",
+    calldata: ["0x123...", "1000000000000000000", "0"],
+  },
+];
+await writeTransaction(calls);
 ```
 
-This example tries to send 1 STRK to the address `0xd8da6bf26964af9d7eed9e03e53415d37aa96045`, prompting the connected [`WalletClient`](https://starknetjs.com/docs/API/classes/AccountInterface/) for a signature. And in the case of a successful transaction, it will show a popup in the UI with the message: "🎉 Transaction completed successfully!".
+This example tries to send a transfer transaction, prompting the connected wallet for a signature. In the case of a successful transaction, it will show a popup in the UI with the message: "🎉 Transaction completed successfully!".
 
-You can pass in a list of valid `Call` - Type is from `starknet`. It also possible to pass it an additional `withSendTransaction = false` parameter to use manual fee estimate and fallback when estimation fails.
+You can pass in a list of valid `Call` — Type is from `starknet`.
 
 [Refer to this recipe](/recipes/WriteToContractWriteAsyncButton) for a more detailed example.
 
@@ -38,27 +34,24 @@ You can pass in a list of valid `Call` - Type is from `starknet`. It also possib
 
 ### useTransactor
 
-| Parameter                     | Type                                                                        | Description                                                                                                                                            |
-| :---------------------------- | :-------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **\_walletClient** (optional) | [`WalletClient`](https://starknetjs.com/docs/API/classes/AccountInterface/) | The wallet client that should sign the transaction. Defaults to the connected wallet client, and is only needed if the transaction is not already sent |
+`useTransactor()` takes no arguments. It internally uses `useSendTransaction` from `@starknet-start/react`.
 
-### callback function
+### writeTransaction
 
-| Parameter                          | Type      | Description                                                                                                  |
-| :--------------------------------- | :-------- | :----------------------------------------------------------------------------------------------------------- |
-| **tx**                             | `Call[]`  | A list of valid `Call` - Type is from `starknet`.                                                            |
-| **withSendTransaction** (optional) | `boolean` | Default to `true`, set to `false` if you want to use manual fee estimate and fallback when estimation fails. |
+| Parameter | Type     | Description                                          |
+| :-------- | :------- | :--------------------------------------------------- |
+| **calls** | `Call[]` | A list of valid `Call` — Type is from `starknet`. |
 
 ## Return Values
 
 ### writeTransaction
 
-- The callback function that is used to initialize the UI feedback flow.
+- The function that is used to initialize the UI feedback flow. Takes a `Call[]` array directly.
 
 ### transactionReceiptInstance
 
-- An instance of [useTransactionReceipt](https://www.starknet-react.com/docs/hooks/use-transaction-receipt#usetransactionreceipt) for tracking receipt details.
+- An instance of [useTransactionReceipt](https://start.starknet-react.com/docs/hooks/useTransactionReceipt) for tracking receipt details.
 
 ### sendTransactionInstance
 
-- An instance of [useSendTransaction](https://www.starknet-react.com/docs/hooks/use-send-transaction#usesendtransaction) for tracking transaction status.
+- An instance of [useSendTransaction](https://start.starknet-react.com/docs/hooks/useSendTransaction) for tracking transaction status.

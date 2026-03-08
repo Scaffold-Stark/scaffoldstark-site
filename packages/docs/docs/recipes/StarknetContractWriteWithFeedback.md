@@ -1,45 +1,33 @@
 ---
 sidebar_position: 4
-title: Starknet-react useSendTransaction with transaction status
+title: Starknet useSendTransaction with transaction status
 description: Show feedback on transaction status to user by `useSendTransaction` along with `useTransactor`
 ---
 
 # Starknet `useSendTransaction` with transaction status
 
-This recipe demonstrates how to create a button for contract interaction using the `useTransactor` and `useSendTransaction` hooks from the "starknet-react" library. The interaction includes the capability to provide feedback on the transaction status when using starknet-react `useSendTransaction`.
+This recipe demonstrates how to create a button for contract interaction using the `useTransactor` hook from Scaffold-Stark. The interaction includes the capability to provide feedback on the transaction status when using starknet-start `useSendTransaction`.
 
 <details open>
 <summary>Here is the full code, which we will be implementing in the guide below:</summary>
 
 ```tsx title="components/ContractInteraction.tsx"
 import * as React from "react";
-import { useAccount, useNetwork, useContractWrite, useContract } from "@starknet-react/core";
-import { erc20ABI } from "./erc20";
-import { useTransactor } from "~~/hooks/useTransactor";
+import { useTransactor } from "~~/hooks/scaffold-stark";
 
 export const ContractInteraction = () => {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
-
-  const { contract } = useContract({
-    abi: erc20ABI,
-    address: chain.nativeCurrency.address,
-  });
-
-  const calls = useMemo(() => {
-    if (!address || !contract) return [];
-    return contract.populateTransaction["transfer"]!(address, { low: 1, high: 0 });
-  }, [contract, address]);
-
-  const { sendAsync, isPending } = useContractWrite({
-    calls,
-  });
-
-  const writeTx = useTransactor();
+  const { writeTransaction, sendTransactionInstance } = useTransactor();
+  const { isPending } = sendTransactionInstance;
 
   const handleTransfer = async () => {
     try {
-      await writeTx(() => sendAsync());
+      await writeTransaction([
+        {
+          contractAddress: "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+          entrypoint: "transfer",
+          calldata: ["0xd8da6bf26964af9d7eed9e03e53415d37aa96045", "1", "0"],
+        },
+      ]);
     } catch (e) {
       console.log("Unexpected error in writeTx", e);
     }
@@ -69,112 +57,77 @@ export const ContractInteraction = () => {
 };
 ```
 
-### 2. Configure starknet-react `useContractWrite` hook
+### 2. Configure transaction calls
 
-Add the `useContractWrite` hook and configure it with the required parameters.
+Define your transaction calls as a `Call[]` array. Each call specifies the contract address, entrypoint, and calldata. No `useContractWrite` or `useContract` hooks are needed — `useTransactor` handles everything internally via `useSendTransaction`.
 
 ```tsx
 import * as React from "react";
-// highlight-end
-import { useAccount, useNetwork, useContractWrite, useContract } from "@starknet-react/core";
-import { erc20ABI } from "./erc20";
+// highlight-start
+import { useTransactor } from "~~/hooks/scaffold-stark";
 // highlight-end
 
 export const ContractInteraction = () => {
   // highlight-start
-  const { address } = useAccount();
-  const { chain } = useNetwork();
-
-  const { contract } = useContract({
-    abi: erc20ABI,
-    address: chain.nativeCurrency.address,
-  });
-
-  const calls = useMemo(() => {
-    if (!address || !contract) return [];
-    return contract.populateTransaction["transfer"]!(address, { low: 1, high: 0 });
-  }, [contract, address]);
-
-  const { sendAsync, data, isPending } = useContractWrite({
-    calls,
-  });
+  const { writeTransaction, sendTransactionInstance } = useTransactor();
   // highlight-end
 
   return <button>Send</button>;
 };
 ```
 
-### 3. Initialize `useTransactor` hook and send transaction
+### 3. Use `writeTransaction` to send the transaction
 
-Initialize the `useTransactor` hook and use it to wrap the `sendAsync` function obtained from `useContractWrite` to provide feedback on the transaction status to the user.
+Call `writeTransaction` with a `Call[]` array directly. It handles wallet interaction and UI feedback automatically.
 
 ```tsx
 import * as React from "react";
-import { useAccount, useNetwork, useContractWrite, useContract } from "@starknet-react/core";
-import { erc20ABI } from "./erc20";
-// highlight-start
-import { useTransactor } from "~~/hooks/useTransactor";
-// highlight-end
+import { useTransactor } from "~~/hooks/scaffold-stark";
 
 export const ContractInteraction = () => {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { writeTransaction, sendTransactionInstance } = useTransactor();
 
-  const { contract } = useContract({
-    abi: erc20ABI,
-    address: chain.nativeCurrency.address,
-  });
-
-  const calls = useMemo(() => {
-    if (!address || !contract) return [];
-    return contract.populateTransaction["transfer"]!(address, { low: 1, high: 0 });
-  }, [contract, address]);
-
-  const { sendAsync, data, isPending } = useContractWrite({
-    calls,
-  });
-
-  // highlight-start
-  const writeTx = useTransactor();
-  // highlight-end
-
-  return <button onClick={() => writeTx(() => sendAsync())}>Transfer</button>;
+  return (
+    <button
+      onClick={() =>
+        // highlight-start
+        writeTransaction([
+          {
+            contractAddress: "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            entrypoint: "transfer",
+            calldata: ["0xd8da6bf26964af9d7eed9e03e53415d37aa96045", "1", "0"],
+          },
+        ])
+        // highlight-end
+      }
+    >
+      Transfer
+    </button>
+  );
 };
 ```
 
-### 4. Wrap `useTransactor` in a handler async function
+### 4. Wrap in an async handler with try/catch
 
-Wrap the `writeTx` function in a handler function to start the transaction when the user clicks the button.
+Wrap the `writeTransaction` call in a handler function to start the transaction when the user clicks the button and catch any errors.
 
 ```tsx
 import * as React from "react";
-import { useAccount, useNetwork, useContractWrite, useContract } from "@starknet-react/core";
-import { erc20ABI } from "./erc20";
-import { useTransactor } from "~~/hooks/useTransactor";
+import { useTransactor } from "~~/hooks/scaffold-stark";
 
 export const ContractInteraction = () => {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
+  const { writeTransaction, sendTransactionInstance } = useTransactor();
 
-  const { contract } = useContract({
-    abi: erc20ABI,
-    address: chain.nativeCurrency.address,
-  });
-
-  const calls = useMemo(() => {
-    if (!address || !contract) return [];
-    return contract.populateTransaction["transfer"]!(address, { low: 1, high: 0 });
-  }, [contract, address]);
-
-  const { sendAsync, data, isPending } = useContractWrite({
-    calls,
-  });
-
-  const writeTx = useTransactor();
   // highlight-start
   const handleTransfer = async () => {
     try {
-      await writeTx(() => sendAsync());
+      await writeTransaction([
+        {
+          contractAddress: "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+          entrypoint: "transfer",
+          calldata: ["0xd8da6bf26964af9d7eed9e03e53415d37aa96045", "1", "0"],
+        },
+      ]);
     } catch (e) {
       console.log("Unexpected error in writeTx", e);
     }
@@ -182,49 +135,36 @@ export const ContractInteraction = () => {
   // highlight-end
 
   return (
-    // highlight-start
     <button className="btn btn-primary" onClick={handleTransfer}>
       Transfer
     </button>
-    // highlight-end
   );
 };
 ```
 
-### 5. Bonus adding loading state
+### 5. Add loading state
 
-We can use `isPending` returned from `useContractWrite` while the transaction is being mined and also `disable` the button.
+Use `sendTransactionInstance.isPending` to show a loading spinner while the transaction is being processed and disable the button.
 
 ```tsx
 import * as React from "react";
-import { useAccount, useNetwork, useContractWrite, useContract } from "@starknet-react/core";
-import { erc20ABI } from "./erc20";
-import { useTransactor } from "~~/hooks/useTransactor";
+import { useTransactor } from "~~/hooks/scaffold-stark";
 
 export const ContractInteraction = () => {
-  const { address } = useAccount();
-  const { chain } = useNetwork();
-
-  const { contract } = useContract({
-    abi: erc20ABI,
-    address: chain.nativeCurrency.address,
-  });
-
-  const calls = useMemo(() => {
-    if (!address || !contract) return [];
-    return contract.populateTransaction["transfer"]!(address, { low: 1, high: 0 });
-  }, [contract, address]);
+  const { writeTransaction, sendTransactionInstance } = useTransactor();
   // highlight-start
-  const { sendAsync, isPending } = useContractWrite({
-    calls,
-  });
-  // highlight-start
-
-  const writeTx = useTransactor();
+  const { isPending } = sendTransactionInstance;
+  // highlight-end
 
   const handleTransfer = async () => {
     try {
-      await writeTx(() => sendAsync());
+      await writeTransaction([
+        {
+          contractAddress: "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+          entrypoint: "transfer",
+          calldata: ["0xd8da6bf26964af9d7eed9e03e53415d37aa96045", "1", "0"],
+        },
+      ]);
     } catch (e) {
       console.log("Unexpected error in writeTx", e);
     }

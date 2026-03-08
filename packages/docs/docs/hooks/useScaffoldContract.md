@@ -12,20 +12,17 @@ const { data: yourContract } = useScaffoldContract({
   contractName: "YourContract",
 });
 // Returns the greeting and can be called in any function, unlike useScaffoldReadContract
-await yourContract?.read.greeting();
+await yourContract?.call("greeting");
 
-// Used to write to a contract and can be called in any function
-import { useAccount } from "@starknet-react/core";
+// For write operations, use useScaffoldWriteContract instead:
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-stark";
 
-const { account } = useAccount();
-const { data: yourContract } = useScaffoldContract({
+const { sendAsync } = useScaffoldWriteContract({
   contractName: "YourContract",
-  account,
+  functionName: "set_greeting",
+  args: ["the greeting here"],
 });
-const setGreeting = async () => {
-  // Call the method in any function
-  await yourContract?.write.setGreeting(["the greeting here"]);
-};
+await sendAsync();
 ```
 
 This example uses the `useScaffoldContract` hook to obtain a contract instance for the `YourContract` smart contract.
@@ -38,6 +35,6 @@ This example uses the `useScaffoldContract` hook to obtain a contract instance f
 
 ## Return Value
 
-- `data`: An instance of the contract, which can be used to call `read` and `write` methods of the contract.
+- `data`: A read-only Contract instance (from starknet.js). Use `.call()` for reads. For writes, use `useScaffoldWriteContract` instead.
 
 - `isLoading` : Boolean indicating if the contract is being loaded.

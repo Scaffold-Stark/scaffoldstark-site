@@ -74,7 +74,7 @@ This example demonstrates how to use the `sendAsync`function to send multiple tr
 | **functionName**    | `string`    | Name of the function to call.                                                                                    |
 | **args** (optional) | `unknown[]` | Array of arguments to pass to the function (if any). Types are inferred from the contract's function parameters. |
 
-You can also pass other arguments accepted by [useSendTransaction#sendAsync from starknet-react](https://www.starknet-react.com/docs/hooks/use-send-transaction#sendasync).
+You can also pass other arguments accepted by [useSendTransaction#sendAsync from starknet-start](https://start.starknet-react.com/docs/hooks/useSendTransaction#sendasync).
 
 ## Return Values
 
