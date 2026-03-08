@@ -154,7 +154,6 @@ const burnerWallet = createBurnerWallet(chain);
 - Passed via `extraWallets` prop to `StarknetConfig`, not added to `connectors` array
 - Account switching: `connector.switchAccount(index)` instead of `connector.burnerAccount = ...`
 
-
 ## URL Changes for starknet-react Documentation
 
 If you reference starknet-react docs, the domain and URL format have changed:
