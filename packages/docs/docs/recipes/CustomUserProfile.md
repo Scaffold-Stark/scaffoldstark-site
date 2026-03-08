@@ -51,7 +51,7 @@ export const UserProfile = () => {
 
 ### 2. Get the User's Address
 
-To fetch the profile associated with the currently connected wallet, we need the user's address. We can get this using the `useAccount` hook provided by Scaffold-Stark 2 or starknet-react.
+To fetch the profile associated with the currently connected wallet, we need the user's address. We can get this using the `useAccount` hook provided by Scaffold-Stark or starknet-start.
 
 ```tsx title="components/UserProfile.tsx"
 import { useAccount } from "~~/hooks/useAccount";

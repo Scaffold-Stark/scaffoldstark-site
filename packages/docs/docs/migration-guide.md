@@ -128,6 +128,32 @@ await writeTransaction([
 - `writeTransaction(calls: Call[])` takes a `Call[]` array directly instead of a callback function
 - Use `sendTransactionInstance.isPending` for loading state
 
+## Burner Wallet
+
+The burner wallet integration has changed completely:
+
+```ts
+// v2 — BurnerConnector class added to connectors array
+import { BurnerConnector } from "@scaffold-stark/stark-burner";
+const burnerConnector = new BurnerConnector();
+connectors.push(burnerConnector);
+// Switch accounts via: burnerConnector.burnerAccount = accounts[index];
+
+// v3 — createBurnerWallet() factory returns a MockWallet, passed via extraWallets
+import { createBurnerWallet } from "@scaffold-stark/stark-burner";
+const burnerWallet = createBurnerWallet(chain);
+// Pass to StarknetConfig via extraWallets prop:
+// <StarknetConfig extraWallets={[burnerWallet]} ...>
+// Switch accounts via: burnerWallet.switchAccount(index);
+```
+
+**Key differences:**
+- Package version: `@scaffold-stark/stark-burner@0.2.0` (v3) vs `0.1.x` (v2)
+- `BurnerConnector` class → `createBurnerWallet()` factory function
+- Returns a `MockWallet` instance (from `@starknet-start/react`), not a connector
+- Passed via `extraWallets` prop to `StarknetConfig`, not added to `connectors` array
+- Account switching: `connector.switchAccount(index)` instead of `connector.burnerAccount = ...`
+
 ## URL Changes for starknet-react Documentation
 
 If you reference starknet-react docs, the domain and URL format have changed:
@@ -154,4 +180,6 @@ Hook URL paths changed from kebab-case to camelCase:
 - [ ] Replace `useContract` usage with starknet.js `Contract` directly
 - [ ] Update `useTransactor` usage: remove arguments, use `writeTransaction(calls)` instead of callback pattern
 - [ ] Remove manual connector setup — wallets are auto-discovered via wallet standard
+- [ ] Migrate burner wallet from `BurnerConnector` to `createBurnerWallet()` + `extraWallets` prop
+- [ ] Update `@scaffold-stark/stark-burner` to `0.2.0`
 - [ ] Update any starknet-react documentation links to use `start.starknet-react.com`

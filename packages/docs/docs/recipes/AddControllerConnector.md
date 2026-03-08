@@ -17,10 +17,6 @@ This guide provides a complete implementation for integrating the [Cartridge Con
 
 :::
 
-:::caution Migration Note
-This recipe was written for `@starknet-react/core`. With `@starknet-start/react`, wallets are auto-discovered via the wallet standard (get-starknet), and the connector setup has changed. The Cartridge Controller integration may require updates for the new wallet standard. Check the [Cartridge Controller documentation](https://docs.cartridge.gg/controller/overview) for the latest integration guidance.
-:::
-
 ## Implementation Guide
 
 ### 1. Add Controller Dependency
@@ -45,8 +41,6 @@ Create a new file `index.tsx` in `nextjs/services/web3/controller/index.tsx`. Yo
 ```tsx title="utils/scaffold-stark/controller.tsx"
 "use client";
 
-import { Chain } from "@starknet-start/chains";
-import { jsonRpcProvider } from "@starknet-start/providers";
 import ControllerConnector from "@cartridge/connector/controller";
 import { constants } from "starknet";
 import scaffoldConfig from "~~/scaffold.config";
@@ -55,55 +49,6 @@ import { SessionPolicies } from "@cartridge/controller";
 // Standard contract addresses
 export const ETH_CONTRACT_ADDRESS = "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7";
 export const STRK_CONTRACT_ADDRESS = "0x04718f5a0Fc34cC1AF16A1cdee98fFB20C31f5cD61D6Ab07201858f4287c938D";
-
-// Function to check for devnet networks
-const containsDevnet = (networks: readonly Chain[]) => {
-  return networks.some(it => it.network === "devnet");
-};
-
-// Function to get rpcProviderUrl, using your environment variables
-// environment variables here need to be uncommented, depending on the network the user wants activated
-const getRpcUrl = (networkName: string): string => {
-  const devnetRpcUrl = process.env.NEXT_PUBLIC_DEVNET_PROVIDER_URL;
-  const sepoliaRpcUrl = process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL;
-  const mainnetRpcUrl = process.env.NEXT_PUBLIC_MAINNET_PROVIDER_URL;
-
-  let rpcUrl = "";
-
-  switch (networkName) {
-    case "devnet":
-      rpcUrl = devnetRpcUrl || "";
-      break;
-    case "sepolia":
-      rpcUrl = sepoliaRpcUrl || "";
-      break;
-    case "mainnet":
-      rpcUrl = mainnetRpcUrl || "";
-      break;
-    default:
-      rpcUrl = "";
-      break;
-  }
-
-  return rpcUrl;
-};
-
-const currentNetwork = scaffoldConfig.targetNetworks[0];
-const currentNetworkName = currentNetwork.network;
-
-// Provider configuration based on Scaffold settings
-export const getProvider = () => {
-  if (getRpcUrl(currentNetworkName) === "" || containsDevnet(scaffoldConfig.targetNetworks)) {
-    return publicProvider();
-  }
-
-  return jsonRpcProvider({
-    rpc: () => ({
-      nodeUrl: getRpcUrl(currentNetworkName),
-      chainId: starknetChainId(scaffoldConfig.targetNetworks[0].id),
-    }),
-  });
-};
 
 // Supported chains configuration
 const chains = [
@@ -144,28 +89,45 @@ export const controllerInstance = new ControllerConnector({
   chains: chains,
   url: process.env.NEXT_PUBLIC_KEYCHAIN_DEPLOYMENT_URL,
   profileUrl: process.env.NEXT_PUBLIC_PROFILE_DEPLOYMENT_URL,
-}) as unknown as InjectedConnector;
+});
 ```
 
 </details>
 
-### 3. Modify Connectors Configuration
+### 3. Register Controller as an Extra Wallet
 
-Update `services/web/connectors.tsx` to include the Cartridge Controller instance.
+In Scaffold-Stark v3, wallets are auto-discovered via the wallet standard (get-starknet). For wallets that don't implement the standard natively, you can pass them via the `extraWallets` prop to `StarknetConfig`.
+
+Update `services/web3/connectors.tsx` to export the Controller as an extra wallet:
 
 <details>
 <summary>View changes</summary>
 
-```tsx title="nextjs/services/web/connectors.tsx"
+```tsx title="nextjs/services/web3/connectors.tsx"
 import { controllerInstance } from "~~/services/web3/controller/index";
 
-// Add Cartridge Controller for non-devnet networks
+// Add Cartridge Controller as an extra wallet for non-devnet networks
+const extraWallets = [];
 if (!targetNetworks.some(network => (network.network as string) === "devnet")) {
-  connectors.push(controllerInstance as unknown as InjectedConnector);
+  extraWallets.push(controllerInstance);
 }
+
+export { extraWallets };
+```
+
+Then pass `extraWallets` to your `StarknetConfig` provider:
+
+```tsx
+<StarknetConfig extraWallets={extraWallets} ...>
+  {children}
+</StarknetConfig>
 ```
 
 </details>
+
+:::tip Wallet Standard
+If the Cartridge Controller implements `WalletWithStarknetFeatures` from the wallet standard, it will be auto-discovered and you don't need to pass it as an extra wallet. Check the [Cartridge Controller documentation](https://docs.cartridge.gg/controller/overview) for the latest compatibility information.
+:::
 
 ### 4. Configure Deployment Settings
 
