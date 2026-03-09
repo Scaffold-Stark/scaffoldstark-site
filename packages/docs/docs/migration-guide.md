@@ -186,15 +186,15 @@ import { voyager } from "@starknet-start/explorers";
 // <StarknetConfig explorer={voyager} ...>
 ```
 
-## Keplr Wallet Removed
+## Keplr: Custom Connector Removed
 
-Keplr support has been dropped in v3. If your v2 project had `@keplr-wallet/*` packages installed, remove them from your `package.json`:
+The custom `KeplrConnector` has been removed in v3 — Keplr is still usable, but you no longer need to import and configure it manually. If Keplr supports the Starknet wallet standard in the user's browser, it will be auto-discovered without any connector code, saving you the bundle size cost of the `@keplr-wallet/*` packages.
+
+If your v2 project explicitly installed those packages, you can remove them:
 
 ```bash
 npm uninstall @keplr-wallet/types @keplr-wallet/cosmos @keplr-wallet/crypto @keplr-wallet/common @keplr-wallet/unit
 ```
-
-When Keplr adds Starknet wallet standard support, it will be auto-discovered without any connector code on your part.
 
 ## Quick Migration Checklist
 
@@ -208,5 +208,5 @@ When Keplr adds Starknet wallet standard support, it will be auto-discovered wit
 - [ ] Migrate burner wallet from `BurnerConnector` to `createBurnerWallet()` + `extraWallets` prop
 - [ ] Update `@scaffold-stark/stark-burner` to `0.2.0`
 - [ ] Update any starknet-react documentation links to use `start.starknet-react.com`
-- [ ] Remove `@keplr-wallet/*` packages from `package.json`
+- [ ] Remove `@keplr-wallet/*` packages from `package.json` (optional — Keplr is auto-discovered if installed)
 - [ ] If you customized `ScaffoldStarkAppWithProviders.tsx`: update `explorer` from `starkscan` to `voyager` (`@starknet-start/explorers`)
