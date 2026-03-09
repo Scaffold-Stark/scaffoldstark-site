@@ -171,6 +171,62 @@ Hook URL paths changed from kebab-case to camelCase:
 | `/docs/hooks/use-send-transaction` | `/docs/hooks/useSendTransaction` |
 | `/docs/hooks/use-transaction-receipt` | `/docs/hooks/useTransactionReceipt` |
 
+## Block Explorer: Starkscan → Voyager
+
+The default block explorer has changed from Starkscan to Voyager.
+
+**Before (v2):**
+
+```tsx
+import { starkscan } from "@starknet-react/core";
+// <StarknetConfig explorer={starkscan} ...>
+```
+
+**After (v3):**
+
+```tsx
+import { voyager } from "@starknet-start/explorers";
+// <StarknetConfig explorer={voyager} ...>
+```
+
+All default explorer URLs have changed:
+
+| Network | Old URL (Starkscan) | New URL (Voyager) |
+| :--- | :--- | :--- |
+| Sepolia | `https://sepolia.starkscan.co/` | `https://sepolia.voyager.online/` |
+| Mainnet | `https://starkscan.co/` | `https://voyager.online/` |
+
+The helper functions `getBlockExplorerTxLink`, `getBlockExplorerAddressLink`, and `getBlockExplorerClasshashLink` in `utils/scaffold-stark/networks.ts` now default to Voyager URLs. Update the `baseUrl` values in that file if you have customized them:
+
+```ts
+// utils/scaffold-stark/networks.ts
+
+// v2 (Starkscan)
+const baseUrl = `https://sepolia.starkscan.co`;
+
+// v3 (Voyager)
+const baseUrl = `https://sepolia.voyager.online`;
+```
+
+## Keplr Wallet Removed
+
+The custom `KeplrConnector` class has been removed entirely in v3. All `@keplr-wallet/*` dependencies (5 packages) have been removed from the project.
+
+If Keplr adds official Starknet wallet standard support in the future, it will be auto-discovered without any custom connector code — no migration action needed beyond removing the old dependencies.
+
+## New Packages in v3
+
+The following packages are new or updated in v3:
+
+| Package | Purpose |
+| :--- | :--- |
+| `@starknet-start/explorers` | Provides the `voyager` explorer config (replaces Starkscan) |
+| `@starknet-start/providers` | Provides `jsonRpcProvider()` for chain-aware RPC configuration |
+| `@starknet-io/get-starknet-modal` | Replaces `get-starknet-core` for wallet discovery modal |
+| `@tanstack/react-query` | Now an explicit dependency (was previously bundled) |
+
+The `starknet` package has also been bumped from `^9.2.1` to `^9.4.2`.
+
 ## Quick Migration Checklist
 
 - [ ] Replace all `@starknet-react/core` imports with `@starknet-start/react`
@@ -183,3 +239,9 @@ Hook URL paths changed from kebab-case to camelCase:
 - [ ] Migrate burner wallet from `BurnerConnector` to `createBurnerWallet()` + `extraWallets` prop
 - [ ] Update `@scaffold-stark/stark-burner` to `0.2.0`
 - [ ] Update any starknet-react documentation links to use `start.starknet-react.com`
+- [ ] Remove `@keplr-wallet/*` dependencies and custom `KeplrConnector`
+- [ ] Update block explorer from `starkscan` (`@starknet-react/core`) to `voyager` (`@starknet-start/explorers`)
+- [ ] Update `baseUrl` values in `getBlockExplorerTxLink`, `getBlockExplorerAddressLink`, and `getBlockExplorerClasshashLink` in `utils/scaffold-stark/networks.ts` to Voyager URLs
+- [ ] Replace `get-starknet-core` with `@starknet-io/get-starknet-modal`
+- [ ] Add `@tanstack/react-query` as an explicit dependency
+- [ ] Add `@starknet-start/explorers` and `@starknet-start/providers`
