@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # useScaffoldWatchContractEvent
 
-The `useScaffoldWatchContractEvent` hook is a custom React hook designed to listen for specific event emission from your contract, and fire a callback provided by you on every emission. It simplifies the process of reading contract data by using Starknet React and StarknetJS utilities. It works with Starknet's WebSocket RPCs by default and will fallback to polling if it is not supported within the browser or device.
+The `useScaffoldWatchContractEvent` hook is a custom React hook designed to listen for specific event emission from your contract, and fire a callback provided by you on every emission. It simplifies the process of reading contract data by using Starknet Start and StarknetJS utilities. It works with Starknet's WebSocket RPCs by default and will fallback to polling if it is not supported within the browser or device.
 
 ## Usage Example
 
@@ -50,7 +50,7 @@ It is recommended to `setState` using [updater function](https://react.dev/refer
 ## Best Practices
 
 - Use this hook in components that need to fire a function when an event occurs within the contract..
-- Ensure that the component using this hook is wrapped in a StarkNet React provider.
+- Ensure that the component using this hook is wrapped in a StarkNet Start provider.
 
 :::note
 

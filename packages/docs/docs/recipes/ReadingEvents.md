@@ -5,7 +5,7 @@ description: How to read and process events emitted by Starknet contracts
 
 # Reading Events from Starknet Contracts
 
-This recipe demonstrates how to read and process events emitted by Starknet contracts using the starknet-react library. We will try to create a simple Token Transfer History table using the `useScaffoldEventHistory` hook.
+This recipe demonstrates how to read and process events emitted by Starknet contracts using the starknet-start library. We will try to create a simple Token Transfer History table using the `useScaffoldEventHistory` hook.
 
 <details open>
 <summary>Here is the full code, which we will implement in the guide below:</summary>
