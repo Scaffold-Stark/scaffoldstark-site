@@ -22,7 +22,7 @@ RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
 
-RUN yarn install --immutable 
+RUN yarn install --frozen-lockfile
 
 
 # Dependencies stage for auco docs app
@@ -52,7 +52,7 @@ COPY --from=docs-deps /app/packages/docs/.env.example ./.env.example
 COPY packages/docs .
 # Copy environment file for docs build
 COPY .env ./
-RUN yarn build || (echo "Proceeding with partial build" && mkdir -p build)
+RUN yarn build
 
 # Builder stage for auco docs app
 FROM base AS auco-docs-builder
@@ -60,10 +60,11 @@ WORKDIR /app/packages/auco-docs
 COPY --from=auco-docs-deps /app/packages/auco-docs/node_modules ./node_modules
 COPY --from=auco-docs-deps /app/packages/auco-docs/.env.example ./.env.example
 COPY packages/auco-docs .
-RUN npm run build || (echo "Proceeding with partial build" && mkdir -p build)
+RUN npm run build
 
 # Final runner stage - no .env file needed here
 FROM base AS runner
+RUN npm install -g serve
 WORKDIR /app
 
 # Copy main app
@@ -104,10 +105,10 @@ wait_for_service() {\n\
 }\n\
 \n\
 # Start docs service in background\n\
-cd /app/packages/docs && npx serve -s build -l 3001 --single &\n\
+cd /app/packages/docs && serve -s build -l 3001 --single &\n\
 \n\
 # Start auco-docs service in background\n\
-cd /app/packages/auco-docs && npx serve -s build -l 3002 --single &\n\
+cd /app/packages/auco-docs && serve -s build -l 3002 --single &\n\
 \n\
 # Wait for both services to be ready before starting the main Next.js app\n\
 wait_for_service localhost 3001\n\
