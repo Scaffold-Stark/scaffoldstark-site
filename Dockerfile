@@ -25,15 +25,6 @@ COPY .env ./
 RUN yarn install --frozen-lockfile
 
 
-# Dependencies stage for auco docs app
-FROM base AS auco-docs-deps
-WORKDIR /app/packages/auco-docs
-COPY packages/auco-docs/package.json packages/auco-docs/package-lock.json ./
-# Create an empty .env.example to prevent the build error
-RUN touch .env.example
-RUN npm ci || (echo "Ignoring npm install error" && true)
-
-
 # Builder stage for main app
 FROM base AS main-builder
 WORKDIR /app
@@ -54,14 +45,6 @@ COPY packages/docs .
 COPY .env ./
 RUN yarn build
 
-# Builder stage for auco docs app
-FROM base AS auco-docs-builder
-WORKDIR /app/packages/auco-docs
-COPY --from=auco-docs-deps /app/packages/auco-docs/node_modules ./node_modules
-COPY --from=auco-docs-deps /app/packages/auco-docs/.env.example ./.env.example
-COPY packages/auco-docs .
-RUN npm run build
-
 # Final runner stage - no .env file needed here
 FROM base AS runner
 RUN npm install -g serve
@@ -74,11 +57,6 @@ COPY --from=main-builder /app/packages/nextjs/.next/static ./packages/nextjs/.ne
 
 # Copy docs app
 COPY --from=docs-builder /app/packages/docs/build ./packages/docs/build
-COPY --from=docs-builder /app/packages/docs/node_modules ./packages/docs/node_modules
-
-# Copy auco docs app
-COPY --from=auco-docs-builder /app/packages/auco-docs/build ./packages/auco-docs/build
-COPY --from=auco-docs-builder /app/packages/auco-docs/node_modules ./packages/auco-docs/node_modules
 
 # Create a start script with health checks to ensure services are ready before starting the main app
 RUN printf '#!/bin/sh\n\
@@ -107,12 +85,8 @@ wait_for_service() {\n\
 # Start docs service in background\n\
 cd /app/packages/docs && serve -s build -l 3001 --single &\n\
 \n\
-# Start auco-docs service in background\n\
-cd /app/packages/auco-docs && serve -s build -l 3002 --single &\n\
-\n\
-# Wait for both services to be ready before starting the main Next.js app\n\
+# Wait for docs service to be ready before starting the main Next.js app\n\
 wait_for_service localhost 3001\n\
-wait_for_service localhost 3002\n\
 \n\
 # Start the main Next.js application\n\
 cd /app/packages/nextjs && node server.js\n' > /app/start.sh

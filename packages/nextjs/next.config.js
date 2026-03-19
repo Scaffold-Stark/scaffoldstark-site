@@ -13,11 +13,6 @@ const nextConfig = {
         destination: "/docs/",
         permanent: true,
       },
-      {
-        source: "/auco",
-        destination: "/auco/",
-        permanent: true,
-      },
     ];
   },
   async rewrites() {
@@ -25,10 +20,6 @@ const nextConfig = {
       {
         source: "/docs/:path*",
         destination: "http://localhost:3001/:path*",
-      },
-      {
-        source: "/auco/:path*",
-        destination: "http://localhost:3002/:path*",
       },
     ];
   },
