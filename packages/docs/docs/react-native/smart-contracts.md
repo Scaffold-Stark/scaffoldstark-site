@@ -37,25 +37,25 @@ Run these commands from the project root:
 
 | Command | Description |
 |---------|-------------|
-| `npm run chain` | Start local Starknet devnet on port 5050 |
-| `npm run compile` | Compile Cairo contracts with Scarb |
-| `npm run deploy` | Deploy contracts to the active network |
-| `npm run deploy:clear` | Deploy with reset (clear previous deployments) |
-| `npm run deploy:no-reset` | Deploy without resetting existing contracts |
-| `npm run test` | Run contract tests with snforge |
-| `npm run verify` | Verify contracts on Starkscan/Voyager |
+| `yarn chain` | Start local Starknet devnet on port 5050 |
+| `yarn compile` | Compile Cairo contracts with Scarb |
+| `yarn deploy` | Deploy contracts to the active network |
+| `yarn deploy:clear` | Deploy with reset (clear previous deployments) |
+| `yarn deploy:no-reset` | Deploy without resetting existing contracts |
+| `yarn test` | Run contract tests with snforge |
+| `yarn verify` | Verify contracts on Starkscan/Voyager |
 
 ### Starting Local Development
 
 ```bash
 # Terminal 1: Start local devnet
-npm run chain
+yarn chain
 
 # Terminal 2: Deploy contracts
-npm run deploy
+yarn deploy
 
 # Terminal 3: Start mobile app
-npm run start
+yarn start
 ```
 
 ## Writing Contracts
@@ -183,13 +183,13 @@ main();
 
 ```bash
 # Deploy to local devnet (default)
-npm run deploy
+yarn deploy
 
 # Deploy to Sepolia testnet
-npm run deploy -- --network sepolia
+yarn deploy --network sepolia
 
 # Deploy to mainnet
-npm run deploy -- --network mainnet
+yarn deploy --network mainnet
 ```
 
 ## Testing Contracts
@@ -230,13 +230,13 @@ fn test_unauthorized() {
 
 ```bash
 # Run all tests
-npm run test
+yarn test
 
 # Run specific test file
-npm run test -- tests/test_your_contract.cairo
+yarn test tests/test_your_contract.cairo
 
 # Run with verbose output
-npm run test -- -v
+yarn test -v
 ```
 
 ## Contract Verification
@@ -245,15 +245,15 @@ Verify your contracts on block explorers:
 
 ```bash
 # Verify on Starkscan (Sepolia)
-npm run verify -- --network sepolia
+yarn verify --network sepolia
 
 # Verify on Voyager
-npm run verify -- --network sepolia --explorer voyager
+yarn verify --network sepolia --explorer voyager
 ```
 
 ## Auto-Generated Types
 
-When you run `npm run deploy`, the deployment script automatically:
+When you run `yarn deploy`, the deployment script automatically:
 
 1. Compiles your contracts
 2. Deploys to the target network
@@ -334,7 +334,7 @@ scarb --version
 # Should be 2.16.0
 
 # Clean and recompile
-npm run compile
+yarn compile
 ```
 
 ### Deployment Failures
@@ -344,14 +344,14 @@ npm run compile
 curl http://127.0.0.1:5050/is_alive
 
 # Check account balance
-npm run chain  # Devnet provides prefunded accounts
+yarn chain  # Devnet provides prefunded accounts
 ```
 
 ### Type Generation Issues
 
 ```bash
 # Regenerate types
-npm run deploy:clear
+yarn deploy:clear
 ```
 
 ## Next Steps
