@@ -49,9 +49,9 @@ RUN yarn build
 FROM base AS runner
 WORKDIR /app
 
-# Copy main app
-COPY --from=main-builder /app/packages/nextjs/public ./packages/nextjs/public
+# Copy standalone server first, then overlay static assets on top
 COPY --from=main-builder /app/packages/nextjs/.next/standalone/packages/nextjs ./packages/nextjs
+COPY --from=main-builder /app/packages/nextjs/public ./packages/nextjs/public
 COPY --from=main-builder /app/packages/nextjs/.next/static ./packages/nextjs/.next/static
 
 # Copy docs static build directly into Next.js public directory
