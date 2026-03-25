@@ -12,7 +12,7 @@ This guide covers mobile-specific features, wallet integration, UI components, a
 
 ### Cavos Aegis (Wallet-as-a-Service)
 
-Scaffold Stark RN uses [Cavos Aegis](https://cavos.xyz) for wallet management on Sepolia and Mainnet. This provides:
+Scaffold Stark RN uses [Cavos Aegis](https://cavos.xyz) (`@cavos/aegis`) for wallet management on Sepolia and Mainnet. This provides:
 
 - **Seamless onboarding**: No wallet app installation required
 - **Social login**: Sign in with email, Google, Apple, etc.
@@ -21,43 +21,52 @@ Scaffold Stark RN uses [Cavos Aegis](https://cavos.xyz) for wallet management on
 
 #### Configuration
 
-```bash
-# packages/rn/.env
-EXPO_PUBLIC_AEGIS_APP_ID=your_aegis_app_id
-```
-
-```tsx
-// App setup (already configured in scaffold)
-import { CavosProvider } from "@cavos/react-native";
-
-export default function App() {
-  return (
-    <CavosProvider appId={process.env.EXPO_PUBLIC_AEGIS_APP_ID}>
-      <StarknetProvider>
-        {/* Your app */}
-      </StarknetProvider>
-    </CavosProvider>
-  );
-}
-```
-
-### Local Development (Devnet)
-
-For local development, the app connects directly to devnet accounts without wallet authentication:
+Aegis is configured in `packages/rn/configs/aegisConfig.ts`:
 
 ```typescript
-// Devnet uses prefunded accounts
-// No wallet configuration needed
-yarn chain  # Provides accounts with test ETH/STRK
+const aegisConfig = {
+  network: "SN_DEVNET" | "SN_SEPOLIA",
+  appName: "Starknet React Native",
+  appId: process.env.EXPO_PUBLIC_AEGIS_APP_ID,
+  paymasterApiKey: process.env.EXPO_PUBLIC_AVNU_API_KEY,
+  enableLogging: true,
+};
 ```
+
+The scaffold automatically wraps your app with the necessary providers in `ScaffoldStarkAppWithProviders`:
+
+```tsx
+// Already configured in the scaffold
+<StarknetConfig connectors={connectors} provider={provider}>
+  <AegisProvider config={aegisConfig}>
+    <ThemeProvider>
+      {children}
+    </ThemeProvider>
+  </AegisProvider>
+</StarknetConfig>
+```
+
+### Burner Wallet (Devnet)
+
+For local development, the scaffold includes a built-in burner wallet that uses prefunded devnet accounts. Burner wallet keys are stored securely using `expo-secure-store`.
+
+The burner wallet is automatically available when `devnet` is included in your `scaffold.config.ts` target networks.
 
 ### Supported Wallets
 
 | Environment | Wallet Solution | Notes |
 |-------------|-----------------|-------|
-| Devnet | Direct account | Prefunded test accounts |
-| Sepolia | Cavos Aegis | Wallet-as-a-Service |
-| Mainnet | Cavos Aegis | Wallet-as-a-Service |
+| Devnet | Burner Wallet | Prefunded test accounts, stored in secure storage |
+| Sepolia | Cavos Aegis (CavosConnector) | Wallet-as-a-Service with social login |
+| Mainnet | Cavos Aegis (CavosConnector) | Wallet-as-a-Service with social login |
+
+Wallet connectors are configured in `packages/rn/configs/connectors.ts`:
+
+```typescript
+// Connectors include:
+// 1. CavosConnector - social login, web2 wallet onboarding
+// 2. BurnerConnector - local devnet testing (when devnet is in targetNetworks)
+```
 
 :::note Future Support
 Support for external mobile wallets (Argent Mobile, Braavos) via WalletConnect is planned for future releases.
@@ -102,20 +111,55 @@ export default function Card() {
 
 ### Dark Mode Support
 
+The scaffold includes a `ThemeProvider` with a built-in color system. Use the `useTheme` hook to access theme state:
+
 ```tsx
-import { View, Text, useColorScheme } from "react-native";
+import { View, Text } from "react-native";
+import { useTheme, themeColors } from "@/components/scaffold-stark/ThemeProvider";
 
 export default function ThemedCard() {
-  const colorScheme = useColorScheme();
+  const { theme, isDark, toggleTheme } = useTheme();
+  const colors = themeColors[theme];
 
   return (
-    <View className="bg-white dark:bg-gray-800 p-4 rounded-xl">
-      <Text className="text-gray-900 dark:text-white">
-        Adapts to system theme
+    <View style={{ backgroundColor: colors.background, padding: 16, borderRadius: 12 }}>
+      <Text style={{ color: colors.text }}>
+        Current theme: {theme}
       </Text>
     </View>
   );
 }
+```
+
+The theme colors include:
+
+```typescript
+{
+  light: {
+    primary: "#8B5CF6",        // Purple
+    background: "#FFFFFF",
+    text: "#000000",
+    border: "#8B45FD",
+    // ... additional colors
+  },
+  dark: {
+    primary: "#8B5CF6",        // Purple
+    background: "#111827",     // Dark gray
+    text: "#FFFFFF",
+    border: "#374151",
+    // ... additional colors
+  },
+}
+```
+
+You can also use NativeWind's dark mode classes:
+
+```tsx
+<View className="bg-white dark:bg-gray-800 p-4 rounded-xl">
+  <Text className="text-gray-900 dark:text-white">
+    Adapts to system theme
+  </Text>
+</View>
 ```
 
 ### Common Component Patterns
@@ -264,23 +308,19 @@ const queryClient = new QueryClient({
 });
 ```
 
-#### Local Storage Cache
+#### Secure Storage
 
-For frequently accessed data:
+For sensitive data (wallet keys, tokens), use `expo-secure-store`:
 
 ```tsx
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
-// Cache contract addresses locally
-const cacheContractData = async (key: string, data: any) => {
-  await AsyncStorage.setItem(key, JSON.stringify(data));
-};
-
-const getCachedData = async (key: string) => {
-  const cached = await AsyncStorage.getItem(key);
-  return cached ? JSON.parse(cached) : null;
-};
+// Store sensitive data securely
+await SecureStore.setItemAsync("wallet_key", value);
+const key = await SecureStore.getItemAsync("wallet_key");
 ```
+
+The scaffold uses `expo-secure-store` internally for burner wallet key storage and auto-connect state.
 
 ### Offline Handling
 
@@ -375,15 +415,16 @@ export default function FormScreen() {
 ### Sensitive Data
 
 ```tsx
-// DON'T: Store private keys in AsyncStorage
+// DON'T: Store private keys in plain storage
 // DON'T: Log sensitive data
 console.log(privateKey); // Never do this
 
-// DO: Use Cavos Aegis for secure key management
-// DO: Use secure storage for sensitive data
+// DO: Use Cavos Aegis for secure key management on testnet/mainnet
+// DO: Use expo-secure-store for sensitive data (scaffold does this for burner wallet keys)
 import * as SecureStore from "expo-secure-store";
 
 await SecureStore.setItemAsync("sensitive_key", value);
+const value = await SecureStore.getItemAsync("sensitive_key");
 ```
 
 ### Deep Link Validation

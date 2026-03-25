@@ -27,11 +27,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.sh | sh
 ```
 
 This will install:
-- **Scarb 2.14.0** - Cairo package manager and build toolchain
-- **Starknet Foundry 0.54.0** - Testing framework for Starknet
+- **Scarb 2.16.0** - Cairo package manager and build toolchain
+- **Starknet Foundry 0.57.0** - Testing framework for Starknet
 - **asdf** - Version manager for tool versions
 - **Cairo 1.0 VSCode Extension** - Syntax highlighting and language support
-- **Starknet Devnet 0.7.1** - Local development network
+- **Starknet Devnet 0.7.2** - Local development network
 
 ### Mobile Development Setup
 
@@ -79,45 +79,55 @@ This will install:
 
 ## Quick Start
 
-### 1. Clone the Repository
+### 1. Create a New Project
 
+Use the `create-stark-rn` CLI to scaffold a new project:
+
+```bash
+npx create-stark-rn my-dapp
+```
+
+The CLI will interactively prompt you for:
+- **Project name** (default: `my-stark-app`)
+- **Include example smart contracts** (StarkNet Foundry) — default: yes
+- **Package manager** — npm, yarn, or pnpm (auto-detects your system default)
+
+This creates a monorepo with `packages/rn` (React Native app) and optionally `packages/snfoundry` (smart contracts), installs dependencies, and initializes a git repository.
+
+:::tip Alternative: Clone the Repository
+You can also clone the repository directly for development or contribution:
 ```bash
 git clone https://github.com/Scaffold-Stark/scaffold-stark-rn.git
 cd scaffold-stark-rn
-```
-
-### 2. Install Dependencies
-
-```bash
 yarn install
 ```
+:::
 
-This will install dependencies for both the React Native app (`packages/rn`) and smart contracts (`packages/snfoundry`).
-
-### 3. Start the Local Devnet
+### 2. Start the Local Devnet
 
 In a separate terminal, start the Starknet local development network:
 
 ```bash
-yarn chain
+cd my-dapp
+npm run chain
 ```
 
 This runs `starknet-devnet` with a seed of 0 for consistent account addresses during development.
 
-### 4. Deploy Contracts
+### 3. Deploy Contracts
 
 With the devnet running, deploy the example contracts:
 
 ```bash
-yarn deploy
+npm run deploy
 ```
 
-### 5. Start the Mobile App
+### 4. Start the Mobile App
 
 #### For iOS:
 
 ```bash
-yarn ios
+npm run ios
 ```
 
 This will:
@@ -128,7 +138,7 @@ This will:
 #### For Android:
 
 ```bash
-yarn android
+npm run android
 ```
 
 This will:
@@ -139,52 +149,107 @@ This will:
 #### For Development Server Only:
 
 ```bash
-yarn start
+npm run start
 ```
 
 Then press `i` for iOS or `a` for Android, or scan the QR code with the Expo Go app on your physical device.
+
+## Project Structure
+
+After scaffolding, your project will have this structure:
+
+```
+my-dapp/
+├── packages/
+│   ├── rn/                          # React Native app (Expo)
+│   │   ├── app/                     # Expo Router file-based routing
+│   │   │   ├── (tabs)/              # Tab layout group
+│   │   │   │   ├── index.tsx        # Home page
+│   │   │   │   ├── debug.tsx        # Debug contracts page
+│   │   │   │   ├── settings.tsx     # Settings/wallet page
+│   │   │   │   └── _layout.tsx      # Custom tab navigator
+│   │   │   ├── _layout.tsx          # Root layout with providers
+│   │   │   └── _components/         # App-specific components
+│   │   ├── components/
+│   │   │   └── scaffold-stark/      # Reusable scaffold components
+│   │   ├── hooks/
+│   │   │   └── scaffold-stark/      # Custom Starknet hooks
+│   │   ├── configs/                 # App configuration
+│   │   │   ├── connectors.ts        # Wallet connectors
+│   │   │   ├── provider.ts          # RPC provider setup
+│   │   │   └── aegisConfig.ts       # Account abstraction config
+│   │   ├── contracts/               # Auto-generated contract types
+│   │   ├── constants/               # Chain definitions
+│   │   ├── scaffold.config.ts       # Target networks, polling config
+│   │   └── package.json
+│   └── snfoundry/                   # Smart contracts (optional)
+│       ├── contracts/src/           # Cairo smart contracts
+│       ├── scripts-ts/              # Deployment scripts
+│       └── Scarb.toml               # Cairo package config
+└── package.json                     # Monorepo workspace
+```
 
 ## Connecting to Networks
 
 ### Local Devnet (Default)
 
-The app is pre-configured to connect to `http://localhost:5050` (or `http://10.0.2.2:5050` on Android emulator). No additional configuration needed.
+The app is pre-configured to connect to `http://127.0.0.1:5050` (or `http://10.0.2.2:5050` on Android emulator). No additional configuration needed.
 
 ### Sepolia Testnet
 
-1. Update your environment variables in `packages/rn/.env`:
+Update your environment variables in `packages/rn/.env`:
 
 ```bash
-EXPO_PUBLIC_PROVIDER_URL=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
-```
+# Provider URLs (per-network)
+EXPO_PUBLIC_DEVNET_PROVIDER_URL=http://127.0.0.1:5050
+EXPO_PUBLIC_SEPOLIA_PROVIDER_URL=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
+EXPO_PUBLIC_MAINNET_PROVIDER_URL=https://starknet-mainnet.public.blastapi.io/rpc/v0_8
 
-2. For wallet functionality on testnet/mainnet, configure Cavos Aegis:
-
-```bash
+# Account abstraction (Cavos Aegis)
 EXPO_PUBLIC_AEGIS_APP_ID=your_aegis_app_id
+
+# Transaction sponsorship (AVNU Paymaster)
 EXPO_PUBLIC_AVNU_API_KEY=your_avnu_api_key
 ```
+
+All environment variables must be prefixed with `EXPO_PUBLIC_` to be accessible in React Native (Expo requirement).
 
 :::tip Getting API Keys
 - **Cavos Aegis**: Sign up at [Cavos](https://cavos.xyz) to get your Wallet-as-a-Service App ID
 - **AVNU**: Register at [AVNU](https://avnu.fi) for transaction sponsorship API key
 :::
 
+### App Configuration
+
+The main app configuration is in `packages/rn/scaffold.config.ts`:
+
+```typescript
+const scaffoldConfig = {
+  targetNetworks: [chains.devnet],       // Networks to support
+  pollingInterval: 30_000,               // Data refresh interval (ms)
+  onlyLocalBurnerWallet: false,          // Restrict burner to devnet only
+  walletAutoConnect: true,               // Auto-reconnect wallet on app load
+  autoConnectTTL: 60_000,               // Auto-connect time-to-live (ms)
+};
+```
+
 ## Available Scripts
+
+Run these from the project root using your chosen package manager (npm, yarn, or pnpm):
 
 | Command | Description |
 |---------|-------------|
-| `yarn start` | Start Expo development server |
-| `yarn ios` | Start app on iOS Simulator |
-| `yarn android` | Start app on Android Emulator |
-| `yarn chain` | Start local Starknet devnet |
-| `yarn deploy` | Deploy contracts to active network |
-| `yarn deploy:clear` | Deploy contracts with reset |
-| `yarn compile` | Compile Cairo smart contracts |
-| `yarn test` | Run smart contract tests |
-| `yarn verify` | Verify contracts on block explorer |
-| `yarn format` | Format code with Prettier |
-| `yarn lint` | Run ESLint |
+| `npm run start` | Start Expo development server |
+| `npm run ios` | Start app on iOS Simulator |
+| `npm run android` | Start app on Android Emulator |
+| `npm run chain` | Start local Starknet devnet |
+| `npm run deploy` | Deploy contracts to active network |
+| `npm run deploy:clear` | Deploy contracts with reset |
+| `npm run compile` | Compile Cairo smart contracts |
+| `npm run test` | Run smart contract tests |
+| `npm run verify` | Verify contracts on block explorer |
+| `npm run format` | Format code with Prettier |
+| `npm run lint` | Run ESLint |
 
 ## Compatible Versions
 
@@ -193,11 +258,15 @@ EXPO_PUBLIC_AVNU_API_KEY=your_avnu_api_key
 | React | 19.1.0 |
 | React Native | 0.81.4 |
 | Expo | 54.x |
-| starknet.js | 9.2.1 |
+| starknet.js | 8.5.3 |
 | @starknet-react/core | 5.0.1 |
-| Scarb | 2.14.0 |
-| Starknet Foundry | 0.54.0 |
-| Starknet Devnet | 0.7.1 |
+| @cavos/aegis | 0.1.5 |
+| nativewind | 4.1.23 |
+| zustand | 5.0.8 |
+| @tanstack/react-query | 5.87.1 |
+| Scarb | 2.16.0 |
+| Starknet Foundry | 0.57.0 |
+| Starknet Devnet | 0.7.2 |
 
 ## Troubleshooting
 
@@ -240,14 +309,14 @@ Ensure you have the correct version installed:
 
 ```bash
 starknet-devnet --version
-# Should be 0.7.1
+# Should be 0.7.2
 ```
 
 If not, reinstall via asdf:
 
 ```bash
-asdf install starknet-devnet 0.7.1
-asdf set starknet-devnet 0.7.1
+asdf install starknet-devnet 0.7.2
+asdf set starknet-devnet 0.7.2
 ```
 
 ## Next Steps

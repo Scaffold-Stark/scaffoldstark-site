@@ -16,6 +16,12 @@ Scaffold Stark React Native (scaffold-stark-rn) is a mobile development framewor
 
 Scaffold Stark React Native combines the power of React Native with Expo to provide a seamless mobile development experience for Starknet. It shares the same smart contract infrastructure (`snfoundry` package) with the web version while providing mobile-optimized hooks and components.
 
+Create a new project in seconds with the CLI:
+
+```bash
+npx create-stark-rn my-dapp
+```
+
 | packages/rn (React Native App) | packages/snfoundry (Smart Contracts) |
 |--------------------------------|--------------------------------------|
 | Expo 54 | Cairo Contracts |
@@ -30,9 +36,10 @@ Scaffold Stark React Native combines the power of React Native with Expo to prov
 | **Framework** | Next.js | React Native + Expo |
 | **Routing** | Next.js App Router | Expo Router (file-based) |
 | **Styling** | Tailwind CSS | NativeWind (Tailwind for RN) |
-| **Wallet Support** | Browser Extensions | Cavos Aegis (WaaS) |
+| **Wallet Support** | Browser Extensions | Cavos Aegis (WaaS) + Burner Wallet |
 | **Platform** | Web Browsers | iOS & Android |
-| **State Management** | React Context | Zustand |
+| **State Management** | Zustand | Zustand |
+| **Storage** | localStorage | expo-secure-store |
 | **Smart Contracts** | `packages/snfoundry` | `packages/snfoundry` (identical) |
 
 ## Target Audience
@@ -54,10 +61,14 @@ Scaffold Stark React Native is designed for:
 
 ## Features
 
+- **CLI Scaffolding**: Create new projects instantly with `npx create-stark-rn` — interactive prompts for project name, smart contracts inclusion, and package manager
 - **Pre-configured Expo Project**: Ready-to-run mobile app with Starknet integration
 - **Scaffold Stark Hooks**: Familiar hooks adapted for React Native (`useScaffoldReadContract`, `useScaffoldWriteContract`, etc.)
 - **Wallet-as-a-Service**: Built-in Cavos Aegis integration for seamless wallet management
+- **Burner Wallet**: Local devnet testing with secure storage via `expo-secure-store`
 - **Transaction Sponsorship**: AVNU integration for gasless transactions
+- **Debug Contracts UI**: Built-in contract debugging page with auto-generated forms from ABI
+- **Theme Support**: Light/dark mode with ThemeProvider and consistent color system
 - **Local Development**: Full local devnet support for rapid iteration
 - **Type-Safe Contracts**: Auto-generated TypeScript types from Cairo contracts
 

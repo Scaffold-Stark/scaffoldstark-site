@@ -49,13 +49,13 @@ Run these commands from the project root:
 
 ```bash
 # Terminal 1: Start local devnet
-yarn chain
+npm run chain
 
 # Terminal 2: Deploy contracts
-yarn deploy
+npm run deploy
 
 # Terminal 3: Start mobile app
-yarn ios  # or yarn android
+npm run start
 ```
 
 ## Writing Contracts
@@ -310,11 +310,11 @@ my-starknet-project/
 
 | Tool | Version |
 |------|---------|
-| Scarb | 2.14.0 |
-| Starknet Foundry | 0.54.0 |
-| Cairo | 2.14.x |
-| starknet.js | 9.2.1 |
-| Starknet Devnet | 0.7.1 |
+| Scarb | 2.16.0 |
+| Starknet Foundry | 0.57.0 |
+| Cairo | 2.16.x |
+| starknet.js | 8.5.3 |
+| Starknet Devnet | 0.7.2 |
 
 ## Troubleshooting
 
@@ -323,26 +323,27 @@ my-starknet-project/
 ```bash
 # Check Scarb version
 scarb --version
+# Should be 2.16.0
 
 # Clean and recompile
-yarn clean && yarn compile
+npm run compile
 ```
 
 ### Deployment Failures
 
 ```bash
 # Check devnet is running
-curl http://localhost:5050/is_alive
+curl http://127.0.0.1:5050/is_alive
 
 # Check account balance
-yarn chain  # Devnet provides prefunded accounts
+npm run chain  # Devnet provides prefunded accounts
 ```
 
 ### Type Generation Issues
 
 ```bash
 # Regenerate types
-yarn deploy:clear
+npm run deploy:clear
 ```
 
 ## Next Steps

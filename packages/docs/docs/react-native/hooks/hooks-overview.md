@@ -17,16 +17,46 @@ Scaffold Stark React Native provides a set of custom hooks that simplify interac
 | [useScaffoldReadContract](./useScaffoldReadContract) | Read data from smart contract view functions |
 | [useScaffoldWriteContract](./useScaffoldWriteContract) | Execute write transactions on smart contracts |
 | [useScaffoldMultiWriteContract](./useScaffoldMultiWriteContract) | Execute multiple transactions in a single batch |
+| useScaffoldContract | Get a typed contract instance (starknet.Contract with ABI) |
 | [useDeployedContractInfo](./useDeployedContractInfo) | Get deployed contract address and ABI |
 | [useScaffoldEventHistory](./useScaffoldEventHistory) | Query historical contract events |
+| useScaffoldWatchContractEvent | Watch a specific contract event in real-time |
 
-### Utility Hooks
+### Account & Profile Hooks
 
 | Hook | Description |
 |------|-------------|
 | [useScaffoldStrkBalance](./useScaffoldStrkBalance) | Get STRK token balance for an address |
-| [useTargetNetwork](./useTargetNetwork) | Get and manage current target network |
-| [useTransactor](./useTransactor) | Low-level transaction execution with notifications |
+| useScaffoldStarkProfile | Fetch Starknet ID profile (name, avatar) for an address |
+
+### Network Hooks
+
+| Hook | Description |
+|------|-------------|
+| [useTargetNetwork](./useTargetNetwork) | Get current target network configuration |
+| useSwitchNetwork | Switch between available networks |
+| useNetworkColor | Get theme-aware network display color |
+
+### Wallet & Connection Hooks
+
+| Hook | Description |
+|------|-------------|
+| useAutoConnect | Auto-reconnect wallet on app load (respects manual disconnect and TTL) |
+
+### Low-Level Hooks
+
+| Hook | Description |
+|------|-------------|
+| [useTransactor](./useTransactor) | Low-level transaction execution with fee estimation and notifications |
+| useNativeCurrencyPrice | Poll and cache native currency price |
+| useAnimationConfig | Get theme-aware animation configuration |
+
+### WebSocket Hooks
+
+| Hook | Description |
+|------|-------------|
+| useWebSocketData | Generic WebSocket data fetching |
+| useScaffoldWebSocketEvents | Watch contract events via WebSocket |
 
 ## Comparison with Web Hooks
 
@@ -36,9 +66,10 @@ The React Native hooks are designed to mirror the Scaffold Stark 2 web hooks as 
 |---------|-----------|--------------|
 | API Signature | Identical | Identical |
 | Return Types | Same | Same |
-| Wallet Integration | Browser wallets | Cavos Aegis (WaaS) |
-| Toast Notifications | react-hot-toast | React Native Toast |
+| Wallet Integration | Browser wallets | Cavos Aegis + Burner Wallet |
+| Toast Notifications | react-hot-toast | toastify-react-native |
 | Network Switching | Wallet prompt | In-app handling |
+| Secure Storage | localStorage | expo-secure-store |
 
 ## Type Safety
 
@@ -135,6 +166,39 @@ const { sendAsync, isLoading, status } = useScaffoldWriteContract({
   onPress={sendAsync}
   disabled={isLoading}
 />
+```
+
+## Quick Reference: Additional Hooks
+
+### useScaffoldContract
+
+Get a typed contract instance for direct interaction:
+
+```typescript
+const { data: contract, isLoading } = useScaffoldContract({
+  contractName: "YourContract",
+});
+
+// Use the starknet.Contract instance directly
+const result = await contract?.call("myMethod", [arg1, arg2]);
+```
+
+### useScaffoldStarkProfile
+
+Fetch Starknet ID profile data for an address:
+
+```typescript
+const { data: profile, isLoading } = useScaffoldStarkProfile(address);
+// profile: { name, profilePicture }
+```
+
+### useSwitchNetwork
+
+Switch between configured networks:
+
+```typescript
+const { switchNetwork, availableNetworks } = useSwitchNetwork();
+await switchNetwork("mainnet");
 ```
 
 ## Next Steps
