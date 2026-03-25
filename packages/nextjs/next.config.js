@@ -15,14 +15,6 @@ const nextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      {
-        source: "/docs/:path*",
-        destination: "http://localhost:3001/:path*",
-      },
-    ];
-  },
   eslint: {
     ignoreDuringBuilds: process.env.NEXT_PUBLIC_IGNORE_BUILD_ERROR === "true",
   },

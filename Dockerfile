@@ -47,7 +47,6 @@ RUN yarn build
 
 # Final runner stage - no .env file needed here
 FROM base AS runner
-RUN npm install -g serve
 WORKDIR /app
 
 # Copy main app
@@ -55,46 +54,13 @@ COPY --from=main-builder /app/packages/nextjs/public ./packages/nextjs/public
 COPY --from=main-builder /app/packages/nextjs/.next/standalone/packages/nextjs ./packages/nextjs
 COPY --from=main-builder /app/packages/nextjs/.next/static ./packages/nextjs/.next/static
 
-# Copy docs app
-COPY --from=docs-builder /app/packages/docs/build ./packages/docs/build
-
-# Create a start script with health checks to ensure services are ready before starting the main app
-RUN printf '#!/bin/sh\n\
-\n\
-# Function to wait for a service to be ready\n\
-wait_for_service() {\n\
-    local host=$1\n\
-    local port=$2\n\
-    local max_attempts=30\n\
-    local attempt=1\n\
-    \n\
-    echo "Waiting for service on $host:$port..."\n\
-    while [ $attempt -le $max_attempts ]; do\n\
-        if wget -q --spider "http://$host:$port" 2>/dev/null; then\n\
-            echo "Service on port $port is ready!"\n\
-            return 0\n\
-        fi\n\
-        echo "Attempt $attempt/$max_attempts: Service on port $port not ready yet..."\n\
-        sleep 1\n\
-        attempt=$((attempt + 1))\n\
-    done\n\
-    echo "Warning: Service on port $port did not become ready in time, proceeding anyway..."\n\
-    return 1\n\
-}\n\
-\n\
-# Start docs service in background\n\
-cd /app/packages/docs && serve -s build -l 3001 --single &\n\
-\n\
-# Wait for docs service to be ready before starting the main Next.js app\n\
-wait_for_service localhost 3001\n\
-\n\
-# Start the main Next.js application\n\
-cd /app/packages/nextjs && node server.js\n' > /app/start.sh
-RUN chmod +x /app/start.sh
+# Copy docs static build directly into Next.js public directory
+COPY --from=docs-builder /app/packages/docs/build ./packages/nextjs/public/docs
 
 ARG PORT=3000
 ENV NODE_ENV=production
 ENV PORT=$PORT
 EXPOSE $PORT
 
-CMD ["/app/start.sh"]
+# Single process - no second service to crash
+CMD ["node", "packages/nextjs/server.js"]
