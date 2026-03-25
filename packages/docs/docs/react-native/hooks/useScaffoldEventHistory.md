@@ -118,6 +118,7 @@ export default function MyTransfers() {
 ### With Block and Transaction Data
 
 ```tsx
+import { View, Text, FlatList } from "react-native";
 import { useScaffoldEventHistory } from "@/hooks/scaffold-stark";
 
 export default function DetailedEventList() {
@@ -183,7 +184,7 @@ export default function LiveOrderBook() {
 
 ```tsx
 import { useState } from "react";
-import { View, Button, FlatList } from "react-native";
+import { View, Text, Button, FlatList } from "react-native";
 import { useScaffoldEventHistory } from "@/hooks/scaffold-stark";
 
 const EVENTS_PER_PAGE = 20;
@@ -231,7 +232,6 @@ export default function PaginatedEvents() {
 ```tsx
 import { View, Text, FlatList, Image } from "react-native";
 import { useScaffoldEventHistory } from "@/hooks/scaffold-stark";
-import { formatDistanceToNow } from "date-fns";
 
 export default function ActivityFeed() {
   const { data: activities, isLoading } = useScaffoldEventHistory({

@@ -89,7 +89,7 @@ npx create-stark-rn my-dapp
 
 The CLI will interactively prompt you for:
 - **Project name** (default: `my-stark-app`)
-- **Include example smart contracts** (StarkNet Foundry) — default: yes
+- **Include example smart contracts** (Starknet Foundry) — default: yes
 - **Package manager** — npm, yarn, or pnpm (auto-detects your system default)
 
 This creates a monorepo with `packages/rn` (React Native app) and optionally `packages/snfoundry` (smart contracts), installs dependencies, and initializes a git repository.
@@ -294,11 +294,11 @@ The Android emulator uses `10.0.2.2` to reach the host machine's localhost. Ensu
 
 ```bash
 # Clear Metro cache
-yarn start --reset-cache
+npm run start -- --reset-cache
 
 # Or clean and reinstall
 rm -rf node_modules
-yarn install
+npm install
 ```
 
 ### Starknet Devnet Issues

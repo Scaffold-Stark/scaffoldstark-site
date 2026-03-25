@@ -37,13 +37,13 @@ Run these commands from the project root:
 
 | Command | Description |
 |---------|-------------|
-| `yarn chain` | Start local Starknet devnet on port 5050 |
-| `yarn compile` | Compile Cairo contracts with Scarb |
-| `yarn deploy` | Deploy contracts to the active network |
-| `yarn deploy:clear` | Deploy with reset (clear previous deployments) |
-| `yarn deploy:no-reset` | Deploy without resetting existing contracts |
-| `yarn test` | Run contract tests with snforge |
-| `yarn verify` | Verify contracts on Starkscan/Voyager |
+| `npm run chain` | Start local Starknet devnet on port 5050 |
+| `npm run compile` | Compile Cairo contracts with Scarb |
+| `npm run deploy` | Deploy contracts to the active network |
+| `npm run deploy:clear` | Deploy with reset (clear previous deployments) |
+| `npm run deploy:no-reset` | Deploy without resetting existing contracts |
+| `npm run test` | Run contract tests with snforge |
+| `npm run verify` | Verify contracts on Starkscan/Voyager |
 
 ### Starting Local Development
 
@@ -64,9 +64,17 @@ npm run start
 
 ```cairo
 // contracts/src/YourContract.cairo
+#[starknet::interface]
+trait IYourContract<TContractState> {
+    fn set_greeting(ref self: TContractState, new_greeting: felt252);
+    fn get_greeting(self: @TContractState) -> felt252;
+    fn get_balance(self: @TContractState, account: ContractAddress) -> u256;
+}
+
 #[starknet::contract]
 mod YourContract {
     use starknet::ContractAddress;
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
     use starknet::get_caller_address;
 
     #[storage]
@@ -95,21 +103,21 @@ mod YourContract {
         self.owner.write(get_caller_address());
     }
 
-    #[external(v0)]
-    fn set_greeting(ref self: ContractState, new_greeting: felt252) {
-        let caller = get_caller_address();
-        self.greeting.write(new_greeting);
-        self.emit(GreetingChanged { user: caller, new_greeting });
-    }
+    #[abi(embed_v0)]
+    impl YourContractImpl of super::IYourContract<ContractState> {
+        fn set_greeting(ref self: ContractState, new_greeting: felt252) {
+            let caller = get_caller_address();
+            self.greeting.write(new_greeting);
+            self.emit(GreetingChanged { user: caller, new_greeting });
+        }
 
-    #[external(v0)]
-    fn get_greeting(self: @ContractState) -> felt252 {
-        self.greeting.read()
-    }
+        fn get_greeting(self: @ContractState) -> felt252 {
+            self.greeting.read()
+        }
 
-    #[external(v0)]
-    fn get_balance(self: @ContractState, account: ContractAddress) -> u256 {
-        self.balances.read(account)
+        fn get_balance(self: @ContractState, account: ContractAddress) -> u256 {
+            self.balances.read(account)
+        }
     }
 }
 ```
@@ -175,13 +183,13 @@ main();
 
 ```bash
 # Deploy to local devnet (default)
-yarn deploy
+npm run deploy
 
 # Deploy to Sepolia testnet
-yarn deploy --network sepolia
+npm run deploy -- --network sepolia
 
 # Deploy to mainnet
-yarn deploy --network mainnet
+npm run deploy -- --network mainnet
 ```
 
 ## Testing Contracts
@@ -222,13 +230,13 @@ fn test_unauthorized() {
 
 ```bash
 # Run all tests
-yarn test
+npm run test
 
 # Run specific test file
-yarn test tests/test_your_contract.cairo
+npm run test -- tests/test_your_contract.cairo
 
 # Run with verbose output
-yarn test -v
+npm run test -- -v
 ```
 
 ## Contract Verification
@@ -237,15 +245,15 @@ Verify your contracts on block explorers:
 
 ```bash
 # Verify on Starkscan (Sepolia)
-yarn verify --network sepolia
+npm run verify -- --network sepolia
 
 # Verify on Voyager
-yarn verify --network sepolia --explorer voyager
+npm run verify -- --network sepolia --explorer voyager
 ```
 
 ## Auto-Generated Types
 
-When you run `yarn deploy`, the deployment script automatically:
+When you run `npm run deploy`, the deployment script automatically:
 
 1. Compiles your contracts
 2. Deploys to the target network

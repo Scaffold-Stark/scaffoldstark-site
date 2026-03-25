@@ -166,7 +166,7 @@ export default function ExplorerLink({ transactionHash }) {
 ### Conditional Features by Network
 
 ```tsx
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Linking } from "react-native";
 import { useTargetNetwork } from "@/hooks/scaffold-stark";
 
 export default function FaucetButton() {

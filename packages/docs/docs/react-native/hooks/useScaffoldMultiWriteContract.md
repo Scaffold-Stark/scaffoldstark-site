@@ -116,7 +116,7 @@ export default function SwapButton({ amount, tokenIn, tokenOut, dexAddress }) {
 Send tokens to multiple recipients in one transaction:
 
 ```tsx
-import { View, Button } from "react-native";
+import { View, Text, Button } from "react-native";
 import { useScaffoldMultiWriteContract, createContractCall } from "@/hooks/scaffold-stark";
 
 export default function BatchTransfer({ recipients }) {
@@ -150,6 +150,7 @@ export default function BatchTransfer({ recipients }) {
 Combine scaffold config and raw calls:
 
 ```tsx
+import { Button } from "react-native";
 import { useScaffoldMultiWriteContract } from "@/hooks/scaffold-stark";
 
 export default function MixedCalls() {
@@ -202,7 +203,7 @@ export default function MintWithMetadata() {
       {
         contractName: "NFT",
         functionName: "setTokenURI",
-        args: [nextTokenId, tokenUri],
+        args: [nextTokenId, tokenUri], // nextTokenId from a useScaffoldReadContract call
       },
     ],
   });
