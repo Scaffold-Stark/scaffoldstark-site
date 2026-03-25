@@ -12,6 +12,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Bare /docs is handled by the redirect in next.config.js before middleware runs.
-  matcher: ["/docs/:path*"],
+  matcher: ["/docs/:path*", "/docs", "/auco/:path*", "/auco"],
 };

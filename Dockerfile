@@ -51,6 +51,14 @@ COPY packages/docs .
 COPY .env ./
 RUN yarn build
 
+# Dependencies and builder stage for auco docs (npm-based submodule)
+FROM base AS auco-docs-builder
+WORKDIR /app/packages/auco-docs
+COPY packages/auco-docs/package.json packages/auco-docs/package-lock.json ./
+RUN npm ci
+COPY packages/auco-docs .
+RUN npm run build
+
 # Final runner stage - no .env file needed here
 FROM base AS runner
 WORKDIR /app
@@ -60,8 +68,9 @@ COPY --from=main-builder /app/packages/nextjs/.next/standalone/packages/nextjs .
 COPY --from=main-builder /app/packages/nextjs/public ./packages/nextjs/public
 COPY --from=main-builder /app/packages/nextjs/.next/static ./packages/nextjs/.next/static
 
-# Copy docs static build directly into Next.js public directory
+# Copy docs static builds directly into Next.js public directory
 COPY --from=docs-builder /app/packages/docs/build ./packages/nextjs/public/docs
+COPY --from=auco-docs-builder /app/packages/auco-docs/build ./packages/nextjs/public/auco
 
 ARG PORT=3000
 ENV NODE_ENV=production
