@@ -1,0 +1,326 @@
+---
+sidebar_position: 2
+title: Installation
+description: Setup and installation guide for Scaffold Stark React Native.
+---
+
+# Installation
+
+This guide will walk you through setting up Scaffold Stark React Native for mobile dApp development on Starknet.
+
+## Prerequisites
+
+Before you begin, ensure you have the following tools installed:
+
+### Core Requirements
+
+- [Node.js](https://nodejs.org/en/download/) (>= v24) - We recommend using [nvm](https://github.com/nvm-sh/nvm) for version management
+- [Yarn](https://yarnpkg.com/getting-started/install) (v1 or v2+)
+- [Git](https://git-scm.com/downloads)
+
+### Starknet Developer Tools
+
+Install the Starknet development toolchain using [Starkup](https://github.com/software-mansion/starkup):
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.sh | sh
+```
+
+This will install:
+- **Scarb 2.16.0** - Cairo package manager and build toolchain
+- **Starknet Foundry 0.57.0** - Testing framework for Starknet
+- **asdf** - Version manager for tool versions
+- **Cairo 1.0 VSCode Extension** - Syntax highlighting and language support
+- **Starknet Devnet 0.7.2** - Local development network
+
+### Mobile Development Setup
+
+#### iOS Development (macOS only)
+
+1. **Install Xcode** from the [Mac App Store](https://apps.apple.com/app/xcode/id497799835)
+
+2. **Configure Command Line Tools**:
+   - Open Xcode
+   - Go to **Settings > Locations**
+   - Select your Xcode version in the Command Line Tools dropdown
+
+3. **Add iOS Simulator**:
+   - Open Xcode
+   - Go to **Settings > Components**
+   - Download an iOS Simulator (iOS 17+ recommended)
+
+4. **Install Watchman** (recommended for file watching):
+   ```bash
+   brew install watchman
+   ```
+
+#### Android Development
+
+1. **Install Android Studio** from [developer.android.com](https://developer.android.com/studio)
+
+2. **Configure Android SDK**:
+   - Open Android Studio
+   - Go to **Settings > Languages & Frameworks > Android SDK**
+   - Install the latest Android SDK Platform (API 34+)
+   - Install Android SDK Build-Tools
+
+3. **Set Environment Variables** (add to `~/.bashrc` or `~/.zshrc`):
+   ```bash
+   export ANDROID_HOME=$HOME/Android/Sdk
+   export PATH=$PATH:$ANDROID_HOME/emulator
+   export PATH=$PATH:$ANDROID_HOME/platform-tools
+   ```
+
+4. **Create Virtual Device**:
+   - Open Android Studio
+   - Go to **Tools > Device Manager**
+   - Click **Create Virtual Device**
+   - Select a device definition and system image
+
+## Quick Start
+
+### 1. Create a New Project
+
+Use the `create-stark-rn` CLI to scaffold a new project:
+
+```bash
+npx create-stark-rn my-dapp
+```
+
+The CLI will interactively prompt you for:
+- **Project name** (default: `my-stark-app`)
+- **Include example smart contracts** (Starknet Foundry) — default: yes
+- **Package manager** — npm, yarn, or pnpm (auto-detects your system default)
+
+This creates a monorepo with `packages/rn` (React Native app) and optionally `packages/snfoundry` (smart contracts), installs dependencies, and initializes a git repository.
+
+:::tip Alternative: Clone the Repository
+You can also clone the repository directly for development or contribution:
+```bash
+git clone https://github.com/Scaffold-Stark/scaffold-stark-rn.git
+cd scaffold-stark-rn
+yarn install
+```
+:::
+
+### 2. Start the Local Devnet
+
+In a separate terminal, start the Starknet local development network:
+
+```bash
+cd my-dapp
+yarn chain
+```
+
+This runs `starknet-devnet` with a seed of 0 for consistent account addresses during development.
+
+### 3. Deploy Contracts
+
+With the devnet running, deploy the example contracts:
+
+```bash
+yarn deploy
+```
+
+### 4. Start the Mobile App
+
+#### For iOS:
+
+```bash
+yarn ios
+```
+
+This will:
+- Start the Expo development server
+- Launch the iOS Simulator
+- Install and run the app
+
+#### For Android:
+
+```bash
+yarn android
+```
+
+This will:
+- Start the Expo development server
+- Launch the Android Emulator
+- Install and run the app
+
+#### For Development Server Only:
+
+```bash
+yarn start
+```
+
+Then press `i` for iOS or `a` for Android, or scan the QR code with the Expo Go app on your physical device.
+
+## Project Structure
+
+After scaffolding, your project will have this structure:
+
+```
+my-dapp/
+├── packages/
+│   ├── rn/                          # React Native app (Expo)
+│   │   ├── app/                     # Expo Router file-based routing
+│   │   │   ├── (tabs)/              # Tab layout group
+│   │   │   │   ├── index.tsx        # Home page
+│   │   │   │   ├── debug.tsx        # Debug contracts page
+│   │   │   │   ├── settings.tsx     # Settings/wallet page
+│   │   │   │   └── _layout.tsx      # Custom tab navigator
+│   │   │   ├── _layout.tsx          # Root layout with providers
+│   │   │   └── _components/         # App-specific components
+│   │   ├── components/
+│   │   │   └── scaffold-stark/      # Reusable scaffold components
+│   │   ├── hooks/
+│   │   │   └── scaffold-stark/      # Custom Starknet hooks
+│   │   ├── configs/                 # App configuration
+│   │   │   ├── connectors.ts        # Wallet connectors
+│   │   │   ├── provider.ts          # RPC provider setup
+│   │   │   └── aegisConfig.ts       # Account abstraction config
+│   │   ├── contracts/               # Auto-generated contract types
+│   │   ├── constants/               # Chain definitions
+│   │   ├── scaffold.config.ts       # Target networks, polling config
+│   │   └── package.json
+│   └── snfoundry/                   # Smart contracts (optional)
+│       ├── contracts/src/           # Cairo smart contracts
+│       ├── scripts-ts/              # Deployment scripts
+│       └── Scarb.toml               # Cairo package config
+└── package.json                     # Monorepo workspace
+```
+
+## Connecting to Networks
+
+### Local Devnet (Default)
+
+The app is pre-configured to connect to `http://127.0.0.1:5050` (or `http://10.0.2.2:5050` on Android emulator). No additional configuration needed.
+
+### Sepolia Testnet
+
+Update your environment variables in `packages/rn/.env`:
+
+```bash
+# Provider URLs (per-network)
+EXPO_PUBLIC_DEVNET_PROVIDER_URL=http://127.0.0.1:5050
+EXPO_PUBLIC_SEPOLIA_PROVIDER_URL=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
+EXPO_PUBLIC_MAINNET_PROVIDER_URL=https://starknet-mainnet.public.blastapi.io/rpc/v0_8
+
+# Account abstraction (Cavos Aegis)
+EXPO_PUBLIC_AEGIS_APP_ID=your_aegis_app_id
+
+# Transaction sponsorship (AVNU Paymaster)
+EXPO_PUBLIC_AVNU_API_KEY=your_avnu_api_key
+```
+
+All environment variables must be prefixed with `EXPO_PUBLIC_` to be accessible in React Native (Expo requirement).
+
+:::tip Getting API Keys
+- **Cavos Aegis**: Sign up at [Cavos](https://cavos.xyz) to get your Wallet-as-a-Service App ID
+- **AVNU**: Register at [AVNU](https://avnu.fi) for transaction sponsorship API key
+:::
+
+### App Configuration
+
+The main app configuration is in `packages/rn/scaffold.config.ts`:
+
+```typescript
+const scaffoldConfig = {
+  targetNetworks: [chains.devnet],       // Networks to support
+  pollingInterval: 30_000,               // Data refresh interval (ms)
+  onlyLocalBurnerWallet: false,          // Restrict burner to devnet only
+  walletAutoConnect: true,               // Auto-reconnect wallet on app load
+  autoConnectTTL: 60_000,               // Auto-connect time-to-live (ms)
+};
+```
+
+## Available Scripts
+
+Run these from the project root using your chosen package manager (npm, yarn, or pnpm):
+
+| Command | Description |
+|---------|-------------|
+| `yarn start` | Start Expo development server |
+| `yarn ios` | Start app on iOS Simulator |
+| `yarn android` | Start app on Android Emulator |
+| `yarn chain` | Start local Starknet devnet |
+| `yarn deploy` | Deploy contracts to active network |
+| `yarn deploy:clear` | Deploy contracts with reset |
+| `yarn compile` | Compile Cairo smart contracts |
+| `yarn test` | Run smart contract tests |
+| `yarn verify` | Verify contracts on block explorer |
+| `yarn format` | Format code with Prettier |
+| `yarn lint` | Run ESLint |
+
+## Compatible Versions
+
+| Dependency | Version |
+|------------|---------|
+| React | 19.1.0 |
+| React Native | 0.81.4 |
+| Expo | 54.x |
+| starknet.js | 8.5.3 |
+| @starknet-react/core | 5.0.1 |
+| @cavos/aegis | 0.1.5 |
+| nativewind | 4.1.23 |
+| zustand | 5.0.8 |
+| @tanstack/react-query | 5.87.1 |
+| Scarb | 2.16.0 |
+| Starknet Foundry | 0.57.0 |
+| Starknet Devnet | 0.7.2 |
+
+## Troubleshooting
+
+### iOS Simulator Issues
+
+**Problem**: Simulator not launching
+
+```bash
+# Reset Expo cache
+npx expo start --clear
+
+# Or rebuild the app
+npx expo run:ios
+```
+
+### Android Emulator Issues
+
+**Problem**: App not connecting to devnet
+
+The Android emulator uses `10.0.2.2` to reach the host machine's localhost. Ensure your network configuration handles this correctly.
+
+### Metro Bundler Issues
+
+**Problem**: Module resolution errors
+
+```bash
+# Clear Metro cache
+yarn start --reset-cache
+
+# Or clean and reinstall
+rm -rf node_modules
+yarn install
+```
+
+### Starknet Devnet Issues
+
+**Problem**: Devnet not starting
+
+Ensure you have the correct version installed:
+
+```bash
+starknet-devnet --version
+# Should be 0.7.2
+```
+
+If not, reinstall via asdf:
+
+```bash
+asdf install starknet-devnet 0.7.2
+asdf set starknet-devnet 0.7.2
+```
+
+## Next Steps
+
+- Explore the [Hooks Reference](./hooks/hooks-overview)
+- Check out [Recipes](./recipes)
+- Read about [Mobile Considerations](./mobile-considerations)
