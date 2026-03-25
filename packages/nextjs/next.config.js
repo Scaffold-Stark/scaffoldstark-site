@@ -6,15 +6,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.NEXT_PUBLIC_IGNORE_BUILD_ERROR === "true",
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
-        source: "/docs/:path*",
-        destination: "http://localhost:3001/:path*",
-      },
-      {
-        source: "/auco/:path*",
-        destination: "http://localhost:3002/:path*",
+        source: "/docs",
+        destination: "/docs/",
+        permanent: true,
       },
     ];
   },
