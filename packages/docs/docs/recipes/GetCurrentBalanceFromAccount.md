@@ -12,7 +12,7 @@ This recipe shows how to fetch and display the STRK balance of the currently con
 <summary>Here is the full code, which we will be implementing in the guide below:</summary>
 
 ```tsx title="components/ConnectedAddressBalance.tsx"
-import { useAccount } from "@starknet-react/core";
+import { useAccount } from "@starknet-start/react";
 import { Address, Balance } from "~~/components/scaffold-stark";
 
 export const ConnectedAddressBalance = () => {
@@ -54,11 +54,11 @@ export const ConnectedAddressBalance = () => {
 
 ### 2. Retrieve the Connected Account
 
-Fetch the Starknet address of the currently connected account using the [useAccount starknet-react hook](https://starknet-react.com/hooks/account/useaccount) and easily display them using Scaffold Stark [Address](/components/Address) and [Balance](/components/Balance) components.
+Fetch the Starknet address of the currently connected account using the [useAccount starknet-start hook](https://start.starknet-react.com/docs/hooks/useAccount) and easily display them using Scaffold Stark [Address](/components/Address) and [Balance](/components/Balance) components.
 
 ```tsx title="components/ConnectedAddressBalance.tsx"
 // highlight-start
-import { useAccount } from "@starknet-react/core";
+import { useAccount } from "@starknet-start/react";
 import { Address, Balance } from "~~/components/scaffold-stark";
 // highlight-end
 

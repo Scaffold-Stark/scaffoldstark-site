@@ -28,7 +28,7 @@ If you are working with Sepolia, you need to use the setup:
 
 ```env
 PRIVATE_KEY_SEPOLIA=yourWalletPrivateKey
-RPC_URL_SEPOLIA=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
+RPC_URL_SEPOLIA=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_8
 ACCOUNT_ADDRESS_SEPOLIA=yourWalletAddress
 ```
 
@@ -42,7 +42,7 @@ If you are working with Mainnet, you need to use the setup:
 
 ```env
 PRIVATE_KEY_MAINNET=yourWalletPrivateKey
-RPC_URL_MAINNET=https://starknet-mainnet.public.blastapi.io/rpc/v0_8
+RPC_URL_MAINNET=https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_8
 ACCOUNT_ADDRESS_MAINNET=yourWalletAddress
 ```
 
@@ -88,7 +88,114 @@ ACCOUNT_ADDRESS_MAINNET=yourWalletAddress
   - Deploy multiple instances of the same contract with different identifiers.
   - Reference the deployed contract under a custom name for clarity in deployment logs.
 
-## 4. Deploy your smart contract(s)
+## 4. Deploying Multiple Contracts
+
+Scaffold-Stark makes it easy to deploy multiple contracts in a single deployment script. This is useful when you have contracts that depend on each other or when you want to deploy a complete dApp with multiple components.
+
+### Basic Multiple Contract Deployment
+
+To deploy multiple contracts, call `deployContract` multiple times within your `deployScript` function:
+
+```typescript
+const deployScript = async (): Promise<void> => {
+  // Deploy first contract
+  await deployContract({
+    contract: "TokenContract",
+    constructorArgs: {
+      name: "MyToken",
+      symbol: "MTK",
+      initial_supply: 1000000n,
+      recipient: deployer.address,
+    },
+  });
+
+  // Deploy second contract
+  await deployContract({
+    contract: "VaultContract",
+    constructorArgs: {
+      owner: deployer.address,
+    },
+  });
+
+  // Deploy third contract
+  await deployContract({
+    contract: "GovernanceContract",
+    constructorArgs: {
+      admin: deployer.address,
+    },
+  });
+};
+```
+
+### Deploying Dependent Contracts
+
+When one contract needs the address of another contract (e.g., a vault that interacts with a token), deploy them in order and capture the address:
+
+```typescript
+const deployScript = async (): Promise<void> => {
+  // Deploy the token contract first
+  const { address: tokenAddress } = await deployContract({
+    contract: "TokenContract",
+    constructorArgs: {
+      name: "MyToken",
+      symbol: "MTK",
+      initial_supply: 1000000n,
+      recipient: deployer.address,
+    },
+  });
+
+  // Deploy the vault contract using the token address
+  await deployContract({
+    contract: "TokenVault",
+    constructorArgs: {
+      token_address: tokenAddress,  // Reference the deployed token
+      owner: deployer.address,
+    },
+  });
+};
+```
+
+### Deploying Multiple Instances of the Same Contract
+
+Use the `contractName` parameter to deploy multiple instances of the same contract with unique identifiers:
+
+```typescript
+const deployScript = async (): Promise<void> => {
+  // Deploy a vault for STRK tokens
+  await deployContract({
+    contract: "TokenVault",
+    contractName: "StrkVault",  // Custom name for this instance
+    constructorArgs: {
+      token_address: STRK_TOKEN_ADDRESS,
+      owner: deployer.address,
+    },
+  });
+
+  // Deploy another vault for ETH tokens using the same contract
+  await deployContract({
+    contract: "TokenVault",
+    contractName: "EthVault",  // Different custom name
+    constructorArgs: {
+      token_address: ETH_TOKEN_ADDRESS,
+      owner: deployer.address,
+    },
+  });
+};
+```
+
+Both vaults will be available in your frontend with their respective names (`StrkVault` and `EthVault`).
+
+### Preserving Existing Deployments
+
+By default, `yarn deploy` resets the `deployedContracts.ts` file. To add new contracts without losing existing deployments:
+
+```bash
+yarn deploy:no-reset
+```
+
+This is useful when iteratively adding contracts to your dApp.
+
+## 5. Deploy your smart contract(s)
 
 By default, `yarn deploy` will deploy the contract to the local network. You can change `defaultNetwork` in `scaffold.config.ts`.
 
@@ -100,9 +207,9 @@ yarn deploy --network <NETWORK_NAME>
 
 e.g. `yarn deploy --network sepolia`
 
-## Configuration of Third-Party Services for Production-Grade Apps
+## 6. Configuration of Third-Party Services for Production-Grade Apps
 
-By default, Scaffold-Stark 2 provides predefined API keys for popular public services such as [Blast](https://blastapi.io/chains/starknet). This allows you to begin developing and testing your applications more easily, avoiding the need to register for this service.
+By default, Scaffold-Stark 2 provides predefined RPC endpoints for popular services such as [Alchemy](https://www.alchemy.com/starknet). This allows you to begin developing and testing your applications more easily, avoiding the need to register for this service.
 
 For production-grade applications, it's recommended to obtain your own API keys (to prevent rate limiting issues). You can configure these at:
 

@@ -7,7 +7,7 @@ slug: /
 
 [Scaffold-Stark](https://github.com/Scaffold-Stark/scaffold-stark-2) is everything you need to get started building decentralized applications on Starknet! 🚀
 
-⚙️ Built using NextJS, StarknetJS, Scarb, Starknet-React, Starknet Foundry and Typescript.
+⚙️ Built using NextJS, StarknetJS, Scarb, Starknet-Start, Starknet Foundry and Typescript.
 
 ## About Scaffold-Stark
 
@@ -26,6 +26,6 @@ Here are the main components:
 - [**Starknet-Devnet**](https://0xspaceshard.github.io/starknet-devnet/) for running local networks
 - [**Scarb**](https://docs.swmansion.com/scarb/) to build/compile smart contracts
 - [**Starknet-Foundry**](https://foundry-rs.github.io/starknet-foundry/index.html) for testing smart contracts
-- [**Starknet-React**](https://starknet-react.com/docs/getting-started) Collection of React hooks wrapper around starknet-react to simplify interactions with smart contracts with typescript autocompletion.
+- [**Starknet-Start**](https://start.starknet-react.com/docs/getting-started) Collection of React hooks wrapper around starknet-start to simplify interactions with smart contracts with typescript autocompletion.
 - [**StarknetJS**](https://www.starknetjs.com/docs/guides/intro) as low-level interface that provides primitives to interact with Starknet. Declaring and deploying smart contracts.The alternative to starknet-rs.
 - [**NextJS**](https://nextjs.org/docs) for building a frontend, using many useful pre-made hooks.

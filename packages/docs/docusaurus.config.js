@@ -4,8 +4,9 @@
 const dotenv = require("dotenv"); // Import dotenv
 dotenv.config(); // Load environment variables
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const { themes } = require("prism-react-renderer");
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 // @ts-ignore

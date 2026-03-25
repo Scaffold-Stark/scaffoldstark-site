@@ -12,6 +12,14 @@ Scaffold-Stark uses a custom _"Connect Button"_, that is enhanced with several u
 
 You can extend this component to suit your app's needs.
 
+### Wallet Discovery
+
+In v3, wallet discovery is automatic via the [wallet standard](https://github.com/starknet-io/get-starknet). Any installed browser wallet that implements the Starknet wallet standard will appear in the connect modal without any manual connector configuration.
+
+On **devnet**, the burner wallet is shown as the primary connection option, making local development fast without requiring a browser extension.
+
+Additional wallets (such as Cartridge Controller) can be injected via the `extraWallets` prop on `StarknetConfig`. See the [Cartridge Controller recipe](/docs/recipes/AddControllerConnector) for an example.
+
 ![CustomConnectButton Example](/img/customConnectButton.png)
 
 ## Import
