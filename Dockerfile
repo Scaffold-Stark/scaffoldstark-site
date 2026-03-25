@@ -15,6 +15,9 @@ RUN yarn install --immutable
 
 # Dependencies stage for docs app
 FROM base AS docs-deps
+WORKDIR /app
+COPY .yarnrc.yml ./
+COPY .yarn .yarn
 WORKDIR /app/packages/docs
 COPY packages/docs/package.json packages/docs/yarn.lock ./
 # Create an empty .env.example to prevent the build error
@@ -22,7 +25,7 @@ RUN touch .env.example
 # Copy environment file for docs as well
 COPY .env ./
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 
 
 # Builder stage for main app
@@ -37,6 +40,9 @@ RUN yarn workspace @ss-2/nextjs build
 
 # Builder stage for docs app
 FROM base AS docs-builder
+WORKDIR /app
+COPY .yarnrc.yml ./
+COPY .yarn .yarn
 WORKDIR /app/packages/docs
 COPY --from=docs-deps /app/packages/docs/node_modules ./node_modules
 COPY --from=docs-deps /app/packages/docs/.env.example ./.env.example
