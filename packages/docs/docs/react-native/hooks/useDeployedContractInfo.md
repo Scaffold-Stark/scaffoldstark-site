@@ -113,15 +113,16 @@ export default function ConditionalInteraction() {
 ### Display Contract Address
 
 ```tsx
-import { View, Text, TouchableOpacity, Clipboard } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import * as Clipboard from "expo-clipboard";
 import { useDeployedContractInfo } from "@/hooks/scaffold-stark";
 
 export default function ContractAddress({ contractName }) {
   const { data, status } = useDeployedContractInfo(contractName);
 
-  const copyAddress = () => {
+  const copyAddress = async () => {
     if (data?.address) {
-      Clipboard.setString(data.address);
+      await Clipboard.setStringAsync(data.address);
       // Show toast or feedback
     }
   };

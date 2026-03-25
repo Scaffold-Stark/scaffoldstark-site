@@ -123,11 +123,7 @@ export default function BatchTransfer({ recipients }) {
   // recipients = [{ address: "0x...", amount: 100n }, ...]
 
   const calls = recipients.map((r) =>
-    createContractCall({
-      contractName: "Token",
-      functionName: "transfer",
-      args: [r.address, r.amount],
-    })
+    createContractCall("Token", "transfer", [r.address, r.amount])
   );
 
   const { sendAsync, isLoading, status } = useScaffoldMultiWriteContract({
@@ -238,14 +234,10 @@ A helper function to create properly typed call objects:
 ```typescript
 import { createContractCall } from "@/hooks/scaffold-stark";
 
-const call = createContractCall({
-  contractName: "Token",
-  functionName: "transfer",
-  args: [recipient, amount],
-});
+const call = createContractCall("Token", "transfer", [recipient, amount]);
 ```
 
-This is useful when building calls dynamically or in loops.
+The function takes three separate arguments: `contractName`, `functionName`, and `args`. This is useful when building calls dynamically or in loops.
 
 ## Atomicity
 
