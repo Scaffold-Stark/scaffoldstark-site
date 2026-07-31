@@ -154,6 +154,10 @@ ACCOUNT_ADDRESS_MAINNET=0x...your_account_address
 PRIVATE_KEY_MAINNET=0x...your_private_key
 ```
 
+:::tip Get your own Alchemy key
+Both RPC URLs above use the shared demo key that ships with Scaffold-Stark — fine for a quick deploy, but everyone using the defaults shares its rate limit. For anything longer-running, grab your own free key at [alchemy.com](https://www.alchemy.com/) and swap it into the URL.
+:::
+
 ### Deployment Script
 
 ```typescript
