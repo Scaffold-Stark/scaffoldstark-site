@@ -318,15 +318,15 @@ my-starknet-project/
         └── snfoundry/   # Symlink to ../contracts
 ```
 
-## Compatible Versions
+## Compatible versions
 
 | Tool | Version |
 |------|---------|
-| Scarb | 2.16.0 |
-| Starknet Foundry | 0.57.0 |
-| Cairo | 2.16.x |
-| starknet.js | 8.5.3 |
-| Starknet Devnet | 0.7.2 |
+| Scarb | 2.18.0 |
+| Starknet Foundry | 0.60.0 |
+| Cairo | 2.18.x |
+| starknet.js | 9.4.2 |
+| Starknet Devnet | 0.8.1 |
 
 ## Troubleshooting
 
