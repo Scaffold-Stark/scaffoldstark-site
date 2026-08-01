@@ -312,7 +312,7 @@ starknet-devnet --version
 # Should be 0.8.1
 ```
 
-If not, reinstall via asdf:
+If not, running `asdf install` from the project root reads the `.tool-versions` file and installs the right version without naming it. To pin just this one tool by hand instead:
 
 ```bash
 asdf install starknet-devnet 0.8.1
