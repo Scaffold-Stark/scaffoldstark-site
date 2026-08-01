@@ -27,11 +27,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.sh | sh
 ```
 
 This will install:
-- **Scarb 2.16.0** - Cairo package manager and build toolchain
-- **Starknet Foundry 0.57.0** - Testing framework for Starknet
+- **Scarb 2.18.0** - Cairo package manager and build toolchain
+- **Starknet Foundry 0.60.0** - Testing framework for Starknet
 - **asdf** - Version manager for tool versions
 - **Cairo 1.0 VSCode Extension** - Syntax highlighting and language support
-- **Starknet Devnet 0.7.2** - Local development network
+- **Starknet Devnet 0.8.1** - Local development network
 
 ### Mobile Development Setup
 
@@ -252,22 +252,21 @@ Run these from the project root using your chosen package manager (npm, yarn, or
 | `yarn format` | Format code with Prettier |
 | `yarn lint` | Run ESLint |
 
-## Compatible Versions
+## Compatible versions
 
 | Dependency | Version |
 |------------|---------|
 | React | 19.1.0 |
 | React Native | 0.81.4 |
 | Expo | 54.x |
-| starknet.js | 8.5.3 |
-| @starknet-react/core | 5.0.1 |
+| starknet.js | 9.4.2 |
 | @cavos/aegis | 0.1.5 |
 | nativewind | 4.1.23 |
 | zustand | 5.0.8 |
 | @tanstack/react-query | 5.87.1 |
-| Scarb | 2.16.0 |
-| Starknet Foundry | 0.57.0 |
-| Starknet Devnet | 0.7.2 |
+| Scarb | 2.18.0 |
+| Starknet Foundry | 0.60.0 |
+| Starknet Devnet | 0.8.1 |
 
 ## Troubleshooting
 
@@ -310,14 +309,14 @@ Ensure you have the correct version installed:
 
 ```bash
 starknet-devnet --version
-# Should be 0.7.2
+# Should be 0.8.1
 ```
 
-If not, reinstall via asdf:
+If not, running `asdf install` from the project root reads the `.tool-versions` file and installs the right version without naming it. To pin just this one tool by hand instead:
 
 ```bash
-asdf install starknet-devnet 0.7.2
-asdf set starknet-devnet 0.7.2
+asdf install starknet-devnet 0.8.1
+asdf set starknet-devnet 0.8.1
 ```
 
 ## Next Steps
