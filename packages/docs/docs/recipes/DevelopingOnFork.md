@@ -13,8 +13,12 @@ This guide shows how to run and interact with a local fork of Starknet mainnet.
 1. Start the fork:
 
 ```bash
-yarn chain --fork-network https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_8
+yarn chain --fork-network https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
 ```
+
+:::caution Use your own Alchemy key for forking
+The URL above uses the shared demo key that ships with Scaffold-Stark, which is fine for a quick first run. A mainnet fork is the heaviest, longest-running RPC consumer in this whole curriculum, so it's the first thing to hit that shared key's rate limit — especially with a whole workshop or classroom forking at once. When that happens, you won't see a "rate limited" message; the fork will just fail to start or die with a parse-ish error, which looks exactly like a broken local setup. Get your own free key at [alchemy.com](https://www.alchemy.com/) and swap it into the `--fork-network` URL before running this for anything longer than a quick try.
+:::
 
 2. After running yarn chain fork, there will be a block number in console:
 

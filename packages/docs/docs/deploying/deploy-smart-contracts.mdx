@@ -28,7 +28,7 @@ If you are working with Sepolia, you need to use the setup:
 
 ```env
 PRIVATE_KEY_SEPOLIA=yourWalletPrivateKey
-RPC_URL_SEPOLIA=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_8
+RPC_URL_SEPOLIA=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
 ACCOUNT_ADDRESS_SEPOLIA=yourWalletAddress
 ```
 
@@ -42,9 +42,13 @@ If you are working with Mainnet, you need to use the setup:
 
 ```env
 PRIVATE_KEY_MAINNET=yourWalletPrivateKey
-RPC_URL_MAINNET=https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_8
+RPC_URL_MAINNET=https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
 ACCOUNT_ADDRESS_MAINNET=yourWalletAddress
 ```
+
+:::tip Get your own Alchemy key
+Both `RPC_URL_SEPOLIA` and `RPC_URL_MAINNET` above use the shared demo key that ships with Scaffold-Stark, which is fine for a quick deploy. See [Configuration of Third-Party Services](#6-configuration-of-third-party-services-for-production-grade-apps) below for getting your own key before anything longer-running.
+:::
 
 ## 3. Changing the smart contract name
 

@@ -202,8 +202,8 @@ Update your environment variables in `packages/rn/.env`:
 ```bash
 # Provider URLs (per-network)
 EXPO_PUBLIC_DEVNET_PROVIDER_URL=http://127.0.0.1:5050
-EXPO_PUBLIC_SEPOLIA_PROVIDER_URL=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
-EXPO_PUBLIC_MAINNET_PROVIDER_URL=https://starknet-mainnet.public.blastapi.io/rpc/v0_8
+EXPO_PUBLIC_SEPOLIA_PROVIDER_URL=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
+EXPO_PUBLIC_MAINNET_PROVIDER_URL=https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
 
 # Account abstraction (Cavos Aegis)
 EXPO_PUBLIC_AEGIS_APP_ID=your_aegis_app_id
@@ -217,6 +217,7 @@ All environment variables must be prefixed with `EXPO_PUBLIC_` to be accessible 
 :::tip Getting API Keys
 - **Cavos Aegis**: Sign up at [Cavos](https://cavos.xyz) to get your Wallet-as-a-Service App ID
 - **AVNU**: Register at [AVNU](https://avnu.fi) for transaction sponsorship API key
+- **Alchemy**: The provider URLs above use the shared demo key that ships with Scaffold-Stark, which is fine for trying things out. For anything longer-running, or a workshop/classroom setting, get your own free key at [alchemy.com](https://www.alchemy.com/) so you're not sharing rate limits with everyone else on the default.
 :::
 
 ### App Configuration

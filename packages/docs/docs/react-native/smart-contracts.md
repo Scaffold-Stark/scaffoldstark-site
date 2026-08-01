@@ -144,15 +144,19 @@ Create a `.env` file in `packages/snfoundry/`:
 # No configuration needed - uses localhost:5050
 
 # Sepolia Testnet
-RPC_URL_SEPOLIA=https://starknet-sepolia.public.blastapi.io/rpc/v0_8
+RPC_URL_SEPOLIA=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
 ACCOUNT_ADDRESS_SEPOLIA=0x...your_account_address
 PRIVATE_KEY_SEPOLIA=0x...your_private_key
 
 # Mainnet
-RPC_URL_MAINNET=https://starknet-mainnet.public.blastapi.io/rpc/v0_8
+RPC_URL_MAINNET=https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU
 ACCOUNT_ADDRESS_MAINNET=0x...your_account_address
 PRIVATE_KEY_MAINNET=0x...your_private_key
 ```
+
+:::tip Get your own Alchemy key
+Both RPC URLs above use the shared demo key that ships with Scaffold-Stark — fine for a quick deploy, but everyone using the defaults shares its rate limit. For anything longer-running, grab your own free key at [alchemy.com](https://www.alchemy.com/) and swap it into the URL.
+:::
 
 ### Deployment Script
 

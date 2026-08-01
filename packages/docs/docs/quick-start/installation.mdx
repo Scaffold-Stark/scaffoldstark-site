@@ -144,7 +144,7 @@ Now you are ready!!!
 
 <details>
 
-To ensure the proper functioning of the scaffold-stark with Testnet or Mainnet, your RPC version must be `0.10.x`. This repository contains `.env.example` files, where we provided the default RPC URL for the Starknet Testnet: `RPC_URL_SEPOLIA=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_8`. Let's verify this RPC version is `0.10.x` by calling a `POST` request in an API platform like `Postman` or `Insomnia`. Your API endpoint should be `https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_8` and the body should be:
+To ensure the proper functioning of the scaffold-stark with Testnet or Mainnet, your RPC version must be `0.10.x`. This repository contains `.env.example` files, where we provided the default RPC URL for the Starknet Testnet: `RPC_URL_SEPOLIA=https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU`. Let's verify this RPC version is `0.10.x` by calling a `POST` request in an API platform like `Postman` or `Insomnia`. Your API endpoint should be `https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_10/_hKu4IgnPgrF8O82GLuYU` and the body should be:
 
 ```json
 {
@@ -157,6 +157,10 @@ To ensure the proper functioning of the scaffold-stark with Testnet or Mainnet, 
 You have to paste the endpoint and body in the API platform and click on the `Send` button. If the response is `0.10.x`, then you are good to go. Otherwise, you have to get the correct RPC URL endpoint.
 
 </details>
+
+:::tip Get your own Alchemy key
+The RPC URL above uses a shared demo key that ships with Scaffold-Stark, which is fine for trying things out. If you'll be doing anything longer-running (an extended dev session, a mainnet fork, a workshop), grab your own free key at [alchemy.com](https://www.alchemy.com/) so you're not sharing rate limits with everyone else using the default.
+:::
 
 ## Compatible versions
 
