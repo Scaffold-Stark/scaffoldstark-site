@@ -335,7 +335,7 @@ my-starknet-project/
 ```bash
 # Check Scarb version
 scarb --version
-# Should be 2.16.0
+# Should be 2.18.0
 
 # Clean and recompile
 yarn compile
